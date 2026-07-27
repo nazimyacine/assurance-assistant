@@ -1,0 +1,316 @@
+"""Taxonomie des intentions et gabarits de génération.
+
+Ce module ne génère rien : il décrit. Il contient la liste des intentions,
+leur type (qui déterminera le routage à l'étape 9), leur poids dans le
+trafic simulé, et les gabarits de phrases utilisés pour fabriquer le jeu
+de données.
+
+Convention des gabarits : les accolades désignent un emplacement à
+remplir, dont les valeurs possibles sont définies dans VALEURS.
+"""
+
+# ---------------------------------------------------------------------------
+# Valeurs injectées dans les gabarits
+# ---------------------------------------------------------------------------
+
+VALEURS = {
+    "formule": ["Essentiel", "Confort", "Premium"],
+    "poste": [
+        "soins courants", "hospitalisation", "optique", "dentaire",
+        "audiologie", "médecines douces", "maternité",
+    ],
+    "acte": [
+        "une consultation chez le généraliste",
+        "une consultation chez un spécialiste",
+        "une paire de lunettes",
+        "une monture",
+        "des verres progressifs",
+        "des lentilles",
+        "une prothèse dentaire",
+        "un implant dentaire",
+        "un appareil dentaire pour mon fils",
+        "un appareil auditif",
+        "une séance d'ostéopathie",
+        "une séance d'acupuncture",
+        "une cure thermale",
+        "une chambre particulière",
+        "des analyses de sang",
+        "mes médicaments",
+        "un accouchement",
+    ],
+    "acte_court": [
+        "les lunettes", "les lentilles", "l'orthodontie", "l'ostéopathie",
+        "les implants", "la chambre particulière", "le forfait journalier",
+        "les prothèses dentaires", "l'appareil auditif", "la cure thermale",
+    ],
+    "acte_posable": [
+        "des lentilles", "une prothèse dentaire", "un implant dentaire",
+        "un appareil auditif", "un appareil dentaire pour mon fils",
+        "une monture",
+    ],
+    "coordonnee": [
+        "adresse", "numéro de téléphone", "adresse mail", "RIB",
+        "IBAN", "nom de famille",
+    ],
+    "paire_formules": [
+        "Essentiel et Confort", "Confort et Premium", "Essentiel et Premium",
+    ],
+    "hors_sujet": [
+        "assurer ma voiture", "assurer mon appartement",
+        "une assurance habitation", "un crédit immobilier",
+        "une assurance auto", "une garantie décès",
+        "une assurance pour mon chien", "une assurance voyage",
+    ],
+}
+
+# ---------------------------------------------------------------------------
+# Intentions
+# ---------------------------------------------------------------------------
+# type : transactionnelle -> flux métier guidé (étape 9)
+#        informationnelle -> recherche documentaire RAG (étape 9)
+#        rejet            -> message de recadrage
+# poids : part approximative du trafic simulé, en pourcentage
+
+INTENTIONS = {
+    "suivre_remboursement": {
+        "type": "transactionnelle",
+        "poids": 22,
+        "gabarits": [
+            "où en est mon remboursement",
+            "j'ai toujours pas été remboursé pour {acte}",
+            "ça fait deux semaines que j'attends mon virement",
+            "je n'ai rien reçu pour {acte}, c'est normal",
+            "pouvez vous me dire où en est ma demande de remboursement",
+            "mon remboursement de {acte_court} n'est pas arrivé",
+            "je voudrais savoir si vous avez bien reçu ma facture",
+            "aucun virement depuis le mois dernier alors que j'ai envoyé mes justificatifs",
+            "est ce que ma feuille de soins a été traitée",
+            "j'attends toujours le remboursement de {acte}",
+            "vous m'avez remboursé seulement une partie, pourquoi",
+            "mon dernier remboursement me semble incomplet",
+            "je ne trouve pas le remboursement de {acte_court} dans mon espace",
+            "combien vous m'avez remboursé le mois dernier",
+        ],
+    },
+    "question_garantie": {
+        "type": "informationnelle",
+        "poids": 18,
+        "gabarits": [
+            "est ce que {acte} est remboursé",
+            "vous prenez en charge {acte_court}",
+            "quel est le remboursement pour {acte} en formule {formule}",
+            "combien je suis remboursé pour {acte}",
+            "en {formule} est ce que {acte_court} est couvert",
+            "{acte_court} c'est pris en charge ou pas",
+            "je voudrais savoir ce que couvre la formule {formule} pour le {poste}",
+            "quelles sont mes garanties en {poste}",
+            "est ce que j'ai droit à {acte}",
+            "la formule {formule} rembourse quoi exactement en {poste}",
+            "j'aimerais connaître mon niveau de couverture pour {acte_court}",
+            "est ce que {acte} est exclu de mon contrat",
+            "vous remboursez combien de séances par an pour l'ostéopathie",
+            "il y a un plafond pour {acte_court}",
+        ],
+    },
+    "question_tarif": {
+        "type": "informationnelle",
+        "poids": 10,
+        "gabarits": [
+            "combien coûte la formule {formule}",
+            "quel est le prix de la formule {formule}",
+            "c'est combien par mois",
+            "quelle est ma cotisation mensuelle",
+            "combien je paye si j'ajoute mon conjoint",
+            "combien ça coûte pour une famille de quatre",
+            "quel tarif pour un assuré de cinquante ans en {formule}",
+            "vous avez une réduction si je paye à l'année",
+            "pourquoi ma cotisation a augmenté cette année",
+            "combien pour rattacher mes enfants au contrat",
+            "les tarifs augmentent avec l'âge",
+            "quel est le montant du prélèvement mensuel",
+        ],
+    },
+    "question_delai": {
+        "type": "informationnelle",
+        "poids": 9,
+        "gabarits": [
+            "combien de temps avant d'être remboursé",
+            "quel est le délai de carence pour {acte_court}",
+            "à partir de quand je peux utiliser mes garanties {poste}",
+            "il y a un délai d'attente pour {acte_court}",
+            "je viens d'adhérer, quand est ce que je suis couvert pour le {poste}",
+            "combien de temps pour recevoir mon virement",
+            "en combien de temps vous traitez une facture",
+            "quand est ce que je pourrai me faire poser {acte_posable}",
+            "je dois attendre combien de mois pour {acte_court}",
+            "au bout de combien de temps les garanties optique sont actives",
+            "quel délai pour recevoir mon certificat de radiation",
+            "sous combien de jours vous répondez à une demande de prise en charge",
+        ],
+    },
+    "resilier": {
+        "type": "transactionnelle",
+        "poids": 8,
+        "gabarits": [
+            "je veux résilier mon contrat",
+            "comment je fais pour résilier",
+            "je souhaite mettre fin à mon adhésion",
+            "j'aimerais arrêter ma mutuelle",
+            "je change de mutuelle, comment je résilie",
+            "mon employeur me met une mutuelle obligatoire, je veux résilier",
+            "je voudrais annuler mon contrat chez vous",
+            "comment quitter Mutuelle Solstice",
+            "je déménage à l'étranger, je dois résilier",
+            "quelle est la procédure pour partir",
+            "je ne veux plus de votre mutuelle",
+            "résiliation de contrat",
+        ],
+    },
+    "souscrire": {
+        "type": "transactionnelle",
+        "poids": 8,
+        "gabarits": [
+            "je voudrais souscrire une mutuelle",
+            "comment adhérer chez vous",
+            "je veux prendre la formule {formule}",
+            "j'aimerais m'inscrire à votre complémentaire santé",
+            "quels documents pour adhérer",
+            "je souhaite ouvrir un contrat",
+            "est ce que je peux souscrire en ligne",
+            "je veux ajouter ma femme sur mon contrat",
+            "comment rattacher mon fils à mon contrat",
+            "je voudrais passer en formule {formule}",
+            "il y a un questionnaire de santé pour adhérer",
+            "je veux devenir adhérent",
+        ],
+    },
+    "comparer_formules": {
+        "type": "informationnelle",
+        "poids": 6,
+        "gabarits": [
+            "quelle est la différence entre {paire_formules}",
+            "quelle formule choisir pour l'optique",
+            "Essentiel ou Confort, laquelle est mieux pour le dentaire",
+            "quelles sont les différences entre vos formules",
+            "je porte des lentilles, quelle formule me conviendrait",
+            "quelle formule prendre si j'ai besoin de beaucoup de dentaire",
+            "quelle est la meilleure formule pour une famille",
+            "vaut il mieux Confort ou Premium pour l'hospitalisation",
+            "en quoi la formule {formule} est différente des autres",
+            "comparez moi vos trois formules",
+        ],
+    },
+    "demande_prise_en_charge": {
+        "type": "transactionnelle",
+        "poids": 5,
+        "gabarits": [
+            "je dois être hospitalisé la semaine prochaine, comment ça se passe",
+            "j'ai besoin d'une prise en charge pour mon hospitalisation",
+            "comment obtenir une prise en charge hospitalière",
+            "je rentre à la clinique lundi, que dois je faire",
+            "il me faut un accord de prise en charge pour la clinique",
+            "je suis opéré dans quinze jours, il faut vous prévenir",
+            "l'hôpital me demande une attestation de prise en charge",
+            "je voudrais une chambre particulière pour mon hospitalisation",
+            "j'ai été hospitalisé en urgence hier, je fais quoi",
+            "comment éviter d'avancer les frais d'hospitalisation",
+        ],
+    },
+    "modifier_coordonnees": {
+        "type": "transactionnelle",
+        "poids": 4,
+        "gabarits": [
+            "je veux changer mon {coordonnee}",
+            "comment modifier mon {coordonnee}",
+            "j'ai déménagé, je dois mettre à jour mon {coordonnee}",
+            "je change de banque, comment je mets à jour mon {coordonnee}",
+            "mon {coordonnee} a changé, je dois le signaler",
+            "je me suis mariée, je voudrais changer mon {coordonnee}",
+            "où est ce que je modifie mes informations personnelles",
+            "je souhaite mettre à jour mon dossier",
+        ],
+    },
+    "contacter_conseiller": {
+        "type": "transactionnelle",
+        "poids": 4,
+        "gabarits": [
+            "je veux parler à un conseiller",
+            "vous avez un numéro de téléphone",
+            "je peux avoir quelqu'un au téléphone",
+            "comment vous joindre",
+            "quels sont vos horaires d'ouverture",
+            "je voudrais un rendez vous avec un conseiller",
+            "passez moi un humain",
+            "je préfère parler à une vraie personne",
+        ],
+    },
+    "hors_perimetre": {
+        "type": "rejet",
+        "poids": 4,
+        "gabarits": [
+            "je voudrais {hors_sujet}",
+            "vous faites {hors_sujet}",
+            "est ce que vous proposez {hors_sujet}",
+            "combien coûte {hors_sujet} chez vous",
+            "quel temps fait il aujourd'hui",
+            "raconte moi une blague",
+            "tu es une intelligence artificielle",
+            "je cherche un médecin près de chez moi",
+            "quel est le numéro de la sécurité sociale",
+            "comment déclarer mes impôts",
+        ],
+    },
+    "demander_attestation": {
+        "type": "transactionnelle",
+        "poids": 2,
+        "gabarits": [
+            "je voudrais mon attestation de droits",
+            "où je télécharge ma carte de tiers payant",
+            "il me faut une attestation pour mon employeur",
+            "comment obtenir mon certificat de radiation",
+            "j'ai besoin d'un justificatif d'affiliation",
+            "ma carte de mutuelle est perdue, comment en avoir une nouvelle",
+            "je peux avoir une attestation de couverture",
+        ],
+    },
+}
+
+# ---------------------------------------------------------------------------
+# Cas volontairement ambigus
+# ---------------------------------------------------------------------------
+# Ces phrases n'ont pas de réponse évidente. Elles sont étiquetées avec le
+# choix retenu et la raison, pour l'analyse d'erreurs de l'étape 5. Le
+# modèle se trompera sur une partie d'entre elles, et c'est attendu.
+
+CAS_AMBIGUS = [
+    ("combien je paye pour les lunettes", "question_garantie",
+     "peut désigner le reste à charge (garantie) ou la cotisation (tarif)"),
+    ("les lunettes c'est combien", "question_garantie",
+     "même ambiguïté, formulation plus courte"),
+    ("quand est ce que je serai remboursé de mes lunettes", "question_delai",
+     "délai générique, mais peut viser une demande précise en cours"),
+    ("j'ai envoyé ma facture d'ostéo il y a dix jours", "suivre_remboursement",
+     "constat sans question explicite, proche de question_delai"),
+    ("je viens d'adhérer et j'ai besoin de lunettes", "question_delai",
+     "sous-entend le délai de carence sans le nommer"),
+    ("est ce que je peux changer de formule maintenant", "souscrire",
+     "changement de formule, entre souscription et question de délai"),
+    ("je pars chez un autre assureur", "resilier",
+     "aucune mention du mot résilier"),
+    ("mon fils a 22 ans, il est encore couvert", "question_garantie",
+     "porte sur les conditions de rattachement, proche de souscrire"),
+    ("ça coûte combien de rajouter ma fille", "question_tarif",
+     "tarif d'un ayant droit, proche de souscrire"),
+    ("je ne comprends pas mon relevé", "suivre_remboursement",
+     "proche de contacter_conseiller"),
+    ("l'implant c'est pris en charge et sous combien de temps", "question_garantie",
+     "deux intentions dans la même phrase"),
+    ("j'ai changé de banque", "modifier_coordonnees",
+     "constat sans demande explicite"),
+    ("vous êtes ouverts le samedi", "contacter_conseiller",
+     "horaires, proche de hors_perimetre"),
+    ("je voudrais une mutuelle pour ma voiture", "hors_perimetre",
+     "le mot mutuelle peut tromper le modèle"),
+    ("quelle formule pour être bien remboursé", "comparer_formules",
+     "très vague, proche de question_garantie"),
+]
