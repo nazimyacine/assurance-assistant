@@ -29,7 +29,8 @@ GRAINE = 42
 TOTAL_TRAIN = 5000
 TOTAL_VAL = 800
 TOTAL_TEST = 500
-PART_GABARITS_TEST = 0.30
+PART_GABARITS_TEST = 0.25
+PART_GABARITS_VAL = 0.20
 
 # ---------------------------------------------------------------------------
 # Bruit
@@ -174,16 +175,24 @@ def remplir(gabarit: str, rng: random.Random) -> str:
     return corriger_elisions(texte)
 
 
-def repartir_gabarits(rng: random.Random) -> tuple[dict, dict]:
-    """Sépare les gabarits de chaque intention en deux ensembles disjoints."""
-    train, test = {}, {}
+def repartir_gabarits(rng: random.Random) -> tuple[dict, dict, dict]:
+    """Sépare les gabarits en trois ensembles strictement disjoints.
+
+    Les trois jeux doivent l'être, pas seulement le test. Si la validation
+    partage ses gabarits avec l'entraînement, son score sature en une epoch
+    et ne peut plus servir à choisir le meilleur modèle : on sélectionne
+    alors au hasard, voire on garde un modèle sous-entraîné.
+    """
+    train, val, test = {}, {}, {}
     for nom, config in INTENTIONS.items():
         gabarits = list(config["gabarits"])
         rng.shuffle(gabarits)
         n_test = max(2, round(len(gabarits) * PART_GABARITS_TEST))
+        n_val = max(2, round(len(gabarits) * PART_GABARITS_VAL))
         test[nom] = gabarits[:n_test]
-        train[nom] = gabarits[n_test:]
-    return train, test
+        val[nom] = gabarits[n_test:n_test + n_val]
+        train[nom] = gabarits[n_test + n_val:]
+    return train, val, test
 
 
 def generer(pool: dict, total: int, rng: random.Random,
@@ -256,12 +265,12 @@ def ecrire(chemin: Path, lignes: list[dict]) -> None:
 
 def main() -> int:
     rng = random.Random(GRAINE)
-    pool_train, pool_test = repartir_gabarits(rng)
+    pool_train, pool_val, pool_test = repartir_gabarits(rng)
 
     train = generer(pool_train, TOTAL_TRAIN, rng)
     textes_train = {l["texte"].lower().strip() for l in train}
 
-    val = generer(pool_train, TOTAL_VAL, rng, textes_train)
+    val = generer(pool_val, TOTAL_VAL, rng, textes_train)
 
     # Le test ne doit contenir aucune phrase déjà vue ailleurs : le bruit
     # aléatoire peut faire converger deux gabarits vers la même phrase.
@@ -297,10 +306,10 @@ def main() -> int:
     print(f"train : {len(train)} lignes")
     print(f"val   : {len(val)} lignes")
     print(f"test  : {len(test)} lignes")
-    print("\nGabarits réservés au test, par intention :")
+    print("\nRépartition des gabarits (train / val / test) :")
     for nom in INTENTIONS:
-        print(f"  {nom:26} {len(pool_test[nom])} test / "
-              f"{len(pool_train[nom])} train")
+        print(f"  {nom:26} {len(pool_train[nom])} / "
+              f"{len(pool_val[nom])} / {len(pool_test[nom])}")
     return 0
 
 

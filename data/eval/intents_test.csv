@@ -1,536 +1,537 @@
 texte,intention,difficulte,origine
-je souahite ouvrir un contrat svp,souscrire,bruite,gabarit
-désolé de vous déranger mais est ce que vous propossez assurer mon appartement,hors_perimetre,bruite,gabarit
-saluut je préfère parler à une vraie personne,contacter_conseiller,bruite,gabarit
-est ce que ma feuille de sooins a été traitée merci,suivre_remboursement,bruite,gabarit
-"ma femme m'a dit de vous contacter, aucun virement depuis le mois dernier alors que j'ai envoyé mes justificatifs",suivre_remboursement,bruite,gabarit
-désolé de vous déranger mais il me faut une attestation pour mon employeur,demander_attestation,bruite,gabarit
-coucou je voudrais savoir si vous avez bien reçu ma facture,suivre_remboursement,bruite,gabarit
-"ma femme m'a dit de vs contacter, quels sont vos hhoraires d'ouverture",contacter_conseiller,bruite,gabarit
-je vodurais un crédit immobilier,hors_perimetre,bruite,gabarit
-je voudrais savoir si vous avez bien reçu ma facture svp,suivre_remboursement,facile,gabarit
-"bonsoir, comment rattacher mon fils à mon contrat",souscrire,bruite,gabarit
-"alors voila, je voudrais savoir si vous avez bien recu ma facture",suivre_remboursement,bruite,gabarit
-il y a un délai d'attente pour l'appareil auditif cordialement,question_delai,facile,gabarit
-j'aimerais arrêter ma mutuelle,resilier,facile,gabarit
-hello je veux devenir adhérennt,souscrire,bruite,gabarit
-"coucou j'ai déjà appelé la semaine dernière et personne ne m'a répondu, je voudrais savoir si vous avez bien reçu ma facture ?",suivre_remboursement,bruite,gabarit
-"BONJOUR, QUELLES SONT MES GARANTIES EN HOSPITALISATION",question_garantie,bruite,gabarit
-"j'ai déjà appelé la semaine dernière et personne ne m'a répondu, j'ai été hospitalisé en urgence hier, je fais quoi",demande_prise_en_charge,bruite,gabarit
-quand est ce que j prrai me faire poser une monture,question_delai,bruite,gabarit
-vous faites assurer mon appartement,hors_perimetre,facile,gabarit
-"ma femme m'a dit de vous contacter, comment quitter Mutuelle Solstice",resilier,bruite,gabarit
-je souhaite mettre fin à mon adhésion cordialement,resilier,facile,gabarit
-"je vous explique ma situation, comparze moi vos trois formules",comparer_formules,bruite,gabarit
-"bjr je ne trouve pas l'information sur votre site, résiliation de contrat",resilier,bruite,gabarit
-"je vs explique ma situation, je voudrais savoir si vous avez bien recu ma facture",suivre_remboursement,bruite,gabarit
-"bonsoir, je voudrais savoir si vous avez bien recu ma facture merci",suivre_remboursement,bruite,gabarit
-JE SUIS ADHÉRENT DEPUIS TROIS ANS ET EST CE QUE MA FEUILLE DE SOINS A ÉTÉ TRAITÉE,suivre_remboursement,bruite,gabarit
-je souhaite mettre fin à mon adhésion merci d'avacne,resilier,bruite,gabarit
-"hello je ne trouve pas l'information sur votre site, mon IBAN a change, je dois le signaler ?",modifier_coordonnees,bruite,gabarit
-combien ça coûte pour une famille de quatre,question_tarif,facile,gabarit
-"ma femme m'a dit de vous contacter, vous êtes ouverts le samedi",contacter_conseiller,ambigu,cas_ambigu
-quelle est la différence entre Essentiel et Premium,comparer_formules,facile,gabarit
-"ma femme m'a dit de vous contacter, Essentiel ou Confort, laquelle est mieux pour le dentaire",comparer_formules,bruite,gabarit
-"coucou je vous explique ma situation, quelle est ma cotisation mensuelle",question_tarif,bruite,gabarit
-quelle est ma cotisation mensuelle,question_tarif,facile,gabarit
-quel est le montant du prelevement mensuel,question_tarif,bruite,gabarit
-coucou combien ça coûte pour une famille de quatre,question_tarif,bruite,gabarit
-je veux devenir adhernt,souscrire,bruite,gabarit
-esk j peux changer de formule manitenant ??,souscrire,ambigu,cas_ambigu
-"ma femme m'a dit de vous contacter, je voudrais savoir si vous avez bieen reçu ma facture",suivre_remboursement,bruite,gabarit
-bjr l'orthodontie c'est pris en charge ou pas,question_garantie,bruite,gabarit
-les lunettes c'est combien,question_garantie,ambigu,cas_ambigu
-résiliaiton de contrat,resilier,bruite,gabarit
-est ce que ma feuille de soins a été traitée ??,suivre_remboursement,facile,gabarit
-quelle est ma cotisation mensuelle svp,question_tarif,facile,gabarit
-"ma femme m'a dit de vous contacter, les tarifs augmentent avec l'âge s'il vous plaît",question_tarif,bruite,gabarit
-comment rattacher mon fils à mon contrat merci,souscrire,facile,gabarit
-la formule Confort rembourse quoi exactement en maternite,question_garantie,bruite,gabarit
-les prothèses dentaires c'est pris en charge ou pas ?,question_garantie,facile,gabarit
-la formule Essentiel rembourse quoi exactement en hospitalisation,question_garantie,facile,gabarit
-esk ma feuille de soins a été traitée mercci d'avance,suivre_remboursement,bruite,gabarit
-"alors voilà, quelle formule pour être bien remboursé svp",comparer_formules,ambigu,cas_ambigu
-"sEsentiel ou Confort, laquelle est mieux pour le dentaire",comparer_formules,bruite,gabarit
-quel est le remboursement pour une chambre particulière en formule Essentiel,question_garantie,facile,gabarit
-"je vous explique ma situation, je voudrais savoir si vous avez bien reçu ma facture",suivre_remboursement,bruite,gabarit
-QUEL EST LE REMBOURSEMENT POUR UNE CURE THERMALE EN FORRMULE PREMIUM,question_garantie,bruite,gabarit
-"bonjour, je voudrais savoir si vous avez bien reçu ma facture",suivre_remboursement,bruite,gabarit
-"je vous explique ma situation, j'ai été hospitalisé en urgence hier, je fais quoi ?",demande_prise_en_charge,bruite,gabarit
-hello aucun virement depuis le mois dernier alors que j'ai envoyé mes justificatifs,suivre_remboursement,bruite,gabarit
-"ma femme m'a dit de vous contacter, la formule Confort rembourse quoi exactement en audiologie",question_garantie,bruite,gabarit
-bonjour je peux avoir une attestation de couverture merci bcp,demander_attestation,bruite,gabarit
-quelle est la différence entre Essentiel et Premium merci beaucoup,comparer_formules,facile,gabarit
-JE NE TROUVE PAS LE REMBOURSEMENT DE L'OSTEOPATHIE DANS MON ESPACE,suivre_remboursement,bruite,gabarit
-"bonjour, comparez moi vos trois formules",comparer_formules,bruite,gabarit
-comment rattacher mon fils à mon contrat ?,souscrire,facile,gabarit
-la cure thermale c pris en chrage ou pas,question_garantie,bruite,gabarit
-helllo les tarifs augmentent avec l'âge,question_tarif,bruite,gabarit
-salut les tarifs augmenttent avec l'âge,question_tarif,bruite,gabarit
-j'ai changé de banque,modifier_coordonnees,ambigu,cas_ambigu
-HELLO EST CE QUE MA FEUILLE DE SOINS A ÉTÉ TRAITÉE,suivre_remboursement,bruite,gabarit
-la chambre particuliere c'est pris en charge ou pas,question_garantie,bruite,gabarit
+coment je fais pour résilier ??,resilier,bruite,gabarit
 combien je paye pour les lunettes,question_garantie,ambigu,cas_ambigu
-"je change de banque, comment je mets à jour mon RIB",modifier_coordonnees,facile,gabarit
-je ne trouve pas le remboursement de la chambre particulière adns mon espace,suivre_remboursement,bruite,gabarit
-au bouut de combien de temps les garanties optique sont actives ??,question_delai,bruite,gabarit
-"bonjour madame, l'ostéopathie c'est pris en charge ou pas",question_garantie,bruite,gabarit
-"bonjour, je préfère parler à une vraie personne ??",contacter_conseiller,bruite,gabarit
-la formule Premium rembourse quoi exactement en hospitalisation,question_garantie,facile,gabarit
-quelles sont mes garanties en soins courants,question_garantie,facile,gabarit
-bonjour je voudrais une chambrre particulière pour mon hospitalisation,demande_prise_en_charge,bruite,gabarit
-il me faut une attestation pour mon employeur ?,demander_attestation,facile,gabarit
-"bonjour, alors voila, Essentiel ou Confort, laquelle est mieux pour le dentaire",comparer_formules,bruite,gabarit
-coucou résiliation de contrat,resilier,bruite,gabarit
-quel est le montant du prélèvement mensuel merci d'avance,question_tarif,facile,gabarit
-COUCOU QUELLE EST LA DIFFÉRENCE ENTRE ESSENTIEL ET CONFORT,comparer_formules,bruite,gabarit
-"bjr madame, la formule Premium rembourse quoi exactement en dentaire",question_garantie,bruite,gabarit
-je voudrais souscrire une mutuelle merci,souscrire,facile,gabarit
-est ce que vous proposez un crédit immobilier,hors_perimetre,facile,gabarit
-"ma femme m'a dit de vous contacter, je voudrais souscrire une mutuelle",souscrire,bruite,gabarit
-"ma femme m'a dit de vous contacter, la formule Premium rembourse quoi exactement en audiologie",question_garantie,bruite,gabarit
-"BONJOUR MADAME, LA FORMULE PREMIUM REMBOURSE QUOI EXACTEMENT EN MÉDECINES DOUCES S'IL VOUS PLAÎT",question_garantie,bruite,gabarit
-comment rattacher mon fils à mon contrat,souscrire,facile,gabarit
-aucun virement depuis le mois dernier alors que j'ai envoyé mes justificatifs,suivre_remboursement,facile,gabarit
-quel est le rembourseement pour des lentilles en formule Premium,question_garantie,bruite,gabarit
-coucou quel est le remboursement pour une séance d'acupuncture en formule Essentiel,question_garantie,bruite,gabarit
-j voudrais une chambre particulière pour mon hospitalisation,demande_prise_en_charge,bruite,gabarit
-bjr quelles sont mes garanties en dentaire,question_garantie,bruite,gabarit
-je suis ahdérent depuis trois ans et quel est le montant du prélèvement mensuel,question_tarif,bruite,gabarit
-salut je ne trouve pas le remboursement de la cure thermale dans mon espace merci d'avance,suivre_remboursement,bruite,gabarit
-BJR DÉSOLÉ DE VOUS DÉRANGER MAIS AUCUN VIREMENT DEPUIS LE MOIS DERNIER ALORS QUE J'AI ENVOYÉ MES JUSTIFICATIFS,suivre_remboursement,bruite,gabarit
-je pars chez un autre assureur,resilier,ambigu,cas_ambigu
-"désolé de vous déranger mais j'ai été hospitalisé en ugence hier, je fais quoi",demande_prise_en_charge,bruite,gabarit
-coucou je préfère parler à une vraie personne,contacter_conseiller,bruite,gabarit
-est ce que ma feuille de soins a été traitée merci d'avance,suivre_remboursement,facile,gabarit
-"bonjour, la formule Essentiel rembourse quio exactement en audiologie",question_garantie,bruite,gabarit
-"désolé de vous déranger mais je change de banque, comment je mets à jour mon RIB",modifier_coordonnees,bruite,gabarit
-est ce que ma feuille de soins a été traiitée,suivre_remboursement,bruite,gabarit
-"bonsoir, aucun virement depuis le mois dernire alors que j'ai envoyé mes justificatifs ??",suivre_remboursement,bruite,gabarit
-quel est le remboursement pour une prothèse dentaire en formule Confort,question_garantie,facile,gabarit
-bonjour quel est le montant du prélèvement mensuel,question_tarif,bruite,gabarit
-je préfère parler à une vraie personne,contacter_conseiller,facile,gabarit
-"bonjour, je suis adhérent depuis trois ans et quel délai pour recevoir mon certificat de radiation",question_delai,bruite,gabarit
-"je vous explique ma situation, je ne trouve pas le remboursement des prothèses dentaires dans mon espace",suivre_remboursement,bruite,gabarit
-la formule Premium rembourse quoi exactement en medecines douces ??,question_garantie,bruite,gabarit
-"je ne trouve pas l'information sur votre site, je voudrais un crédit immoobilier",hors_perimetre,bruite,gabarit
-l'osteopathie c'est pris en charge ou pas ??,question_garantie,bruite,gabarit
-j suis adhérent depuis trois ans et les tarifs augmentent avec l'âge,question_tarif,bruite,gabarit
-"COUCOU MA FEMME M'A DIT DE VOUS CONTACTER, LA FORMULE ESSENTIEL REMBOURSE QUOI EXACTEMENT EN OPTIQUE",question_garantie,bruite,gabarit
-je viens d'adhérer et j'ai besoin de lunettes,question_delai,ambigu,cas_ambigu
-coucou les tarifs augmentent vec l'âge,question_tarif,bruite,gabarit
-"je ne trouve pas l'information sur votre site, je voudrais savoir si vous avez bien reçu ma facture",suivre_remboursement,bruite,gabarit
-bjr il me faut une attestation pour mon employeur,demander_attestation,bruite,gabarit
-"bonjour madame, j'ai déjà appelé la semaine dernière et personne ne m'a répondu, il y a un délai d'attente pour la cure thermale",question_delai,bruite,gabarit
-quel élai pour recevoir mon certificat de radiation,question_delai,bruite,gabarit
-desole de vs deranger mais aucun virement depuis le mois dernier alors que j'ai envoye mes justificatifs s'il vous plait,suivre_remboursement,bruite,gabarit
-"salut j'ai déjà appelé la semaine dernière et personne ne m'a répondu, aucun virement depuis le mois dernier alors que j'ai envoyé mes justificatifs",suivre_remboursement,bruite,gabarit
-quelle est la différence entre Essentiel et Confort,comparer_formules,facile,gabarit
-"BONJOUR, QUEL EST LE MONTANT DU PRÉLÈVEMENT MENSUEL",question_tarif,bruite,gabarit
-esk vs proposez un crédit immobilier ??,hors_perimetre,bruite,gabarit
-je voudrais souscrrire une mutuelle,souscrire,bruite,gabarit
-"bonsoir, je suis adhérent depuis trois ans et je ne trouve pas le remboursement de l'appareil auditif dans mon espace",suivre_remboursement,bruite,gabarit
-"je vous explique ma situation, je ne trouve pas le remboursement de la chambre particulière dans mon espace",suivre_remboursement,bruite,gabarit
-coucou les tarifs auggmentent avec l'âge ??,question_tarif,bruite,gabarit
-"bonsoir, au bout de combien de temps les garanties optique sont actives",question_delai,bruite,gabarit
-est ce que ma feuille de soins a été triatée,suivre_remboursement,bruite,gabarit
-QUELLES SONT MES GARANTIES EN AMTERNITÉ,question_garantie,bruite,gabarit
-je voudrais une chambre particulière pour mon hospitalisation cordialement,demande_prise_en_charge,facile,gabarit
-désolé de vs déranger mais les tarifs augmentent avec l'âge,question_tarif,bruite,gabarit
-je prefere parler a une vraie personne,contacter_conseiller,bruite,gabarit
-"j'ai déjà appelé la semaine dernière et personne ne m'a répondu, comment quitter Mutuelle Solsice",resilier,bruite,gabarit
-vs faites assurer ma voiture,hors_perimetre,bruite,gabarit
-"j ne trouve pas l'information sur votre site, je peux avoir une attestation de couverture",demander_attestation,bruite,gabarit
-est ce que ma feuille de sons a été traitée svp,suivre_remboursement,bruite,gabarit
-je souhaite mettre fin à mon adhésion svp,resilier,facile,gabarit
-désolé de vous déranger mais je souhaite ouvrir un contrat ??,souscrire,bruite,gabarit
-JE PEUX AVOIR UNE ATTESTATION DE COUVERTURE,demander_attestation,bruite,gabarit
-hello le forfait journalier c'est pris en charge ou pas,question_garantie,bruite,gabarit
-il y a un délai d'attente pour les lunettes,question_delai,facile,gabarit
-je veux devenir adhérent,souscrire,facile,gabarit
-quand est ce que je pourrai me faire poser une monture,question_delai,facile,gabarit
-coucou quel est le remboursement pour un implant dentaire en formule Confort merci d'avance,question_garantie,bruite,gabarit
-il y a un délai d'attente pour le forfait journalier,question_delai,facile,gabarit
-"je ne trouve pas l'information sur votre site, la formule Confort rembourse quoi exactement en audiologie",question_garantie,bruite,gabarit
-il y a un délai d'attente pr les implants,question_delai,bruite,gabarit
-"ma femme m'a dit de vs contacter, comment quitter Mutuelle Solstice",resilier,bruite,gabarit
-l'orthodontie c'est pris en charge ou pas,question_garantie,facile,gabarit
-je pux avoir une attestation de couverture,demander_attestation,bruite,gabarit
-comarez moi vos trois formules cordialement,comparer_formules,bruite,gabarit
-quel est le remboursement pour mes médicamennts en formule Essentiel,question_garantie,bruite,gabarit
-"j'ai ete hospitalise en urgence hier, je fais quoi merci",demande_prise_en_charge,bruite,gabarit
-bjr je veux devenir adhérent,souscrire,bruite,gabarit
-"JE VOUS EXPLIQUE MA SITUATION, LA FORMULE ESSENTIEL REMBOURSE QUOI EXACTEMENT EN DENTAIRE",question_garantie,bruite,gabarit
-"bonjour, comment quitter Mutuelle Solstice merci d'avance",resilier,bruite,gabarit
-je souhaite ouvrir un conrat,souscrire,bruite,gabarit
-bjr quel délai pour recevoir mon certificat de radiation,question_delai,bruite,gabarit
-salut est ce que ma feuille de soins a été traitée,suivre_remboursement,bruite,gabarit
-quel délai pr recevoir mon certificat de radiation merci,question_delai,bruite,gabarit
-"bonjour madame, est ce que ma feuille de soins a ete traitee",suivre_remboursement,bruite,gabarit
-hello quelles sont mes garnties en soins courants merci d'avance,question_garantie,bruite,gabarit
-salut quand est ce que je pourrai me faire poser un appareil auditif s'il vous pplaît,question_delai,bruite,gabarit
-comparez moi vos troois formules,comparer_formules,bruite,gabarit
-"j'ai déjà appelé la semaine dernière et personne ne m'a répondu, quelles sont mes garanties en optique",question_garantie,bruite,gabarit
-j ne trouve pas le remboursement des implants dans mon espace svp,suivre_remboursement,bruite,gabarit
-"bonsoir, désolé de vous déranger mais je change de banque, comment je mets à jour mon adresse mail",modifier_coordonnees,bruite,gabarit
-bonjour aucun virement depuis le mois dernier alors que j'ai envoyé mes justificatifs merci,suivre_remboursement,bruite,gabarit
-quand est ce que je serai remboursé de mes lunettes,question_delai,ambigu,cas_ambigu
-quel delai pour recevoir mon certificat de radiation,question_delai,bruite,gabarit
-bonjour aucun virement depuis le mois dernier alors que j'ai envoyé mes justificatifs,suivre_remboursement,bruite,gabarit
-"je vous explique ma situation, les tarifs augmentent avec l'âge",question_tarif,bruite,gabarit
-LES IMPLANTS C'EST PRIS EN CHARGE OU PAS,question_garantie,bruite,gabarit
-"bonsoir, desole de vous deranger mais quelle est la difference entre Essentiel et Premium",comparer_formules,bruite,gabarit
-"bonjour, quel est le remboursement pour un accouchement en formule Confort",question_garantie,bruite,gabarit
-"je vous explique ma situation, resiliation de contrat merci beaucoup",resilier,bruite,gabarit
-"bonsoir, j'aimerais arrêter ma mutuelle",resilier,bruite,gabarit
-"bjr, j voudrais savoir si vs avez bien reçu ma facture",suivre_remboursement,bruite,gabarit
-"j'ai deja appele la semaine derniere et personne ne m'a repondu, j'ai ete hospitalise en urgence hier, je fais quoi cordialement",demande_prise_en_charge,bruite,gabarit
-"BONJOUR, JE VOUS EXPLIQUE MA SITUATION, COMBIEN ÇA COÛTE OPUR UNE FAMILLE DE QUATRE",question_tarif,bruite,gabarit
-"bonsoir, je suis adérent depuis trois ans et comparez moi vos trois formules merci",comparer_formules,bruite,gabarit
-"bonsoir, j'ai déjà appelé la semaine dernière et personne ne m'a répondu, je ne trouve pas le remboursement du forfait journalier dans mon espace",suivre_remboursement,bruite,gabarit
-quand esk j pourrai me faire poser un implant dentaire,question_delai,bruite,gabarit
-"bjr je vous explique ma situation, quelles sont mes garanties en audiologie",question_garantie,bruite,gabarit
-"bonjour, je souhatie mettre fin à mon adhésion",resilier,bruite,gabarit
-"HELLO ALORS VOOILÀ, RÉSILIATION DE CONTRAT",resilier,bruite,gabarit
-j ne trouve pas le remboursement des lentilles dans mon espace,suivre_remboursement,bruite,gabarit
-je voudrais souscrire une mutuelle,souscrire,facile,gabarit
-"bonjour madame, la cure thermale c'est pris en charge ou pas",question_garantie,bruite,gabarit
-quel est le remboursement pour une monture en formule Essentiel,question_garantie,facile,gabarit
-j suis adhérent depuis trois ans et est ce que ma feuille de soins a été traitée,suivre_remboursement,bruite,gabarit
-je souhaite ouuvrir un contrat,souscrire,bruite,gabarit
-"ma femme m'a dit de vous contacter, est ce que ma feuille de soins a été traitée",suivre_remboursement,bruite,gabarit
-quelles sont mes garanties en medecines douces,question_garantie,bruite,gabarit
-je voudrais savoir si vous avez bien recu ma facture cordialement,suivre_remboursement,bruite,gabarit
-"je ne trouve pas l'information sur votre site, quelle est la diffeernce entre Confort et Premium ??",comparer_formules,bruite,gabarit
-la formule Confort rembourse quoi exactement en médecines douces,question_garantie,facile,gabarit
-"je ne trouve pas 'information sur votre site, je préfère parler à une vraie personne",contacter_conseiller,bruite,gabarit
-"bonjour, quel est le remboursement pour des verres progressifs en formule Confort merci beaucoup",question_garantie,bruite,gabarit
-"je ne trouve pas l'information sur votre site, est ce que ma feuille de soins a été traitée",suivre_remboursement,bruite,gabarit
-je ne comprends pas mon releve,suivre_remboursement,ambigu,cas_ambigu
-les lentilles c'est pris en charge ou pas merci d'avance,question_garantie,facile,gabarit
-combine ça coûte pour une famille de quatre merci,question_tarif,bruite,gabarit
-quelle est ma cotisation mensuelel,question_tarif,bruite,gabarit
-résiliation de contrat,resilier,facile,gabarit
-"alors voila, je ne trouve pas le remboursement de l'appareil auditif dans mon espace",suivre_remboursement,bruite,gabarit
-"je ne trouve pas l'information sur votre site, je préfère parler à une vraie personne ??",contacter_conseiller,bruite,gabarit
-"SALUT JE VOUS EXPLIQUE MA SITUATION, QUELLES SONT MES GARANTIES EN AUDIOLOGIE",question_garantie,bruite,gabarit
-resiliation de contrat,resilier,bruite,gabarit
-les tarifs augmentent avec l'âge ??,question_tarif,facile,gabarit
-quels sont vos horaires d'ouverture,contacter_conseiller,facile,gabarit
-"bonjour, je change de banque, comment je mets à jour mon IBAN",modifier_coordonnees,bruite,gabarit
-ça coûte combien de rajouter ma fille,question_tarif,ambigu,cas_ambigu
-"bonjour ma femme m'a dit de vous contacter, quelle formule pour être bien remboursé ?",comparer_formules,ambigu,cas_ambigu
-jvoudré savoir si vs avez bien reçu ma facture,suivre_remboursement,bruite,gabarit
-il y a un delai d'attente pour les protheses dentaires,question_delai,bruite,gabarit
-"j'ai été hospitalisé en urgence hier, je fais quoi",demande_prise_en_charge,facile,gabarit
-je voudrais une chambre particulière pur mon hospitalisation,demande_prise_en_charge,bruite,gabarit
-"mon adresse a changé, je dois le signaler",modifier_coordonnees,facile,gabarit
-"ma femme m'a dit de vous contacter, comment quitter Mutuelle Solstice cordialement",resilier,bruite,gabarit
-"alors voilà, je ne trouve pas le remboursement de l'orthodontie dans mon espace",suivre_remboursement,bruite,gabarit
-je voudrais assurer ma voitre,hors_perimetre,bruite,gabarit
-"ma femme m'a dit de vs contacter, je ne trouve pas le remboursement des lunettes dans mon espace",suivre_remboursement,bruite,gabarit
-les tarifs augmentent avec l'age,question_tarif,bruite,gabarit
-"bonjjour, quelles sont mes garanties en médecines douces",question_garantie,bruite,gabarit
-"bonjour, j'ai été hospitalisé en urgence hier, je fais quoi",demande_prise_en_charge,bruite,gabarit
-"coucou je vous explique ma situation, les tarifs augmentennt avec l'âge",question_tarif,bruite,gabarit
-désolé de vous déraner mais comment rattacher mon fils à mon contrat merci d'avance,souscrire,bruite,gabarit
-je souhaite mettre fin à mon adhésion,resilier,facile,gabarit
-quel est le remboursement pour un appareil auditif en formule Premium,question_garantie,facile,gabarit
-"ma femme m'a dit de vs contacter, je ne trouve pas le rmboursement de la cure thermale dans mon espace",suivre_remboursement,bruite,gabarit
-je voudrais savoir si vous avez bien recu ma facture ??,suivre_remboursement,bruite,gabarit
-je suis adherent depuis trois ans et quelle est ma cotisation mensuelle,question_tarif,bruite,gabarit
-hello je souhaite ouvrir un contrat svp,souscrire,bruite,gabarit
-sault quelle est ma cotisation mensuelle,question_tarif,bruite,gabarit
-"bonsoir, quand est ce que je pourrai me faire poser un appareil dentaire pour mon fils",question_delai,bruite,gabarit
-je voudrais savoir si vous avez bien reçu ma facture,suivre_remboursement,facile,gabarit
-comparez moi vos ttrois formules,comparer_formules,bruite,gabarit
-"bonsooir, je veux devenir adherent",souscrire,bruite,gabarit
-"je ne trouve pas l'information sur votre site, quels sont vos horaires d'ouverture",contacter_conseiller,bruite,gabarit
-désolé de vous déranger mais quels sont vos horaires d'ouverture,contacter_conseiller,bruite,gabarit
-QUEL EST LE MONTANT DU PRÉLÈVEMMENT MENSUEL,question_tarif,bruite,gabarit
-"ALORS VOILÀ, JE VEUX DEVENIR ADHÉRENT",souscrire,bruite,gabarit
-comment rattacher mon fils à mon contrat svp,souscrire,facile,gabarit
-bonjour j'aimerais arrêter ma mutuelle,resilier,bruite,gabarit
-"JE CHANGE DE BANQUE, COMMENT JE METS À JOUR MON IBAN",modifier_coordonnees,bruite,gabarit
-quel est le remboursement pour un appareil dentaire pour mon fils en formule Essentiel,question_garantie,facile,gabarit
-vous êtes ouverts le samedi merci d'avanec,contacter_conseiller,ambigu,cas_ambigu
-desole de vous deranger mais la formule Essentiel rembourse quoi exactement en soins ccourants,question_garantie,bruite,gabarit
-coucou j voudrais savoir si vs avez bien reçu ma facture svp,suivre_remboursement,bruite,gabarit
-il me faut une attestation pour mon employeur s'il vous plaît,demander_attestation,facile,gabarit
-bonjour comment quitter Mutuelle Solstice,resilier,bruite,gabarit
-bjr est ce que ma feuille de soins a été traitée merci,suivre_remboursement,bruite,gabarit
-aucun virement depuis le mois dernier alors que j'ai envoyé mes justificatifs merci beaucoup,suivre_remboursement,facile,gabarit
-hello quels sont vos horaires d'ouverture,contacter_conseiller,bruite,gabarit
-quel est le montant du prélèvement mensuel,question_tarif,facile,gabarit
-"BJR JE NE TROUVE PAS L'INFORMATION SUR VOTRE SITE, LA FORMULE CONFORT REMBOURSE QUOI EXACTEMENT EN SOINS COURANTS MERCI D'AVANCE",question_garantie,bruite,gabarit
-vous êtes ouverts le samedi,contacter_conseiller,ambigu,cas_ambigu
-il y a un delai d'attente pour les implants ??,question_delai,bruite,gabarit
-"désolé de ous déranger mais Essentiel ou Confort, laquelle est mieux pour le dentaire",comparer_formules,bruite,gabarit
-les prothèses dentaires c'est pris en charge ou pas,question_garantie,facile,gabarit
-désolé de vs déranger mais au bout de combien de temps les garanties optique sont actives,question_delai,bruite,gabarit
-COUCOU JE SUIS ADHÉRENT DEPUIS TROIS ANS ET JE SOUHAITE METTRE FIN À MON ADHÉSION,resilier,bruite,gabarit
-coucou au bout de combien de temps les garanties optique sont actives,question_delai,bruite,gabarit
-"bonjour madame, est ce que ma feuille de soins a été traitée svp",suivre_remboursement,bruite,gabarit
-"bonsoir, ma femme m'a dit de vous contacter, je voudrais une assurance habitation",hors_perimetre,bruite,gabarit
-hello je voudrais souscrire une mutuelle,souscrire,bruite,gabarit
-je ne trouve pas le remboursement de la cure thermale dans mon espace merci,suivre_remboursement,facile,gabarit
-hello les tarifs augmentent avec l'âge,question_tarif,bruite,gabarit
-j voudrais souscrire une mutuelle,souscrire,bruite,gabarit
-quelles ont mes garanties en audiologie s'il vous plaît,question_garantie,bruite,gabarit
-quel est le montnat du prélèvement mensuel,question_tarif,bruite,gabarit
-"bonjour madame, est ce que ma feuille de soins a été traitée",suivre_remboursement,bruite,gabarit
-"alors voilà, les tarifs augmentent avec l'âge",question_tarif,bruite,gabarit
-hello je voudrais savoir si vous avez bien reçu ma facture,suivre_remboursement,bruite,gabarit
-"je vous explique ma situation, quelle est la différence entre Confort et Premium",comparer_formules,bruite,gabarit
-DÉSOLÉ DE VOUS DÉRANGER MAIS QUEL EST LE REMBOURSEMENT PR UNE MONTURE EN FORMULE PREMIUM ERCI D'AVANCE,question_garantie,bruite,gabarit
-les lunettes c combien,question_garantie,ambigu,cas_ambigu
-aucun virement depuis le mois dernier alors que j'ai envoye mes ustificatifs,suivre_remboursement,bruite,gabarit
-"je ne trouve pas l'nformation sur votre site, j'aimerais arrêter ma mutuelle",resilier,bruite,gabarit
-"Essentiel ou Confort, laquelle est mieux pour le dentaire merci",comparer_formules,facile,gabarit
-bjr désolé de vs déranger mais quel est le remboursement pr mes médicaments en formule Premium,question_garantie,bruite,gabarit
-"alors voila, je viens d'adherer et j'ai besoin de lunettes",question_delai,ambigu,cas_ambigu
-bjr je voudrais souscrire une mutuelle ?,souscrire,bruite,gabarit
-quelles sont mes garanties en audiologie cordialement,question_garantie,facile,gabarit
-salut j viens d'adhérer et j'ai besoin de lunettes,question_delai,ambigu,cas_ambigu
-coucou la formule Confort rembourse quoi exactement en optique,question_garantie,bruite,gabarit
-coomment quitter Mutuelle Solstice,resilier,bruite,gabarit
-"bonjour madame, je suis adhérent depuis trois ans et je ne trouve pas le remboursement des implants dans mon espace",suivre_remboursement,bruite,gabarit
-vous faites une assurance voyage merci,hors_perimetre,facile,gabarit
-quel délai pour recevoir mon certificat de raddiation,question_delai,bruite,gabarit
-"bonjour, je ne trouve pas le remboursement de la cure thermale dans mon espace",suivre_remboursement,bruite,gabarit
-la formule Essentiel rembourse quoi exactement en soins courants cordialement,question_garantie,facile,gabarit
-"bonjour madame, je souhaite mettre fin à mon adhésion ?",resilier,bruite,gabarit
-"mon fils a 22 ans, il est encore couvert",question_garantie,ambigu,cas_ambigu
-hello quel délai pour recevoir mon certificat de radiation,question_delai,bruite,gabarit
-je voudrais savoir si vous avez bien reçu ma facture cordialement,suivre_remboursement,facile,gabarit
-les tarifs augmentent avec l'âge,question_tarif,facile,gabarit
-quel est le remboursement pour une séance d'acupuncture en formule Essentiel,question_garantie,facile,gabarit
-est ce que ma ffeuille de soins a été traitée merci d'avance,suivre_remboursement,bruite,gabarit
-je souhaite ouvrir un contrta,souscrire,bruite,gabarit
-"bonjour, quel délai pour recevoir mon certtificat de radiation",question_delai,bruite,gabarit
-je suis adhérent depuis trois ans et aucun virement depuis le mois dernier alors que j'ai envoyé mes justificatifs ??,suivre_remboursement,bruite,gabarit
-quel est le remboursement pr un implant dentaire en formule Essentiel merci beaucoup,question_garantie,bruite,gabarit
-quelle est la différence entre Confort et Premium s'il vous lpaît,comparer_formules,bruite,gabarit
-quel est le remboursement pour une monture en formule Confort,question_garantie,facile,gabarit
-"bonjour, la formule Premium rembourse quoi exactement en médecines douces",question_garantie,bruite,gabarit
-désolé de vous déranger mais je voudrais savoir si vous aevz bien reçu ma facture,suivre_remboursement,bruite,gabarit
-l'appareil auditif c'est pris en charge ou pas,question_garantie,facile,gabarit
-"BONJOUR, J'AI DÉJÀ APPELÉ LA SEMAINE DERNIÈRE ET PERSONNE NE M'A RÉPONDU, J'AI CHANGÉ DE BANQUE SVP",modifier_coordonnees,ambigu,cas_ambigu
-"coucou ma femme m'a dit de vous contacter, j ne trouve pas le remboursement de l'osteopathie dans mon espace",suivre_remboursement,bruite,gabarit
-aucun virement depuis le mois dernier alors que j'ai envoyé mes justificatifs svp,suivre_remboursement,bruite,gabarit
-j voudrais savoir si vous avez iben reçu ma facture,suivre_remboursement,bruite,gabarit
-"ma femme m'a dit de vous contacter, je voudrais une assurance habitation svp",hors_perimetre,bruite,gabarit
-quelles sont mes garanties en audiologie,question_garantie,facile,gabarit
-la chambre particulière c'est pris en charge ou pas,question_garantie,facile,gabarit
-"salut je vous explique ma situation, quel est le montant du prélèvement mensuel",question_tarif,bruite,gabarit
-je ne trouve pas le remboursement des prothèses dentaires dans mon espace,suivre_remboursement,facile,gabarit
-"bonsoir, est ce que ma feuille de soins a été traitée",suivre_remboursement,bruite,gabarit
-"bonjour madame, je souhaite ouvrir un contrat",souscrire,bruite,gabarit
-quel est le remboursement pour des analyses de sang en formule Premium merci d'avance,question_garantie,facile,gabarit
-"mon adresse a changé, je dois le signaler cordialement",modifier_coordonnees,facile,gabarit
-j'aimerais arrêter ma mutuelle ??,resilier,facile,gabarit
-hello quel est le remboursement pour une seance d'osteopathie en formule Premium,question_garantie,bruite,gabarit
-les lunettes c'est combien merci beaucoup,question_garantie,ambigu,cas_ambigu
-désolé de vs déranger mais j voudrais un crédit immobilier,hors_perimetre,bruite,gabarit
-aucun virement depuis le mois dernier aors que j'ai envoyé mes justificatifs merci d'avance,suivre_remboursement,bruite,gabarit
-hello le forfat journalier c'est pris en charge ou pas,question_garantie,bruite,gabarit
-"bonsoir, je souhaite ouvrir un contrat",souscrire,bruite,gabarit
-coucou est ce que ma feuille de soins a été traitée,suivre_remboursement,bruite,gabarit
-quelle est la difference entre Essentiel et Premium,comparer_formules,bruite,gabarit
-"JE VOUS EXPLIQUE MA SITUATION, COMMENT RATTACHER MON FILS À MON CONTRAT",souscrire,bruite,gabarit
-j pars chez un autre assureur,resilier,ambigu,cas_ambigu
-j'ai envoyé ma facture d'ostéo il y a dix jours,suivre_remboursement,ambigu,cas_ambigu
-"j ne trouve pas l'information sur votre site, jvooudré savoir si vs avez bien reçu ma facture ?",suivre_remboursement,bruite,gabarit
-les lentilles c'est pris en charge ou pas,question_garantie,facile,gabarit
-je veux devenir adhrent,souscrire,bruite,gabarit
-je souhaite ouvrir un contrat,souscrire,facile,gabarit
-quelles sont mes garanties en dentaire,question_garantie,facile,gabarit
-"alors voilà, quand est ce que je pourrai me faire poser un implant dentaire",question_delai,bruite,gabarit
-coucou je ne trouve pas le remboursement de l'ostéopathie dans mon espace,suivre_remboursement,bruite,gabarit
-je voudrais une mtuelle pour ma voiture ??,hors_perimetre,ambigu,cas_ambigu
-"bonjour, j'ai déjà appelé la semaine dernière et personne ne m'a répondu, est ce que ma feuille de soins a été traitée merci beaucoup",suivre_remboursement,bruite,gabarit
-"je change de banque, comment je mets à jour mon RIB svp",modifier_coordonnees,facile,gabarit
-coucou je suis adhérent edpuis trois ans et est ce que je peux changer de formule maintenant,souscrire,ambigu,cas_ambigu
-"ma femme m'a dit de vous contacter, quuel est le montant du prélèvement mensuel",question_tarif,bruite,gabarit
-bonjour les lentilles c'est pris en charge ou pas,question_garantie,bruite,gabarit
-"mon RIB a changé, je dois le signaler merci",modifier_coordonnees,facile,gabarit
-la formule Confort rembourse quoi exactement en soins courants,question_garantie,facile,gabarit
-est ce que je peux changer de formule maintenant,souscrire,ambigu,cas_ambigu
-coucou quelles sont mes garanties en hospitalisation,question_garantie,bruite,gabarit
-"bonjour madame, comparez moi vos trois formules",comparer_formules,bruite,gabarit
-"salut alors voilà, quels sont vos horaires d'ouverture",contacter_conseiller,bruite,gabarit
-il y a un delai d'attente pour les lunettes,question_delai,bruite,gabarit
-"bonjour madame, ma femme m'a dit de vous contacter, quel est le remboursement pour des lentilles en formule Essentiel",question_garantie,bruite,gabarit
-désolé de vous déranger mais quel est le remboursement pour une séance d'ostéopathie en formule Confort,question_garantie,bruite,gabarit
-quand esk j pourrai me faire poser un appareil dentaire pour mon fils ?,question_delai,bruite,gabarit
-quel délai pour recevoir mon certificat de radiation merci d'avance,question_delai,facile,gabarit
-salut je voudrais savoir si vous avez bien reçu ma facture,suivre_remboursement,bruite,gabarit
-quelles sont mes garanties en soins curants,question_garantie,bruite,gabarit
-"j'ai ete hospitalise en urgence hier, je fais quoi",demande_prise_en_charge,bruite,gabarit
-est ce que vous proposeez une assurance pour mon chien,hors_perimetre,bruite,gabarit
-je ne trouve pas le remboursement de la chambre particulière dans mon espace svp,suivre_remboursement,facile,gabarit
-les prothèses dentaires c'est pris en charge ou pas s'il vous plaît,question_garantie,facile,gabarit
-je ne trouve pas le remboursement de l'ostéopathie dans mon espace,suivre_remboursement,facile,gabarit
-je ne trouve pas le remboursement des lunettes dans mon espace,suivre_remboursement,facile,gabarit
-"bonjour, désolé de vous déranger mais quelles sont mes garaties en hospitalisation",question_garantie,bruite,gabarit
-je voudrais savoir si vous avez bien recu ma facture,suivre_remboursement,bruite,gabarit
-salut comment éviter d'avancer les frais d'hospitalisation,demande_prise_en_charge,bruite,gabarit
-quand est ce que je pourrai me faire poser une prothèse dentaire merci,question_delai,facile,gabarit
-la chambre particulière c'est pris en chaarge ou pas ?,question_garantie,bruite,gabarit
-"ma femme m'a dit de vous contacter, je veux devenir adhérent",souscrire,bruite,gabarit
-"ma femme m'a dit de vous contacter, aucun viremnet depuis le mois dernier alors que j'ai envoyé mes justificatifs",suivre_remboursement,bruite,gabarit
-quelle est ma ctisation mensuelle,question_tarif,bruite,gabarit
-je veux devenir adherent cordialement,souscrire,bruite,gabarit
+"bjr je ne trouve pas l'information sur votre site, je change de banque, comment je mets à jour mon IBAN",modifier_coordonnees,bruite,gabarit
+"bonjour madame, est ce que une consultation chez le généraliste est exclu de mon contrat",question_garantie,bruite,gabarit
+"je vous explique ma situation, je dois attendre combien de mois pour l'orthodontie merci beaucoup",question_delai,bruite,gabarit
+"ma femme m'a dit de vous contacter, je pars chez un autre assureur ??",resilier,ambigu,cas_ambigu
+j'attends toujours le remboursement de mes médicaments,suivre_remboursement,facile,gabarit
+"bonsoir, je porte des lentilles, quelle formule me conviendrait",comparer_formules,bruite,gabarit
+est ce que j'ai droit à un appareil auditif,question_garantie,facile,gabarit
+"ma femme m'a dit de vous contacter, je dois attendre combien de mois pour l'appareil auditif",question_delai,bruite,gabarit
+coucou quelle est la procédure pour partir ?,resilier,bruite,gabarit
+"j vs explique ma situation, j'attends toujours le remboursement de des verrse progressifs merci",suivre_remboursement,bruite,gabarit
+je viens d'adhérer et j'ai besoin de lunettes cordialement,question_delai,ambigu,cas_ambigu
 l'implant c'est pris en charge et sous combien de temps,question_garantie,ambigu,cas_ambigu
-je voudrais savoir si vous avez bien reçu ma facture s'il vous plaît,suivre_remboursement,facile,gabarit
-combien je paye pour les lunettes ??,question_garantie,ambigu,cas_ambigu
-"BONJOUR, AU BOUUT DE COMBIEN DE TEMPS LES GARANTIES OPTIQUE SONT ACTIVES S'IL VOUS PLAÎT",question_delai,bruite,gabarit
-"bonjour, il me faut une attestation pour mon employeur",demander_attestation,bruite,gabarit
-"bonjour madame, vous faites un crédit immobilier",hors_perimetre,bruite,gabarit
-bonjour résiliation de contrat,resilier,bruite,gabarit
-"hello mon adresse mail a changé, je dois le signaler",modifier_coordonnees,bruite,gabarit
-"ma femme m'a dit de vous contacter, quel est le montant du prélèvement mensuel",question_tarif,bruite,gabarit
-je ne comprends pas mon relevé,suivre_remboursement,ambigu,cas_ambigu
-hello combien ça coûte pour une famille de quatre ?,question_tarif,bruite,gabarit
-"bonjour madame, au bout de combien de temps les garanties optique sont actives",question_delai,bruite,gabarit
-bjr je voudrais savoir si vous avez bien reçu ma facture erci,suivre_remboursement,bruite,gabarit
-aucun virement depuis le mois dernier alors que j'ai envoyé mes justificatifs merci d'avance,suivre_remboursement,facile,gabarit
-je voudrais savoir si vous avez bien reçu ma facture ??,suivre_remboursement,facile,gabarit
-JE VEUUX DEVENIR ADHÉRENT,souscrire,bruite,gabarit
-bonjour je ne trouve pas le remboursement de l'orthodontie dans mon espace,suivre_remboursement,bruite,gabarit
-il me faut une attestation pour mon employeur,demander_attestation,facile,gabarit
-"je vous exlique ma situation, je ne trouve pas le remboursement des prothèses dentaires dans mon espace",suivre_remboursement,bruite,gabarit
-bjr désolé de vous déranger mais j'aimerais arrêter ma mutuelle,resilier,bruite,gabarit
-"bjr j'ai déjà appelé la semaine dernière et personne ne m'a répondu, comparez moi vos trois formules ??",comparer_formules,bruite,gabarit
-"j'ai déjà appelé la semaine dernière et personne ne m'a répondu, quel est le montant du prélèvement mensuel",question_tarif,bruite,gabarit
-"ma femme m'a dit de vous contacter, je ne trouve pas le remboursement de la cure thermale dans mon espace s'il vous plaît",suivre_remboursement,bruite,gabarit
-"j'ai déjà appelé la semaine dernière et personne ne m'a rpéondu, mon RIB a changé, je dois le signaler",modifier_coordonnees,bruite,gabarit
-je voudrais une mutuelle pour ma voiture,hors_perimetre,ambigu,cas_ambigu
-"bonjour madame, je vous explique ma situation, il y a un délai d'attente pour les lentilles",question_delai,bruite,gabarit
-"bonsoir, je souhaite mettre fin à mon adhésion merci beaucoup",resilier,bruite,gabarit
-j ne comprends pas mon releve merci d'avance,suivre_remboursement,ambigu,cas_ambigu
-"bonjour, je souhaite ouvrir un contrat",souscrire,bruite,gabarit
-"bonjour, comment éviter d'avancer les frais d'hospitalisation",demande_prise_en_charge,bruite,gabarit
-"alors voilà, au bout de combien de temps les garanties optique sont actives merci",question_delai,bruite,gabarit
-"bjr, ma femme m'a dit de vous contacter, comment rattacher mon fils à mon contrat merci",souscrire,bruite,gabarit
-bjr les tarifs augmentent avec l'age,question_tarif,bruite,gabarit
-les tarifs augmentent avec l'age svp,question_tarif,bruite,gabarit
-je voudrais savoir si vous avez bien reçu ma facture merci,suivre_remboursement,facile,gabarit
-"BONSOIR, COMMENT EVITER D'AVANCER LES FRAIS D'HOSPITALISAION",demande_prise_en_charge,bruite,gabarit
-"JE NE TROUVE PAS L'INFORMATION SUR VOTRE SITE, ESK MA FEUILLE DE SOINS A ÉTÉ TRAITÉE",suivre_remboursement,bruite,gabarit
-jvoudré savoir si vs avez bien reçu ma facture merci d'avance,suivre_remboursement,bruite,gabarit
-est ce que ma feuille de soins a ete traaitee,suivre_remboursement,bruite,gabarit
-"bjr alors voilà, quelles sont mes garanties en dentaire s'il vous plaît",question_garantie,bruite,gabarit
-j'ai envoyé ma facture d'stéo il y a dix jours cordialement,suivre_remboursement,ambigu,cas_ambigu
-édsolé de vs déranger mais j voudrais une chambre particulière pour mon hospitalisation cordialement,demande_prise_en_charge,bruite,gabarit
-je suis adherent deepuis trois ans et comparez moi vos trois formules ?,comparer_formules,bruite,gabarit
-bjr quel est le montant du prélèvement mensuel,question_tarif,bruite,gabarit
-"bonjour madame, ma femme m'a dit de vous contacter, je voudrais savoir si vous avez bien reçu ma afcture",suivre_remboursement,bruite,gabarit
-hello comment rattacher mon fils a mon contrat,souscrire,bruite,gabarit
-"Essentiel ou Confort, laquelle est mieux pour le dentaire",comparer_formules,facile,gabarit
-DÉSOLÉ DE VOUS DÉRANGER MAIS COMPAREZ MOI VOS TROIS FORMULES,comparer_formules,bruite,gabarit
-je préfère parler à une vraie personne merci bcp,contacter_conseiller,bruite,gabarit
-SALUT LA FORMULE ESSENTIEL REMBOURSE QUOI EXACTEMENT EN AUIOLOGIE,question_garantie,bruite,gabarit
-désolé de vous déranger mais je voudrais une assurance habitation,hors_perimetre,bruite,gabarit
-comment éviter d'avancer les frais d'hospitalisation,demande_prise_en_charge,facile,gabarit
-"j ne trouve pas l'information sur votre site, quel délai pour recevoir mon certificat de radiation",question_delai,bruite,gabarit
-JE VOUUDRAIS UNE ASSURANCE HABITATION,hors_perimetre,bruite,gabarit
-comment quiitter Mutuelle Solstice,resilier,bruite,gabarit
-les tarifs augmentent avec l'âge merci beaucoup,question_tarif,facile,gabarit
-bjr je voudrais une hambre particulière pour mon hospitalisation,demande_prise_en_charge,bruite,gabarit
-est ce que vous propossez un crédit immobilier,hors_perimetre,bruite,gabarit
-bonjour je souhaite ouvrir un contrat,souscrire,bruite,gabarit
-"je vous explique ma situation, est ce que ma feuille de soins a été traite ?",suivre_remboursement,bruite,gabarit
-je suis adhérent depuis trois ans et aucun virement depuis le mois dernier alors que j'ai envoyé mes justificatifs,suivre_remboursement,bruite,gabarit
-"bjr j'ai deja appele la semaine derniere et personne ne m'a repondu, les tarifs augmentent avec l'age",question_tarif,bruite,gabarit
-quel délai pour recevoir mon certificat de radiation,question_delai,facile,gabarit
-"je change de banque, comment je mets à jour mon adresse mail",modifier_coordonnees,facile,gabarit
-désolé de vous déranger mais quelle est la différence entre Confort et Premium s'il vous plaît,comparer_formules,bruite,gabarit
-bjr je souhaite mettre fin à mon adhésion,resilier,bruite,gabarit
-aucun virement depuis le mois dernier alors que j'ai envoyé mes justificatifs cordialement,suivre_remboursement,facile,gabarit
-"alors voià, la formule Essentiel rembourse quoi exactement en hospitalisation",question_garantie,bruite,gabarit
-"hello je change de banque, comment je mets à jour mon adresse mail svp",modifier_coordonnees,bruite,gabarit
-la formule Confort rembourse quoi exactement en hospitalisation,question_garantie,facile,gabarit
-les tarifs augmentent avec l'age merci,question_tarif,bruite,gabarit
-"ma femme m'a dit de vous contacter, est ce que ma feuille de soins a été traitée ??",suivre_remboursement,bruite,gabarit
-quel est le remboursement pour une prothese dentaire en formule Premium,question_garantie,bruite,gabarit
-comment éviter d'avancer les frais d'hospitalisation svp,demande_prise_en_charge,facile,gabarit
-"j'ai déjà appelé la semaine dernière et personne ne m'a répondu, au bout de combien de temps les garanties optique sont actives",question_delai,bruite,gabarit
-hello la formule Confort rembourse quoi exactement en medecines douces,question_garantie,bruite,gabarit
-"mon RIB a changé, je dois le signaler merci d'avance",modifier_coordonnees,facile,gabarit
+au bout de combien de temps les garanties optique sont actives s'il vous plaît,question_delai,facile,gabarit
+comment récupérer mon attestation de tiers payant,demander_attestation,facile,gabarit
+est ce que une monture est exclu de mon contrat svp,question_garantie,facile,gabarit
+bjr sous combien de jours vous répondez à une demande de prise en charge svp,question_delai,bruite,gabarit
+quelle formule est la plus daptée à mon âge cordialement,comparer_formules,bruite,gabarit
+"bonjour madame, alors voilà, ma cotisation change si je déménage",question_tarif,bruite,gabarit
+j'ai envoyé ma facture d'ostéo il y a dix jours cordialement,suivre_remboursement,ambigu,cas_ambigu
+"je ne trouve pas l'information sur votre site, combien de temps avant d'être remboursé",question_delai,bruite,gabarit
+ma cotisation change si je déménage,question_tarif,facile,gabarit
+bonjour les tarifs augmentent avec l'âge cordialement,question_tarif,bruite,gabarit
+"BONJOUR MADAME, ALORS VOILÀ, EST CE QUE J'AI DROIT À DES VERRES PROGRESSIFS",question_garantie,bruite,gabarit
+"bonsoir, mon remboursement du forfait journalier n'est pas arrivé",suivre_remboursement,bruite,gabarit
+J SUIS ADHÉRENT DEPUIS TROIS ANS ET JE VOUDRAIS MON ATTESTATION DE DROITS,demander_attestation,bruite,gabarit
+"j vous explique ma situation, je n'arrive pas à vous joindre",contacter_conseiller,bruite,gabarit
+"j change de banque, commment je mets à jour mon IBAN cordialement",modifier_coordonnees,bruite,gabarit
+salut pouvez vous me dire où en est ma demande de remboursement,suivre_remboursement,bruite,gabarit
+il y a un questionnaire de santé pour adhérer,souscrire,facile,gabarit
+"bonjour, la clinique demande un accord de votre part",demande_prise_en_charge,bruite,gabarit
+combien je suis remboursé pour une cure thermale,question_garantie,facile,gabarit
+"bonsoir, esk une consultation chez le généraliste est exclu de mon contrat",question_garantie,bruite,gabarit
+salut combien je suis remboursé pour une consultation chez un spécialiste,question_garantie,bruite,gabarit
+salut j'aimerais connaître mon niveau de couverture pour les prothèses dentaires,question_garantie,bruite,gabarit
+bonjour je ne veux lus de votre mutuelle merci beaucoup,resilier,bruite,gabarit
+combien je suis remboursé pour des verres progressifs ??,question_garantie,facile,gabarit
+combien je suis remboursé pour un implant dentaire,question_garantie,facile,gabarit
+"j'ai déjà appelé la semaine dernière et peronne ne m'a répondu, pouvez vous me dire où en est ma demande de remboursement",suivre_remboursement,bruite,gabarit
+quelle formule choisir pour l'optique cordialement,comparer_formules,facile,gabarit
+bonjour j'ai changé de banque,modifier_coordonnees,ambigu,cas_ambigu
+"alors voilà, je ne veux plus de votre mutuelle",resilier,bruite,gabarit
+"bjr je porte des lentilles, quelle formule me conviendrait ?",comparer_formules,bruite,gabarit
+combien je suis remboursé pour une paire de lunettes,question_garantie,facile,gabarit
+"bonjour madame, je ne veux plus de votre mutulele",resilier,bruite,gabarit
+hello quels documennts pour adhérer merci,souscrire,bruite,gabarit
+qu'est ce qui est couvert en audiologie avec la formule Premium,question_garantie,facile,gabarit
+j veux aprler a un conseiller,contacter_conseiller,bruite,gabarit
+il y a un questionnaire de santé pour adhérer merci,souscrire,facile,gabarit
+mon remboursement de l'orthodontie n'ets pas arrivé,suivre_remboursement,bruite,gabarit
+désolé de vous déranger mais j'attends toujours le remboursement de une séance d'ostéopathie,suivre_remboursement,bruite,gabarit
+quelle formule est la plus adaptee a mon age merci d'avance,comparer_formules,bruite,gabarit
+combien de temps vant d'être remboursé,question_delai,bruite,gabarit
+coucou vous pouvez me dire le prix de mon contrat,question_tarif,bruite,gabarit
+je suis adherent depuis trois ans et il y a un questionnaire de sante pour adherer,souscrire,bruite,gabarit
+à quelle heure je peux vous appeler,contacter_conseiller,facile,gabarit
+la clinique demande un accord de votre part cordialement,demande_prise_en_charge,facile,gabarit
+"hello je vous explique ma situation, au bout de combien de temps les garanties optique sont actives svp",question_delai,bruite,gabarit
+quels documents pour adhérer merci d'avance,souscrire,facile,gabarit
+laquelle de vos formules est la plus complète,comparer_formules,facile,gabarit
+combien je suis remboursé pour une monture merci d'avance,question_garantie,facile,gabarit
+je suis adhérent depuis trois ans et qu'est ce qui est couvert en dentaire avec la formule Premium ?,question_garantie,bruite,gabarit
+"ALORS VOILÀ, QULLE FORMULE CHOISIR POUR L'OPTIQUE",comparer_formules,bruite,gabarit
+JE VOUDRAIS SOUSCRIRE UNE MUTUELLE ?,souscrire,bruite,gabarit
+bjr je dois attendre combien de mois pour les lunettes,question_delai,bruite,gabarit
+salut les tarifs augmentnt avec l'âge,question_tarif,bruite,gabarit
+désolé de vous déranger mais les tarifs augmentent avec l'âge svp,question_tarif,bruite,gabarit
+salut quelle formule pour être bien remboursé,comparer_formules,ambigu,cas_ambigu
+salut quels documents pour adhérer s'il vous palît,souscrire,bruite,gabarit
+hello je ne veux plus de votre mutuelle ??,resilier,bruite,gabarit
+quelle formule est la plus adaptée à mon âge cordialement,comparer_formules,facile,gabarit
+je cherche un médecin près de chez moi,hors_perimetre,facile,gabarit
+coucou je veux passer à une formule supérieure merci beaucoup,souscrire,bruite,gabarit
+"ma femme m'a dit de vous contacter, pouvez vous me dire où en est ma demande de remboursement",suivre_remboursement,bruite,gabarit
+"alors voilà, qu'est ce qui est couvert en médecines douces avec la formule Confort",question_garantie,bruite,gabarit
+coucou combien je suis remboursé pour un accouchement,question_garantie,bruite,gabarit
+bjr mon remboursement des prothèses dentaires n'est pas arrivé ??,suivre_remboursement,bruite,gabarit
+hello quand est ce que je serai remboursé de mes lunettes merci,question_delai,ambigu,cas_ambigu
 quelle formule pour être bien remboursé,comparer_formules,ambigu,cas_ambigu
-"bonsoir, les tarifs augmentent avec l'âge merci d'avance",question_tarif,bruite,gabarit
-désolé de vous déranger mais quel est le montant du prélèvement mensuel merci d'avance,question_tarif,bruite,gabarit
-résiliation de contrat merci d'avance,resilier,facile,gabarit
-"mon numéro de téléphone a changé, je dois le signaler",modifier_coordonnees,facile,gabarit
-JE PRÉFÈRE PARLER À UNE VRAIE PPERSONNE,contacter_conseiller,bruite,gabarit
-comment éviter d'avancer les frais d'hospitalisation s'il vous plaît,demande_prise_en_charge,facile,gabarit
-bonjour aucun virement depuis le mois dernier alors que j'ai envoyé mes justificatifs merci d'avance,suivre_remboursement,bruite,gabarit
-"j'ai déjà appelé la semaine dernière et personne ne m'a répondu, je ne trouve pas le remboursement des lentilles dans mon espace ??",suivre_remboursement,bruite,gabarit
-"j'ai été hospitalisé en urgence hier, je fais quoi cordialement",demande_prise_en_charge,facile,gabarit
-il y a un délai d'attente pour l'orthodontie,question_delai,facile,gabarit
-"alors voilà, est ce que ma feuille de soins a été traitée merci",suivre_remboursement,bruite,gabarit
-je suis adhérent depuis trois ans et les tarifs augmentent avec l'âge,question_tarif,bruite,gabarit
-salut quel est le remboursement pour un appareil auditif en formule Confort,question_garantie,bruite,gabarit
-"bonsoir, comment éviter d'avancer les frais d'hospitalisation",demande_prise_en_charge,bruite,gabarit
-"bonjour madame, quand est ce que je pourrai me faire poser un appareil dentaire pour mon fils",question_delai,bruite,gabarit
-les tarifs augmentent avec l'âge s'il vous plaît,question_tarif,facile,gabarit
-"J'AI DÉJÀ APPELÉ LA SEMAINE DERNIÈRE ET PERSONNE NE M'A RÉPONDU, QUELS SONT VOS HORAIRES D'OUVERTURE",contacter_conseiller,bruite,gabarit
-comparez moi vos trois formules,comparer_formules,facile,gabarit
-"BONSOIR, MA FEMME M'A DIT DE VOUS CONTACTER, VOUS FAITES ASSURER MON APPARTEMENT",hors_perimetre,bruite,gabarit
-salut aucun virement depuis le mois dernier alors que j'ai envoyé mes justificatifs,suivre_remboursement,bruite,gabarit
-les implants c'est prris en charge ou pas svp,question_garantie,bruite,gabarit
-"bonjour madame, comparez moi vos trois formules ?",comparer_formules,bruite,gabarit
-est ce que ma feuille de soins a été traitée,suivre_remboursement,facile,gabarit
-"bonjour, la chambre particulière c'est pris en charge ou pas",question_garantie,bruite,gabarit
-combien ca ccoute pour une famille de quatre,question_tarif,bruite,gabarit
-je ne trouve pas le remboursement des lentilles dans mon espace,suivre_remboursement,facile,gabarit
-comment éviter d'avancer les frais d'hospitalisation cordialement,demande_prise_en_charge,facile,gabarit
-"je ne trouve pas l'information sur votre site, il y a un délai d'attente pour la chambre particulière",question_delai,bruite,gabarit
-aucun virement depuis le mois dernier alors que j'ai ennvoyé mes justificatifs merci,suivre_remboursement,bruite,gabarit
-"mon nom de famille a changé, je dois le signaler",modifier_coordonnees,facile,gabarit
-"ma femme m'a dit de vous contacter, quelle est ma cotisation mensuelle",question_tarif,bruite,gabarit
-"bonjour je ne trouve pas l'information sur votre site, je voudrais savoir si vous avez bien reçu ma facture",suivre_remboursement,bruite,gabarit
-"bonsoir, quels sont vos horaires d'ouverture",contacter_conseiller,bruite,gabarit
-comment quitter Mutuelle Solstice,resilier,facile,gabarit
-bjr il y a un délai d'attente pour les prothèses dentaires ??,question_delai,bruite,gabarit
-bonjour j'aimerais arreter ma mutuelle,resilier,bruite,gabarit
-"je ne trouve pas l'information sur votre site, au bout de combien de temps les garanties optique sont actives",question_delai,bruite,gabarit
-"mon adresse mail a changé, je dois le signaler",modifier_coordonnees,facile,gabarit
-est ce que vous proposez assurer ma voiture ??,hors_perimetre,facile,gabarit
-"bonjour, Essentiel ou Confort, laquelle est mieux pr le dentaire",comparer_formules,bruite,gabarit
-j'aimerais arrêter ma mutuelle merci d'avance,resilier,facile,gabarit
-je souhaite mettre fin à mon adhésion merci d'avance,resilier,facile,gabarit
-JE SUIS ADHÉRENT DEPUIS TROIS ANS ET JE SOUHAITE METTRE FIN À MON ADHÉSION,resilier,bruite,gabarit
-"j'ai déjà appelé la semaine dernière et personne ne m'a répondu, je ne trouve pas le remboursement de l'appareil auditif dans mon espace",suivre_remboursement,bruite,gabarit
-la cure thermale c'est pris en charge ou pas,question_garantie,facile,gabarit
-"ma femme m'a dit de vous contacter, résiliation de contrat",resilier,bruite,gabarit
-quelles sont mes garanties en médecines douces,question_garantie,facile,gabarit
-"bonjour, comment rattacher mon fils à mon contrat",souscrire,bruite,gabarit
-resiliation de contrat svp,resilier,bruite,gabarit
-QUEL EST LE REMBOURSEMENT POUR UNE PAIRE DE LUNETTES EN FORMULE ESSENTIEL,question_garantie,bruite,gabarit
-comment rattacher mon fils à mon conrat merci d'avance,souscrire,bruite,gabarit
-ça coûte combien de rajouter ma fille cordialement,question_tarif,ambigu,cas_ambigu
-je ne trouve pas le remboursement de l'orthodontie dans mon espace,suivre_remboursement,facile,gabarit
-"JE VOUS EXPLIQUE MA SITUATION, IL Y A UN DÉLAI D'ATTENTE POOUR LES LUNETTES",question_delai,bruite,gabarit
-"je ne trouve pas l'information sur votre site, je veux devenir adhéret merci beaucoup",souscrire,bruite,gabarit
-bjr j'aimerais arrêter ma mutuelle,resilier,bruite,gabarit
-j'ai changé de banue merci,modifier_coordonnees,ambigu,cas_ambigu
-AUCUN VIREMENT DEPUIS LE MOIS DERNIER ALORS QUE J'AI ENVOYE MES JUSTIFICATIFS,suivre_remboursement,bruite,gabarit
-"bonjour madame, quelle est la différence entre Confort et Premium",comparer_formules,bruite,gabarit
-désolé de vous déranger mais je préfère parler à une vraie personne,contacter_conseiller,bruite,gabarit
-"mon nom de famille a changé, j dois le signaler cordialement",modifier_coordonnees,bruite,gabarit
-il y a un délai d'attente pour l'ostéopathie,question_delai,facile,gabarit
-salut est ce que vous proposez assurer ma voiture merci beacuoup,hors_perimetre,bruite,gabarit
-bjr queels sont vos horaires d'ouverture ?,contacter_conseiller,bruite,gabarit
-je voudrais une chambre particulière pour mon hospitalisation,demande_prise_en_charge,facile,gabarit
-hello la formule Essentiel rembourse quoi exactement en optique,question_garantie,bruite,gabarit
-j ne trouve pas le remboursement de la chambre particulière dans mon espace,suivre_remboursement,bruite,gabarit
-"bonjour madame, désolé de vous déranger mais aucun virement depuis le mois dernier alors que j'ai envoyé mes justificatifs merci d'avance",suivre_remboursement,bruite,gabarit
-"bonjour, quand est ce que je pourrai me faire poser un appareil auditif",question_delai,bruite,gabarit
-quelles sont mes garanties en optique,question_garantie,facile,gabarit
-"bjr ma femme m'a dit de vous contacter, j hcange de banque, comment je mets à jour mon numéro de téléphone",modifier_coordonnees,bruite,gabarit
+mon remboursement du forfait journalier n'est pas arive,suivre_remboursement,bruite,gabarit
+j'ai transmis ma facture il y a une semaine et toujours rien merci d'avance,suivre_remboursement,facile,gabarit
+hello combien ça coûte pour une famille de quatre cordialement,question_tarif,bruite,gabarit
+"j'ai déjà appelé la semaine dernière et personne ne m'a répondu, j'aimerais connaître mon niveau de couverture pour la chambre particulière s'il vous plaît",question_garantie,bruite,gabarit
+"bonsoir, j'ai déjà appelé la semaine dernière et personne ne m'a répondu, sous combien de jours vous répondez à une demande de prise en charge",question_delai,bruite,gabarit
+"bonjour madame, désolé de vous déranger mais comment obtenir une prise en charge hospitalière",demande_prise_en_charge,bruite,gabarit
+"bonjour madame, comment obtenir une prise en charge hospitalière merci d'avance",demande_prise_en_charge,bruite,gabarit
+je veux mettre a jour mon numero de telephone,modifier_coordonnees,bruite,gabarit
+les tarifs augmentent avec l'âge,question_tarif,facile,gabarit
+je ne comprends pas mon releve,suivre_remboursement,ambigu,cas_ambigu
+pouvez vous me dire où en est ma demande de remboursement svp,suivre_remboursement,facile,gabarit
+mon remboursement des implants n'est pas arrivé,suivre_remboursement,facile,gabarit
+bonjour mon remboursement de la cure thermale n'est pas arrivé s'il vs plaît,suivre_remboursement,bruite,gabarit
+"bonjour, je vous explique ma situation, au bout de combien de temps les ggaranties optique sont actives",question_delai,bruite,gabarit
+comment obtenir une pries en charge hospitalière merci d'avance,demande_prise_en_charge,bruite,gabarit
+"j'ai deja appele la semaine derniere et personne ne m'a repondu, j'ai transmis ma facture il y a une semaine et toujours rien ?",suivre_remboursement,bruite,gabarit
+je suis adhérent depuis trois ans et qu'est ce qui est couvert en maternité avec la formue Essentiel merci beaucoup,question_garantie,bruite,gabarit
+coucou jvoudré souscrire une mutuelle,souscrire,bruite,gabarit
+combien je paey pour les lunettes,question_garantie,ambigu,cas_ambigu
+"alors voilà, mon dossier de remboursement semble bloqué",suivre_remboursement,bruite,gabarit
+qu'est ce qui est couvert en soins courants aevc la formule Confort ??,question_garantie,bruite,gabarit
+j'aimerais connaître mon niveau de couverture opur les lentilles,question_garantie,bruite,gabarit
+pouvez vous me dire où en est ma demande de remboursement ?,suivre_remboursement,facile,gabarit
+est ce que j'ai droit à une chambre particulière,question_garantie,facile,gabarit
+j'attends toujours le remboursement de une monture,suivre_remboursement,facile,gabarit
+"j'ai déjà appelé la semaine dernière et personne ne m'a répondu, les lunettes c'est combien ?",question_garantie,ambigu,cas_ambigu
+"j suis convoqué pour une intervention, quelle démarche",demande_prise_en_charge,bruite,gabarit
+JE CHERCHE ASSURER MA VOITURE,hors_perimetre,bruite,gabarit
+"j ne trouve pas l'information sur votre site, combien de temps avant d'être remboursé svp",question_delai,bruite,gabarit
+"alors voilà, je ne veux plus de votre mutuelle ??",resilier,bruite,gabarit
+mon dossier de remboursement semble bloqué merci d'avance,suivre_remboursement,facile,gabarit
+"je porte des lentilles, quelle formule me conviendrait",comparer_formules,facile,gabarit
+est ce que j'ai droit à une consultation chez le généraliste,question_garantie,facile,gabarit
+"bonjour, tu es une intelligence artificielle svp",hors_perimetre,bruite,gabarit
+désolé de vous déranger mais quelle est la procédure pour partir,resilier,bruite,gabarit
+"ma femme m'a dit de vous contacter, qu'est ce qui est couvert en soins courants avec la formule Premium merci beaucoup",question_garantie,bruite,gabarit
+SALUT SOUS COMBIEN DE JOURS VOUS RÉPONDEZ À UNE DEMANDE DE PRISE EN CHARGE MERCI BEAUCOUP,question_delai,bruite,gabarit
+ma cotisation change si je déménage merci bcp,question_tarif,bruite,gabarit
+bonnjour pouvez vous me dire où en est ma demande de remboursement cordialement,suivre_remboursement,bruite,gabarit
+est ce que une paire de lunettes est exclu de mon contrat cordialement,question_garantie,facile,gabarit
+j suis adherent depuis trois ans et mon dossier de remboursement semble bloque,suivre_remboursement,bruite,gabarit
+"BJR, JVEU PASSER À UNE FORMULE SUPÉRIEURE SVP",souscrire,bruite,gabarit
+hello mon remboursement des lentilles n'est pas arrivé,suivre_remboursement,bruite,gabarit
+hello j'attends toujours le remboursement de une consultation chez un spécialiste,suivre_remboursement,bruite,gabarit
+combien ça coûte pour une famille de quatre,question_tarif,facile,gabarit
+au bout de combien de temps les garanties optique sont actives merci d'avance,question_delai,facile,gabarit
+coucou qu'est ce qui est couvert en optique avec la formule Essentil,question_garantie,bruite,gabarit
+BJR VOUS ÊTES OUVERTS LE SAMEDI ??,contacter_conseiller,ambigu,cas_ambigu
+"bjr maame, comment j fais pr résilier svp",resilier,bruite,gabarit
+"BONSOIR, J'AI DÉJÀ APPELÉ LA SEMAINE DERNIÈRE ET PERSONNE NE M'A RÉPONDU, J'AI TRANSMIS MA FACTURE IL Y A UNE SEMAINE ET TOUJOURS RIEN",suivre_remboursement,bruite,gabarit
+"bonsoir, les tarifs augmentent avec l'âge",question_tarif,bruite,gabarit
+j'ai transmis ma facture il y a une semaine et toujourrs rien,suivre_remboursement,bruite,gabarit
+hello je voudrais souscrire une mutuelle merci d'avance,souscrire,bruite,gabarit
+"ma femme m'a dit de vous contacter, qu'est ce qui est couvert en optique avec la formule Premium",question_garantie,bruite,gabarit
+j'aimerais connaître mon niveau de couverture pour la cure thermale,question_garantie,facile,gabarit
+bonjour mon dossier de remboursement semble bloqué,suivre_remboursement,bruite,gabarit
+je cherche sasurer mon appartement,hors_perimetre,bruite,gabarit
+désolé de vs déranger mais jvoudré mon attestation de droits merci bcp,demander_attestation,bruite,gabarit
+"j vous explique ma situation, mon remboursement de la chambre particulière n'est pas arrivé",suivre_remboursement,bruite,gabarit
+"je change de banque, comment je mets à jour mon adresse merci",modifier_coordonnees,facile,gabarit
+coucou vous pouvez me dire le prix de mon contrat cordilement,question_tarif,bruite,gabarit
+hello combiien ça coûte pr une famille de quatre,question_tarif,bruite,gabarit
+comment je fais pour resilier merci,resilier,bruite,gabarit
+"bonjour, comment récupérer mon attestation de tirs payant s'il vous plaît",demander_attestation,bruite,gabarit
+je suis adhérrent depuis trois ans et je veux passer à une formule supérieure,souscrire,bruite,gabarit
+J'ATTENDS TOUJOURS LE REMBOURSEMENT DE UNE CURE THERMALE,suivre_remboursement,bruite,gabarit
+"bonjour madame, alors voilà, je veux passer à une formule supérieure merci beaucoup",souscrire,bruite,gabarit
+comment obtenir une prise en charge hospitaliière,demande_prise_en_charge,bruite,gabarit
+je suis adherent depuis trois ans et quels documents pour adherer,souscrire,bruite,gabarit
+j veux passer a une formule superieure merci beaucoup,souscrire,bruite,gabarit
+"j'ai déjà appelé la semaine dernière et personne ne m'a répondu, comment obtenir une prise en charge hospitalière",demande_prise_en_charge,bruite,gabarit
+comment j fais pour résilier ?,resilier,bruite,gabarit
+"coucou je vous explique ma situation, j'ai transmis ma facture il y a une semaine et toujours rien",suivre_remboursement,bruite,gabarit
+"alors voilà, combien de temps avant d'être remboursé",question_delai,bruite,gabarit
+"bonjour, je vous explique ma situation, je ne veux plus de votre mutuelle merci beaucoup",resilier,bruite,gabarit
+comment obtenir une prise en charge hospitalière,demande_prise_en_charge,facile,gabarit
+"bonjour, je me suis mariée, je voudrais changer mon adresse mail",modifier_coordonnees,bruite,gabarit
+je dois attendre combien de mois pr l'ostéopathie,question_delai,bruite,gabarit
+"ma femme m'a dit de vs contacter, est ce que vous proposez une assurance voyage",hors_perimetre,bruite,gabarit
+"je vous explique ma situation, j'ai transmis ma facture il y a une semaine et toujours rien",suivre_remboursement,bruite,gabarit
+quels docuemnts pour adhérer,souscrire,bruite,gabarit
+je voudrais souscrire une muuelle,souscrire,bruite,gabarit
+au bout de combien de temps les garanties optique sont actives ??,question_delai,facile,gabarit
+la clinique demande un ccord de votre part,demande_prise_en_charge,bruite,gabarit
+bjr pouvez vous me dire où en est ma demande de remboursement,suivre_remboursement,bruite,gabarit
+mon remboursement de l'appareil auditif n'est pas arrivé,suivre_remboursement,facile,gabarit
+"je ne trouve pas l'information sur votre site, je suis convoqué pour une intervention, quelle démarche",demande_prise_en_charge,bruite,gabarit
+salut je souhaite ne pas renouveler mon adhésion,resilier,bruite,gabarit
+"BONJOUR MADAME, MON DOSSIER DE REMBOURSEMENT SEMBLE BLOQUÉ",suivre_remboursement,bruite,gabarit
+ma cotisation change si je déménage ??,question_tarif,facile,gabarit
+il y a un questionnaire de santé pr adhérer,souscrire,bruite,gabarit
+est ce que j'ai droit à un accouchement,question_garantie,facile,gabarit
+je veux mettre à jour mon numéro de téléphone,modifier_coordonnees,facile,gabarit
+"je vous explique ma situation, mon fils a 22 as, il est encore couvert",question_garantie,ambigu,cas_ambigu
+bjr il y a un questionnaire de santé pour adhérer,souscrire,bruite,gabarit
+mon dossier de remboursement semble bloqué cordialement,suivre_remboursement,facile,gabarit
+hello est ce que vous proposez une assurance voyage ??,hors_perimetre,bruite,gabarit
+quels documents pour adhérer,souscrire,facile,gabarit
+tu es une intelligence artificielle,hors_perimetre,facile,gabarit
+quelle foormule est la plus adaptée à mon âge ?,comparer_formules,bruite,gabarit
+je préfère parler à une vraie personne,contacter_conseiller,facile,gabarit
+je veeux mettre à jour mon nom de famille,modifier_coordonnees,bruite,gabarit
+sous combien de jours vous répondez à une demande de prise en charge merci,question_delai,facile,gabarit
+salut est ce que des verres progressifs est exclu de mon contrat ??,question_garantie,bruite,gabarit
+j'attends toujours le remboursement de une consultation chez un spécialiste,suivre_remboursement,facile,gabarit
+qu'est ce qui est couvert en médecines douces avec la formule Confort,question_garantie,facile,gabarit
+mon dosier de remboursement semble bloqué,suivre_remboursement,bruite,gabarit
+"ma femme m'a dit de vs contacter, pouvez vous me dire où en est ma dmeande de remboursement",suivre_remboursement,bruite,gabarit
+mon remboursement des lunettes n'est pas arrivé,suivre_remboursement,facile,gabarit
+laquelle de vos formules est la plus complete,comparer_formules,bruite,gabarit
+j vveux parler à un conseiller,contacter_conseiller,bruite,gabarit
+je voudrais une mutuelle pour ma voiture,hors_perimetre,ambigu,cas_ambigu
+"J'AI DÉJÀ APPELÉ LA SEMAINE DERNIÈRE ET PERSONNE NE M'A RÉPONDU, MON REMBOURSEMENT DE L'ORTHODONTIE N'EST PAS ARRIVÉ",suivre_remboursement,bruite,gabarit
+mon remboursement des implants n'est pas arrivé cordialement,suivre_remboursement,facile,gabarit
+"je ne trouve pas l'information sur votre site, je ne veux plus de votre mutuelle",resilier,bruite,gabarit
+je souhaite ne pas renouveler mon adhesion,resilier,bruite,gabarit
+"alors voilà, laquelle de vos formules est la plus complète meric",comparer_formules,bruite,gabarit
+"je ne trouve pas l'information sur votre site, ma cotisation change si je déménage",question_tarif,bruite,gabarit
+mon remboursement de l'ostéopathie n'est pas arrivé,suivre_remboursement,facile,gabarit
+pouvez vous me dire où en est ma demande de remboursement s'il vous plaît,suivre_remboursement,facile,gabarit
+je veux mettre à jour mon IBAN cordialement,modifier_coordonnees,facile,gabarit
+je suis adhérent depuis trois ans et les tarifs augmentent avec l'âge merci d'avance,question_tarif,bruite,gabarit
+"bonsoir, quelle formule pour être bien remboursé",comparer_formules,ambigu,cas_ambigu
+est ce que j'ai droit à des verres progressifs,question_garantie,facile,gabarit
+j'ai transmis ma facture il y a une semaine et toujours rien,suivre_remboursement,facile,gabarit
+"bonjour, j'ai transmis ma facture il y a une semaine et toujours rien s'il vous plaît",suivre_remboursement,bruite,gabarit
+tu es une intleligence artificielle,hors_perimetre,bruite,gabarit
+il y a un questionnaire de sante pour adherer merci,souscrire,bruite,gabarit
+DÉSOLÉ DE VOUS DÉRANGER MAIS JE NE VEUX PLUS DE VOTRE MUTUELLE,resilier,bruite,gabarit
+hello je veux parler à un conseiller,contacter_conseiller,bruite,gabarit
+"bjr j porte des lentilles, quelle formule me conviendrait",comparer_formules,bruite,gabarit
+vous pouvez me dire le prix de mon contrat,question_tarif,facile,gabarit
+combien de temps avant d'etre rembourse,question_delai,bruite,gabarit
+"mon fils a 22 ans, il est encore couvert",question_garantie,ambigu,cas_ambigu
+qu'est ce qui est couvert en médecines douces avec la formule Essentiel,question_garantie,facile,gabarit
+"je vous explique ma situation, qelle formule choisir pour l'optique",comparer_formules,bruite,gabarit
+"je vous explique ma situation, je souhaite ne pas renouveler mon adhésion merci beaucoup",resilier,bruite,gabarit
+je viens d'adhérer et j'ai besoin de lunettes,question_delai,ambigu,cas_ambigu
+"je vous explique ma situation, je dois attendre combien de mois pour l'orthdoontie",question_delai,bruite,gabarit
+désolé de vous déranger mais est ce que j'ai droit à une paire de lunettes svp,question_garantie,bruite,gabarit
+combien de temps avant d'être remboursé,question_delai,facile,gabarit
+hello je voudrais mon attestation de droits,demander_attestation,bruite,gabarit
+"bjr madame, j'attends toujours le remboursement de un implant dentaire",suivre_remboursement,bruite,gabarit
+pouvez vous me dire ou en est ma demande de rembousrement,suivre_remboursement,bruite,gabarit
+les tarifs augmentent avec l'âge merci beaucoup,question_tarif,facile,gabarit
+COUCOU COMMENT JE FAIS POUR RÉSILIER CORDIALEMENT,resilier,bruite,gabarit
+bjr je voudrais mon attestation de droits,demander_attestation,bruite,gabarit
+"bonjour madame, j'attends toujours le remboursement de mes médicaments",suivre_remboursement,bruite,gabarit
+"alors voilà, combien ça coûte pour une famille de quatre",question_tarif,bruite,gabarit
+"coucou je porte des lentilles, quelle formule me conviendrait",comparer_formules,bruite,gabarit
+j souhaite ne pas renouveler mon adhésion cordialement,resilier,bruite,gabarit
+je dois attendre combien de mois pour les prothèses dentaires,question_delai,facile,gabarit
+désolé de vous déranger mais j'aimerais connaître mon niveau de couverture pour l'orthodontie,question_garantie,bruite,gabarit
+"ma femme m'a dit de vous contacter, je suis convoqué por une intervention, quelle démarche svp",demande_prise_en_charge,bruite,gabarit
+j'aimerais connaître mon niveau de couverture pour les lunettes,question_garantie,facile,gabarit
+salut combien ça coûte pour une famille de quatre,question_tarif,bruite,gabarit
+"bonsoir, j'ai transmis ma facture il y a une semaine et toujours rien",suivre_remboursement,bruite,gabarit
+"bjr, vous pouvez me dire le prix de mon contrat",question_tarif,bruite,gabarit
+"alors ovila, est ce que une monture est exclu de mon contrat",question_garantie,bruite,gabarit
+salut qu'est ce qui est couvert en optique avec la formule Essentiel,question_garantie,bruite,gabarit
+hello sous combien de jours vous repondez a une demande de prise en charge merci beaucoup,question_delai,bruite,gabarit
+"j'ai deja appele la semaine derniere et personne ne m'a repondu, qu'est ce qui est couvert en medecines douces avec la formule Essentiel ?",question_garantie,bruite,gabarit
+les tarifs augmentent avec l'âge merci,question_tarif,facile,gabarit
+"je ne trouve pas l'information sur votre site, qu'est ce qui est couvert en audiologie avec la formule Confort ??",question_garantie,bruite,gabarit
+"j'ai dééjà appelé la semaine dernière et personne ne m'a répondu, comment je fais pour résilier merci beaucoup",resilier,bruite,gabarit
+"ma femme m'a dit de vous contacter, j'attends toujours le remboursement de une consultation chez le généraliste",suivre_remboursement,bruite,gabarit
+quelle formule choisir pour l'optique ??,comparer_formules,facile,gabarit
+J'ATTENDS TOUJOURS LE REMBOURSEMENT DE UN ACCOUCHEMENT MERCI,suivre_remboursement,bruite,gabarit
+desole de vous deranger mais je souhaite ne pas renouveler mon ahesion,resilier,bruite,gabarit
+ma cotisation change si je déméange,question_tarif,bruite,gabarit
+"bonjour, qu'est ce qui est couvert en maternité avec la formule Premium",question_garantie,bruite,gabarit
+la clinique demande un accord de votre part,demande_prise_en_charge,facile,gabarit
+"bonjour madame, pouvez vos me dire où en est ma demande de remboursement",suivre_remboursement,bruite,gabarit
+"j'ai édjà appelé la semaine dernière et personne ne m'a répondu, je préfère parler à une vraie personne",contacter_conseiller,bruite,gabarit
+pouvez vous me dire où en est ma demande de remboursement cordialement,suivre_remboursement,facile,gabarit
+vous pouvez me dire le prix de mon contrat merci d'avance,question_tarif,facile,gabarit
+est ce que j'ai droit à une cure thermale,question_garantie,facile,gabarit
+je suis adhérent depuis trois ans et est ce que une chambre particulière est exclu de mon contrat,question_garantie,bruite,gabarit
+j'attends toujours le remboursement de une séance d'ostéopathie,suivre_remboursement,facile,gabarit
+combien je suis remboursé pour un appareil auditif,question_garantie,facile,gabarit
+désolé de vous déranger mais les tarifs augmentent avec l'âge merci d'avance,question_tarif,bruite,gabarit
+"bonsoir, esk une cure thermale est exclu de mon contrat merci d'avance",question_garantie,bruite,gabarit
+j cherche une garantie décès,hors_perimetre,bruite,gabarit
+je vooudrais souscrire une mutuelle merci d'avance,souscrire,bruite,gabarit
+hello vous pouvez me dire le prix de mon contrat s'il vous plaît,question_tarif,bruite,gabarit
+désolé de vs déranger mais combien je suis remboursé pr un appareil auditif,question_garantie,bruite,gabarit
+j'aimerais connaître mon niveau de couverture pour les prothèses dentaires,question_garantie,facile,gabarit
+coucou je n'arrive pas à vous joindre,contacter_conseiller,bruite,gabarit
+quelle formule est la plus adaptée à mon âge s'il vous plaît,comparer_formules,facile,gabarit
+mon remboursement de l'ostéopathie n'est pas arrivé merci,suivre_remboursement,facile,gabarit
+mon remboursement du forfait journalier n'est pas arrivé,suivre_remboursement,facile,gabarit
+"bonjour madame, j'attends toujours le remboursement de une séance d'acupuncture",suivre_remboursement,bruite,gabarit
+est ce que j'ai rdoit à des analyses de sang,question_garantie,bruite,gabarit
+"bonjour, est ce que j'ai droit à des lentilles merci d''avance",question_garantie,bruite,gabarit
+"je me suis mariée, je voudrais changer mon nom de famille",modifier_coordonnees,facile,gabarit
+je n'arrive pas à vous joindre,contacter_conseiller,facile,gabarit
+"ma femme m'a dit de vous contacter, mon dossier de remboursement semble bloqué",suivre_remboursement,bruite,gabarit
+JE NE VEUX PLUS DE VOTRE MUTUELLE,resilier,bruite,gabarit
+désolé de vous déranger mais j'aimerais connaître mon niveau de couverture pour la chambre particulière,question_garantie,bruite,gabarit
+désolé de vous déranger mais quelle est la procédure pour partir svp,resilier,bruite,gabarit
+l'implant c'est pris en carge et sous combien de temps,question_garantie,ambigu,cas_ambigu
+j n'arrive pas à vs joindre,contacter_conseiller,bruite,gabarit
+"bjr je ne trouve pas l'information sur votre site, la clinique demande un accord de votre part svp",demande_prise_en_charge,bruite,gabarit
+j'ia envoyé ma facture d'ostéo il y a dix jours ?,suivre_remboursement,ambigu,cas_ambigu
+HELLO IL Y A UN QUESTIONNAIRE DE SANTÉ POUR ADHÉRER,souscrire,bruite,gabarit
+"J VOUS EXPLIQUE MA SITUATION, QUAND EST CE QUE JE SERAI REMBOURSÉ DE MES LUNETTES SVP",question_delai,ambigu,cas_ambigu
+bonjour pouvez vous me dire où en est ma demande de remboursement ??,suivre_remboursement,bruite,gabarit
+je cherche une assurance habitation,hors_perimetre,facile,gabarit
+je n'arrive pas à vous joindre cordialement,contacter_conseiller,facile,gabarit
+il y a un questionnaire de sante pour adherer,souscrire,bruite,gabarit
 au bout de combien de temps les garanties optique sont actives,question_delai,facile,gabarit
-"bonjour madame, je préfère parler à une vraie personne",contacter_conseiller,bruite,gabarit
-"salut j'ai été hospitalisé en urgence hier, je fais quoi merci d'avance",demande_prise_en_charge,bruite,gabarit
-"je ne trouve pas l'information sur votre site, quand est ce que je serai remboursé de mes lunettes",question_delai,ambigu,cas_ambigu
+est ce que une consultation chez un specialiste est exclu de mon contrat,question_garantie,bruite,gabarit
+"bonsoir, tu es une intelligence artificielle",hors_perimetre,bruite,gabarit
+est ce que une consultation chez un specialiste est exclu de mon contrat ??,question_garantie,bruite,gabarit
+je suis adhérent depuis trois ans et combien je suis remboursé pour une consultation chez un spécialiste,question_garantie,bruite,gabarit
+"bonjor madame, je pars chez un autre assureur",resilier,ambigu,cas_ambigu
+jvoudré souscrire une mutuelle merci bcp,souscrire,bruite,gabarit
+je dois attendre combien de mois pour le forfait journalier,question_delai,facile,gabarit
+EST CE QUE J'AI DROIT À UN APPAREIL DENTAIRE POUR MON FILS,question_garantie,bruite,gabarit
+"je change de banque, comment je mets à jour mon numéro de téléphone",modifier_coordonnees,facile,gabarit
+je ne comprends pas mon relevé,suivre_remboursement,ambigu,cas_ambigu
+"je suis convoqué pour une intervention, quelle démarche",demande_prise_en_charge,facile,gabarit
+est ce que une cure thermale est exclu de mon contrat,question_garantie,facile,gabarit
+salut j'aimerais connaître mon niveau de couverture pr l'ostéopathie,question_garantie,bruite,gabarit
+à quelle heure j peux vous appeler ?,contacter_conseiller,bruite,gabarit
+la clinique demande un accord de votre part s'il vous plaît,demande_prise_en_charge,facile,gabarit
+"bjr j'ai déjà appelé la semaine dernière et personne ne m'a répondu, j'aimerais connaître mon niveau de couverture pour l'orthodontie ?",question_garantie,bruite,gabarit
+"je vous explique ma situation, il y a un questionnaire de santé pour adhérer s'il vous plaît",souscrire,bruite,gabarit
+bonjour je suis adhérent depuis trois ans et quelle est la procédure pour partir svp,resilier,bruite,gabarit
+salut j'ai transmis ma facture il y a une semaine et toujours rien,suivre_remboursement,bruite,gabarit
+"je ne trouve pas l'information sur votre site, sous combien de jours vous répondez à une demande de prise en charge",question_delai,bruite,gabarit
+"coucou ma femme m'a dit de vous contacter, laquelle de vos formules est la plus complète",comparer_formules,bruite,gabarit
+je suis adhérent depuis trois ans et quels documents ppour adhérer,souscrire,bruite,gabarit
+"bjr madame, ma femme m'a dit de vs contacter, j'attends toujours le remboursement de des lentilles",suivre_remboursement,bruite,gabarit
+"alors voilà, je souhaite ne pas renouveler mon adhésion",resilier,bruite,gabarit
+je suis adhérent depuis trios ans et ma cotisation change si je déménage,question_tarif,bruite,gabarit
+"je potre des lentilles, quelle formule me conviendrait",comparer_formules,bruite,gabarit
+"HELLO JE ME SUIS MARIÉE, JE VOUDRAIS CHANGER MON RIB",modifier_coordonnees,bruite,gabarit
+quelle formule est la plus adaptée à mon âge,comparer_formules,facile,gabarit
+bonjour à quelle heure je pexu vous appeler,contacter_conseiller,bruite,gabarit
+j n'arive pas a vs joindre svp,contacter_conseiller,bruite,gabarit
+qeulle formule est la plus adaptée à mon âge merci,comparer_formules,bruite,gabarit
+comment récuupérer mon attestation de tiers payant,demander_attestation,bruite,gabarit
+bjr mon dossier de remboursement semble bloqué merci beaucoup,suivre_remboursement,bruite,gabarit
+quelle formule choisir pour l'optique,comparer_formules,facile,gabarit
+bjr qu'est ce qui est couvert en dentaire avec la forrmule Essentiel ??,question_garantie,bruite,gabarit
+"ma femme m'a dit de vous contacter, est ce que j'ai droit à des analyses de sang",question_garantie,bruite,gabarit
+"hello j'ai déjà appelé la semaine dernière et personne ne m'a répondu, quels documents pour adhérer",souscrire,bruite,gabarit
+"ma femme m'a dit de vous contacter, je voudrais mon attestation de droits",demander_attestation,bruite,gabarit
+désolé de vous déranger mais les tarifs augmentent avec l'âge,question_tarif,bruite,gabarit
+j'attends toujours le remboursement de une chambre particulière cordialement,suivre_remboursement,facile,gabarit
+quelle formule choisir pour l'optique merci beauoup,comparer_formules,bruite,gabarit
+salut j'attends toujours le remboursement de un accouchement,suivre_remboursement,bruite,gabarit
+bonjour j'ai transmis ma facture il y a une semaine et oujours rien,suivre_remboursement,bruite,gabarit
+j'ai transmis ma facture il y a une semaine et toujours rien ?,suivre_remboursement,facile,gabarit
+mon dossier de remboursement semble bloqué cordilement,suivre_remboursement,bruite,gabarit
+est ce que j'ai droit a une prothese dentaire,question_garantie,bruite,gabarit
+j'aimerais connaître mon niveau de couverture pour les lentilles s'il vous plaît,question_garantie,facile,gabarit
+bjr mon remboursement des lentilles n'est pas arrivé,suivre_remboursement,bruite,gabarit
+coucou les tarifs augmentent avec l'âge,question_tarif,bruite,gabarit
+est ce que je peux changer de formule maintenant,souscrire,ambigu,cas_ambigu
+"salut je vous explique ma situation, je ne veux plus de votre mutuelle",resilier,bruite,gabarit
+"je suis convoqué pour une intervention, quelle démarche merci beaucoup",demande_prise_en_charge,facile,gabarit
+mon remboursement de la chambre particulière n'est pas arrivé,suivre_remboursement,facile,gabarit
+j suis adhérent depuis trois ans et combien ça coûte pr une famille de quatre svp,question_tarif,bruite,gabarit
+pouvez voous me dire où en est ma demande de remboursement,suivre_remboursement,bruite,gabarit
+j'attends toujours le remboursement de un appareil auditif,suivre_remboursement,facile,gabarit
+"bonjour madame, j'ai transmis ma facture il y a une semaine et toujours rien",suivre_remboursement,bruite,gabarit
+"salut je ne trouve pas l'information sur votre site, je porte des lenitlles, quelle formule me conviendrait",comparer_formules,bruite,gabarit
+"alors voila, les tarifs augmentent avec l'age merci d'avance",question_tarif,bruite,gabarit
+comment je fais pour résilier,resilier,facile,gabarit
+mon dssier de remboursement semble bloque s'il vous plait,suivre_remboursement,bruite,gabarit
+"bonsoir, je voudrais une mutuellle pour ma voiture merci beaucoup",hors_perimetre,ambigu,cas_ambigu
+est ce que un implant dentaire est exclu de mon contrat,question_garantie,facile,gabarit
+bjr mon dossier de remboursement semble bloque,suivre_remboursement,bruite,gabarit
+combien j sius remboursé pour un implant dentaire cordialement,question_garantie,bruite,gabarit
+ma cotisation change si je éménage,question_tarif,bruite,gabarit
+coucou j'ai transmis ma facture il y a une semaine et toujours rien,suivre_remboursement,bruite,gabarit
+salut je dois attnedre combien de mois pour les implants,question_delai,bruite,gabarit
+mon dossier de remboursement semble bloqué,suivre_remboursement,facile,gabarit
+"bonjour madame, je veux passer à une formule supérieure merci beaucoup",souscrire,bruite,gabarit
+vous êtes ouverts le samedi,contacter_conseiller,ambigu,cas_ambigu
+"j suis convooqué pr une intervention, quelle démarche",demande_prise_en_charge,bruite,gabarit
+j'ai envoyé ma facture d'ostéo il y a dix jours,suivre_remboursement,ambigu,cas_ambigu
+"je vous explique ma situation, est ce que vous proposez une garantie décès cordialement",hors_perimetre,bruite,gabarit
+"JE NE TROUVE PAS L'INFORMATION SUR VOTRE SITE, J'AI UN NOUVEAU ADRESSE MAIL À VOUS COMMUNIQUER",modifier_coordonnees,bruite,gabarit
+vous pouvez me dire le prix de mon contrat s'il vous plaît,question_tarif,facile,gabarit
+POUVEZ OVUS ME DIRE OÙ EN EST MA DEMANDE DE REMBOURSEMENT,suivre_remboursement,bruite,gabarit
+je suis adhérent depuis trois ans et combien ça coûte pour une famille de quatre,question_tarif,bruite,gabarit
+combien de temps avant d'être remboursé merci beaucoup,question_delai,facile,gabarit
+"hello je ne trouve pas l'information sur vvotre site, je souhaite ne pas renouveler mon adhésion",resilier,bruite,gabarit
+ma cotisation change si je déménage merci,question_tarif,facile,gabarit
+"alors voilà, je veux parler à un conseiller",contacter_conseiller,bruite,gabarit
+esk j'ai droit à des aanalyses de sang,question_garantie,bruite,gabarit
+bonjour ma ctisation change si je déménage,question_tarif,bruite,gabarit
+bonjour la clinique demande un accord de votre part,demande_prise_en_charge,bruite,gabarit
+bjr vous pouvez me dire le prix de mon contrat,question_tarif,bruite,gabarit
+j'ai changé de banque,modifier_coordonnees,ambigu,cas_ambigu
+mon dossier de remboursement semble bloqué svp,suivre_remboursement,facile,gabarit
+je veux passer à une formule supérieure,souscrire,facile,gabarit
+"bonsoir, je suis adhérent depuis trois ans et vous pouvez me dire le prix de mon contrat merci d'avance",question_tarif,bruite,gabarit
+"bonjour madame, les tarifs augmentent vec l'âge merci d'avance",question_tarif,bruite,gabarit
+je dois attendre combien de mois pour les lunettes,question_delai,facile,gabarit
+"bonsoir, ma femme m'a dit de vous contacter, je ne veux pls de votre mutuelle",resilier,bruite,gabarit
+salut sous combien de jours vous répondez à une demande de prise en charge,question_delai,bruite,gabarit
+j'ai un nouveau adresse mail à vous communiquer,modifier_coordonnees,facile,gabarit
+j'aimerais connaître mon nievau de couverture pour les implants ??,question_garantie,bruite,gabarit
+j voudrais souscrire une mutuelle,souscrire,bruite,gabarit
+MA COTISATION CHANGE SI JE DÉMÉNAGE MERCI D'AVANCE,question_tarif,bruite,gabarit
+"bonjour madame, je vous explique ma situation, mon dossier de remboursement semble bloqué",suivre_remboursement,bruite,gabarit
+quelle est la procédure opur partir,resilier,bruite,gabarit
+coucou je veux passer à une formule supérieure,souscrire,bruite,gabarit
+mon dossier de rembooursement semble bloqué ??,suivre_remboursement,bruite,gabarit
+hello j'aimerais connaître mon niveau de couverture pour la chambre particulière,question_garantie,bruite,gabarit
+"je rentre à la clinique lundi, que dois je faire",demande_prise_en_charge,facile,gabarit
+qu'est ce qui est couvert en dentaire avec la formule Premium ?,question_garantie,facile,gabarit
+"bonjour, je veux passer à une formule supérieure svp",souscrire,bruite,gabarit
+"JE VOUS EXPLIQUE MA SITUATION, MON DOSSIER DE REMBOURSEMENT SEMBLE BLOQUÉ",suivre_remboursement,bruite,gabarit
+est ce que un accouchement est exclu de mon contrat,question_garantie,facile,gabarit
+"alors voilà, je veux mettre à jour mon nom de famille",modifier_coordonnees,bruite,gabarit
+j prefere parler a une vraie personne,contacter_conseiller,bruite,gabarit
+QUELLE FORMULE EST LA PLUS ADAPTTÉE À MON ÂGE,comparer_formules,bruite,gabarit
+bjr j veux mettre à jour mon RIB cordialement,modifier_coordonnees,bruite,gabarit
+"bonjour, j change de banque, comment je mets à jour mon nom de famille",modifier_coordonnees,bruite,gabarit
+mon dossier de remboursement semble lboqué,suivre_remboursement,bruite,gabarit
+"coucou je rentre à la clinique lundi, que dois je faire",demande_prise_en_charge,bruite,gabarit
+bonjour je veux mettre a jour mon RIB merci beaucoup,modifier_coordonnees,bruite,gabarit
+salut mon dossier de remboursement semble bloqué,suivre_remboursement,bruite,gabarit
+quand est ce que je serai remboursé de mes lunettes,question_delai,ambigu,cas_ambigu
+bjr mon remboursement de l'osteopathie n'est pas arrive merci bcp,suivre_remboursement,bruite,gabarit
+"ma femme m'a dit de vous contacter, est ce que j'ai droit à une séance d'ostéopathie",question_garantie,bruite,gabarit
+j'aimerais connaître mon niveau de couverture pour l'ostéopathie,question_garantie,facile,gabarit
+je suis adhérent depuis trois ans et mon dossier de remboursement semble bloqué,suivre_remboursement,bruite,gabarit
+"ma femme m'a dit de vs contacter, laquelle de vos formules est la plus complète svp",comparer_formules,bruite,gabarit
+est ce que une prothèse dentaire est exclu de mon contrat,question_garantie,facile,gabarit
+salut désolé de vous édranger mais j'ai changé de banque,modifier_coordonnees,ambigu,cas_ambigu
+est ce que vous proposez assurer mon appartement,hors_perimetre,facile,gabarit
+"j'ai déjà appelé la semaine dernière et personne ne m'a répondu, je voudrais souscrire une mutuelle",souscrire,bruite,gabarit
+quels documents pour adherer,souscrire,bruite,gabarit
+salut mon dossier de remboursement semble bloqué svp,suivre_remboursement,bruite,gabarit
+j'aimerais connaître mon niveau de couverture pour l'appareil auditif ??,question_garantie,facile,gabarit
+mon remboursement de la crue thermale n'est pas arrivé,suivre_remboursement,bruite,gabarit
+ocmbien de temps avant d'être remboursé,question_delai,bruite,gabarit
+j'ttends toujours le remboursement de une chambre particulière,suivre_remboursement,bruite,gabarit
+les tarifs augmentent aavec l'âge,question_tarif,bruite,gabarit
+bjr comment obtenir une prise en charge hospitalière,demande_prise_en_charge,bruite,gabarit
+"bonsoir, j'ai déjà appelé la semaine dernière et personne ne m'a répondu, quelle est la procédure pour partir",resilier,bruite,gabarit
+"bjr j'ai déjà appelé la semaine dernière et personne ne m'a répondu, vs pouvez me dire le prix de mon contrat",question_tarif,bruite,gabarit
+hello j'attends toujours le remboursement de des analyses de sang merci beaucoup,suivre_remboursement,bruite,gabarit
+"ma femme m'a dit de vous contacter, j'ai un nouveau RIB à vous communiquer",modifier_coordonnees,bruite,gabarit
+je pars chez un autre assureur,resilier,ambigu,cas_ambigu
+"j vous explique ma situation, jvoudré souscrire une mutuelle",souscrire,bruite,gabarit
+est ce que j'ai droit à une monture merci beaucoup,question_garantie,facile,gabarit
+"bonjour, je vous explique ma situation, je me suis mariée, je voudrais changer mon nom de famille",modifier_coordonnees,bruite,gabarit
+"bjr je ne trouve pas l'information sur votre site, j'attends toujours le remboursement de un appareil auditif",suivre_remboursement,bruite,gabarit
+bjr je voudrais souscrire une mutuelle cordiialement,souscrire,bruite,gabarit
+"bonsoir, je rentre à la cliniue lundi, que dois je faire",demande_prise_en_charge,bruite,gabarit
+je préfère parler à une vraie personen ?,contacter_conseiller,bruite,gabarit
+bjr je dois attendre combien de mois pour le forfait journalier,question_delai,bruite,gabarit
+"MA FEMME M'A DIT DE VOUS CONTACTER, JE PORTE DES LENTILLES, QUELLE FORMULE ME CONVIENDRAIT",comparer_formules,bruite,gabarit
+qu'est ce qui est couvert en médecines douces avec la formule Premium,question_garantie,facile,gabarit
+"désolé de vous déranger mais mon fils a 22 ans, il est encore couvert",question_garantie,ambigu,cas_ambigu
+"salut j'ai deja appele la semaine derniere et personne ne m'a repondu, quelle est la procedure pour partir",resilier,bruite,gabarit
+quelle est la procédure pour partir,resilier,facile,gabarit
+hello vous pouvez me dire le prix de mon contrat s'il vous plait,question_tarif,bruite,gabarit
+pouvez vs me dier où en est ma demande de remboursement ??,suivre_remboursement,bruite,gabarit
+"bonjour, est ce que j'ai droit à des analyses de sang",question_garantie,bruite,gabarit
+salut est ce que une consultation chez un specialiste est exclu de mon contrat,question_garantie,bruite,gabarit
+"bonsoir, comment je fais pour résilier cordialement",resilier,bruite,gabarit
+"bonsoi,r mon dossier de remboursement semble bloqué",suivre_remboursement,bruite,gabarit
+hello quelle formule est la plus adaptée à mon âge,comparer_formules,bruite,gabarit
+hello je ne veux plus de votre mutuelle,resilier,bruite,gabarit
+"bonjour, ma cotisation change si je déménage merci beaucoup",question_tarif,bruite,gabarit
+j'attends toujours le remboursement de un appareil dentaire pour mon fils,suivre_remboursement,facile,gabarit
+je souhaite ne pas renouveler mon adhesion ?,resilier,bruite,gabarit
+"j'ai deja appele la semaine derniere et personne ne m'a repondu, tu es une intelligence artificielle",hors_perimetre,bruite,gabarit
+bjr je suis adhérent depuis trois ans et tu es une intelligence artificielle,hors_perimetre,bruite,gabarit
+"bonsoir, vs pouvez me dire le prix de mon contrat",question_tarif,bruite,gabarit
+les tarifs augmentent avec l'âge ?,question_tarif,facile,gabarit
+pouvez vous me dire où en est ma demande de remboursement,suivre_remboursement,facile,gabarit
+SALUT COMMENT JE FAIS POUR RÉSILIER,resilier,bruite,gabarit
+bonjour j'ai transmis ma facture il y a une semaine et toujours rien,suivre_remboursement,bruite,gabarit
+bjr mon dossier de remboursement semble bloqué,suivre_remboursement,bruite,gabarit
+désolé de vous déranger mais mon dossier de remboursement semble bloqué ?,suivre_remboursement,bruite,gabarit
+"bjr, mon remboursement du forfait journalier n'est pas arrivé",suivre_remboursement,bruite,gabarit
+"j'ai déjà appelé la semaine dernière et personne ne m'a répondu, je dos attendre combien de mois pour le forfait journalier",question_delai,bruite,gabarit
+j'aimerais connaître mon niveau de couverture pour l'appareil auditif,question_garantie,facile,gabarit
+"bonjour, quelle formule choisir pour l'optique",comparer_formules,bruite,gabarit
+désolé de vous déranger mais j'attends toujours le remboursement de une consultation chez le généraliste svp,suivre_remboursement,bruite,gabarit
+bojnour je dois attendre combien de mois pour les lunettes,question_delai,bruite,gabarit
+combien je suis remboursé opur un accouchement merci beaucoup,question_garantie,bruite,gabarit
+je suis adhérent depuis trois ans et la clinique demande un accord de votre part,demande_prise_en_charge,bruite,gabarit
+à quelle heure je peux vous appeler merci beaucoup,contacter_conseiller,facile,gabarit
+je cherche un médecin près de chez moi ?,hors_perimetre,facile,gabarit
+sous combien de jours vous repondez a une demande de prise en charge,question_delai,bruite,gabarit
+combien je suis remboursé pour un accouchement,question_garantie,facile,gabarit
+"bonsoir, j'aimerais connaître mon niveau de couverture pour l'appareil auditif merci beaucoup",question_garantie,bruite,gabarit
+mon remboursement des lentilles n'est pas arrivé,suivre_remboursement,facile,gabarit
+au bout de combien de temps les garanties optique sont actives ?,question_delai,facile,gabarit
+bjr j suis adherent depuis trois ans et mon dossier de remboursement semble bloque s'il vs plait,suivre_remboursement,bruite,gabarit
+j'attends toujurs le remboursement de une chambre particulière,suivre_remboursement,bruite,gabarit
+combien je suis remboursé pour des lentilles ??,question_garantie,facile,gabarit
+j'ai transmis ma facturre il y a une semaine et toujours rien,suivre_remboursement,bruite,gabarit
+hello mon dossier de remboursement semble bloqué,suivre_remboursement,bruite,gabarit
+combien de temps avant d'être remboursé merci d'avance,question_delai,facile,gabarit
+"ma femme m'a dit de vous contacter, je souhaite ne pas renouveler mon adhesion",resilier,bruite,gabarit
+"ma femme m'a dit de vous contacter, je souhaite ne pas renouveler mon adhesion ??",resilier,bruite,gabarit
+je veux parler à un conseiller,contacter_conseiller,facile,gabarit
+mon dossier de remboursement semble bloqué ?,suivre_remboursement,facile,gabarit
+"bonsoir, est ce que j'ai droit à un appareil auditif",question_garantie,bruite,gabarit
+"MA CARTE DE MUTUELLE EST PERDUE, COMMENT EN AVOIR UNE NOUVELLE",demander_attestation,bruite,gabarit
+j'aimerais connaître mon niveau de couverture pour l'ostéopathie merci d'avance,question_garantie,facile,gabarit
+coucou je cherche un médecin prs de chez moi merci,hors_perimetre,bruite,gabarit
+"je ne trouve pas l'information sur votre site, comment obtenir une prise en charge hospitaliere",demande_prise_en_charge,bruite,gabarit
+je cherche une assurance pour mon chien,hors_perimetre,facile,gabarit
+"BONJOUR, JE PRÉFÈRE PARLER À UNE VRAIE PERSONNE",contacter_conseiller,bruite,gabarit
+je voudrais mon attestation de droits,demander_attestation,facile,gabarit
+est ce que des verres progressifs est exclu de mon contrat,question_garantie,facile,gabarit
+je voudrais souscrire une mutuelle,souscrire,facile,gabarit
+qu'est ce qui est couvert en optique avec la formule Essentiel,question_garantie,facile,gabarit
+"bonsoir, j'ai déjà appelé la semaien dernière et personne ne m'a répondu, mon remboursement de l'appareil auditif n'est pas arrivé",suivre_remboursement,bruite,gabarit
+"j'ai deja appele la semaine derniere et personne ne m'a repondu, au bout de combien de temps les garanties optique sont actives svp",question_delai,bruite,gabarit
+j'aimerais connaître mon niveau de couverture pour les implants,question_garantie,facile,gabarit
+"je ne trouve pas l'information sur votre site, mon remboursement du forfait journalier n'est pas arrivé svp",suivre_remboursement,bruite,gabarit
+je dois attendre combien de mois pour les protheses dentaires merci,question_delai,bruite,gabarit
+les lunettes c'est combien,question_garantie,ambigu,cas_ambigu
+"je vous explique ma situation, je dois attendre combien de mois pour le forfait journalier",question_delai,bruite,gabarit
+"ma femme m'a dit de vous contacter, combien je paye pour les lunettes",question_garantie,ambigu,cas_ambigu
+combien de temps avant dd'etre rembourse merci beaucoup,question_delai,bruite,gabarit
+je cherche une garantie décès,hors_perimetre,facile,gabarit
+pouvez vs me dire où en est ma demande de remboursement,suivre_remboursement,bruite,gabarit
+esk je peux changer de forule maintenant,souscrire,ambigu,cas_ambigu
+"alors voilàà, qu'est ce qui est couvert en soins courants avec la formule Premium",question_garantie,bruite,gabarit
+"BJR J'AI DÉJÀ APPELÉ LA SEMAINE DERNIÈRE ET PERSONNE NE M'A RÉPONDU, JE DOIS ATTENDRE COMBIEN DE MOIS POUR LE FORFAIT JOURNALIER",question_delai,bruite,gabarit
+"bonjour, combien de temps avant d'etre rembourse",question_delai,bruite,gabarit
+quelle formule choisir our l'optique cordialement,comparer_formules,bruite,gabarit
+j'attends toujours le remboursement de un accouchement,suivre_remboursement,facile,gabarit
+"bonjour, je ne trouve pas l'information sur votre site, est ce que une paire de lunettes est exclu de mon contrat ?",question_garantie,bruite,gabarit
+sous combien de jours vous répondez à une demande de prise en charge,question_delai,facile,gabarit
+JE SIUS ADHÉRENT DEPUIS TROIS ANS ET POUVEZ VOUS ME DIRE OÙ EN EST MA DEMANDE DE REMBOURSEMENT MERCI BEAUCOUP,suivre_remboursement,bruite,gabarit
+les tarifs augmentent avec l'age,question_tarif,bruite,gabarit
+"j me suis mariee, je oudrais changer mon nom de famille",modifier_coordonnees,bruite,gabarit
+"bonsoir, ma cotisation change si je déménage",question_tarif,bruite,gabarit
+"salut je vous explique ma situation, ma cotisation change si je déménage s'il vous plaît",question_tarif,bruite,gabarit
+comment j fais pr résilier ??,resilier,bruite,gabarit
+est ce que une paire de lunettes est exclu de mon contrat,question_garantie,facile,gabarit
+j veux passer à une formule supérieure,souscrire,bruite,gabarit
+est ce que vous proposez une assurance pour mon chien,hors_perimetre,facile,gabarit
+ça coûte combien de rajouter ma fille,question_tarif,ambigu,cas_ambigu
+je suis adhérent depuis trois ans et sous combien de jours vous répondez à une demande de prise en charge,question_delai,bruite,gabarit
+bonjour est ce que mes médicaments est exclu de mon contrat ??,question_garantie,bruite,gabarit
+"alors voilà, les tarifs augmentent avec l'âge",question_tarif,bruite,gabarit
+"ALORS VOILA, MON REMBOURSEMENT DE LA CURE THERMALE N'EST PAS ARRIVE MERCI",suivre_remboursement,bruite,gabarit
+"bonjour, ma femme m'a dit de vous contacter, j'aimerais connaître mon niveau de couverture pour l'appareil auditif",question_garantie,bruite,gabarit
+sous combien de jours vous repondez a une demande de prise en charge cordialement,question_delai,bruite,gabarit
+"je ne trouve pas l'information sur votre siet, il y a un questionnaire de santé pour adhérer",souscrire,bruite,gabarit
