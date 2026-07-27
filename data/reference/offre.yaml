@@ -1,0 +1,165 @@
+compagnie:
+  nom: "Mutuelle Solstice"
+  perimetre: "complémentaire santé individuelle"
+  formules: [essentiel, confort, premium]
+
+garanties:
+  consultation_generaliste:
+    libelle: "Consultation de médecin généraliste"
+    poste: "soins courants"
+    essentiel: "100% BR"
+    confort: "150% BR"
+    premium: "250% BR"
+
+  consultation_specialiste:
+    libelle: "Consultation de médecin spécialiste"
+    poste: "soins courants"
+    essentiel: "100% BR"
+    confort: "200% BR"
+    premium: "300% BR"
+
+  pharmacie:
+    libelle: "Médicaments remboursés par la Sécurité sociale"
+    poste: "soins courants"
+    essentiel: "100% BR"
+    confort: "100% BR"
+    premium: "100% BR"
+
+  analyses_biologie:
+    libelle: "Analyses et actes de biologie"
+    poste: "soins courants"
+    essentiel: "100% BR"
+    confort: "150% BR"
+    premium: "200% BR"
+
+  hospitalisation_honoraires:
+    libelle: "Honoraires chirurgicaux et d'anesthésie"
+    poste: "hospitalisation"
+    essentiel: "100% BR"
+    confort: "150% BR"
+    premium: "250% BR"
+
+  forfait_journalier:
+    libelle: "Forfait journalier hospitalier"
+    poste: "hospitalisation"
+    essentiel: "intégral"
+    confort: "intégral"
+    premium: "intégral"
+
+  chambre_particuliere:
+    libelle: "Chambre particulière"
+    poste: "hospitalisation"
+    essentiel: "non couvert"
+    confort: "50 € par jour, 30 jours maximum par an"
+    premium: "90 € par jour, 60 jours maximum par an"
+
+  optique_monture:
+    libelle: "Monture de lunettes"
+    poste: "optique"
+    essentiel: "50 € tous les 2 ans"
+    confort: "100 € tous les 2 ans"
+    premium: "100 € par an"
+
+  optique_verres_simples:
+    libelle: "Verres simples, par verre"
+    poste: "optique"
+    essentiel: "60 €"
+    confort: "120 €"
+    premium: "200 €"
+
+  optique_verres_complexes:
+    libelle: "Verres complexes ou progressifs, par verre"
+    poste: "optique"
+    essentiel: "110 €"
+    confort: "220 €"
+    premium: "350 €"
+
+  lentilles:
+    libelle: "Lentilles, y compris non remboursées par la Sécurité sociale"
+    poste: "optique"
+    essentiel: "non couvert"
+    confort: "100 € par an"
+    premium: "200 € par an"
+
+  dentaire_soins:
+    libelle: "Soins dentaires courants"
+    poste: "dentaire"
+    essentiel: "100% BR"
+    confort: "125% BR"
+    premium: "150% BR"
+
+  dentaire_protheses:
+    libelle: "Prothèses dentaires remboursées par la Sécurité sociale"
+    poste: "dentaire"
+    essentiel: "125% BR"
+    confort: "250% BR"
+    premium: "400% BR"
+
+  dentaire_implants:
+    libelle: "Implants dentaires"
+    poste: "dentaire"
+    essentiel: "non couvert"
+    confort: "300 € par implant, 2 par an"
+    premium: "600 € par implant, 3 par an"
+
+  orthodontie:
+    libelle: "Orthodontie acceptée par la Sécurité sociale, moins de 16 ans"
+    poste: "dentaire"
+    essentiel: "100% BR"
+    confort: "200% BR"
+    premium: "300% BR"
+
+  audioprothese:
+    libelle: "Aide auditive, par oreille"
+    poste: "audiologie"
+    essentiel: "100% BR"
+    confort: "100% BR + forfait 100 €"
+    premium: "100% BR + forfait 250 €"
+
+  medecines_douces:
+    libelle: "Ostéopathie, chiropraxie, acupuncture"
+    poste: "médecines douces"
+    essentiel: "non couvert"
+    confort: "25 € par séance, 4 séances par an"
+    premium: "40 € par séance, 8 séances par an"
+
+  cure_thermale:
+    libelle: "Cure thermale acceptée par la Sécurité sociale"
+    poste: "autres"
+    essentiel: "non couvert"
+    confort: "150 € par an"
+    premium: "300 € par an"
+
+cotisations_mensuelles:
+  unite: "euros par mois, assuré seul"
+  tranches:
+    moins_30_ans:   {essentiel: 32, confort: 48, premium: 72}
+    de_30_a_49_ans: {essentiel: 45, confort: 67, premium: 99}
+    de_50_a_64_ans: {essentiel: 68, confort: 98, premium: 145}
+    plus_65_ans:    {essentiel: 95, confort: 140, premium: 205}
+
+delais_carence:
+  soins_courants: "aucun"
+  hospitalisation: "3 mois, sauf accident"
+  optique: "6 mois"
+  dentaire_protheses: "6 mois"
+  maternite: "10 mois"
+  medecines_douces: "3 mois"
+
+delais_traitement:
+  remboursement_teletransmission: "2 jours ouvrés"
+  remboursement_feuille_papier: "5 jours ouvrés"
+  prise_en_charge_hospitaliere: "72 heures avant l'admission"
+  envoi_attestation: "immédiat dans l'espace assuré"
+
+resiliation:
+  premiere_annee: "à l'échéance annuelle, préavis de 2 mois"
+  apres_un_an: "à tout moment, sans frais, préavis de 1 mois"
+  motifs_particuliers: "déménagement, changement de situation professionnelle, adhésion à un contrat collectif obligatoire"
+
+exclusions:
+  - "chirurgie esthétique non prise en charge par la Sécurité sociale"
+  - "soins reçus à l'étranger hors urgence"
+  - "cures de rajeunissement et de bien-être"
+  - "actes non inscrits à la nomenclature de la Sécurité sociale, sauf mention expresse"
+  - "conséquences de la pratique d'un sport à titre professionnel"
