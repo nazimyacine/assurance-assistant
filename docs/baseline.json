@@ -1,0 +1,13 @@
+{
+  "brute": {
+    "f1_macro": 0.5691,
+    "exactitude": 0.5757
+  },
+  "ponderee": {
+    "f1_macro": 0.5966,
+    "exactitude": 0.5757,
+    "exactitude_facile": 0.5378,
+    "exactitude_bruite": 0.5801,
+    "exactitude_ambigu": 0.6571
+  }
+}
