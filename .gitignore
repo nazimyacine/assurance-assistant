@@ -11,7 +11,8 @@ __pycache__/
 ml/artifacts/
 
 # Données générées (régénérables via run.ps1 data)
-data/raw/
+data/raw/*
+!data/raw/corpus/
 
 # Java
 gateway/target/
