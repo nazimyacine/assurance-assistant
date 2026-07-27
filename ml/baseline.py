@@ -48,6 +48,24 @@ def construire_modele(equilibrer: bool) -> Pipeline:
         )),
     ])
 
+def verifier_absence_de_fuite(train, test):
+    """Interrompt si une phrase du test apparaît à l'entraînement.
+
+    Une fuite ne se voit pas dans les scores, elle les embellit. Mieux
+    vaut un script qui refuse de tourner qu'un chiffre flatteur et faux.
+    """
+    textes_train = {t.lower().strip() for t in train["texte"]}
+    fuites = [t for t in test["texte"] if t.lower().strip() in textes_train]
+    if fuites:
+        raise SystemExit(
+            f"\nFUITE : {len(fuites)} phrase(s) du jeu de test sont "
+            f"présentes à l'entraînement.\n"
+            f"Exemple : « {fuites[0]} »\n"
+            f"Le jeu de test est probablement périmé. Relance "
+            f"generate_intents.py puis renomme intents_test_a_relire.csv "
+            f"en intents_test.csv."
+        )
+
 
 def main() -> int:
     parseur = argparse.ArgumentParser()
@@ -56,6 +74,8 @@ def main() -> int:
 
     train = pd.read_csv(TRAIN)
     test = pd.read_csv(args.test)
+    verifier_absence_de_fuite(train, test)
+    print(f"Jeu de test : {len(test)} phrases")
 
     resultats = {}
     for equilibrer in (False, True):
