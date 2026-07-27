@@ -129,8 +129,19 @@ garanties:
     essentiel: "non couvert"
     confort: "150 € par an"
     premium: "300 € par an"
+  
+  forfait_naissance:
+    libelle: "Forfait naissance ou adoption, par enfant"
+    poste: "maternité"
+    essentiel: "non couvert"
+    confort: "200 €"
+    premium: "400 €"
 
 cotisations_mensuelles:
+  ayants_droit:
+    conjoint: "80% de la cotisation de l'assuré principal"
+    enfant: "40% de la cotisation de l'assuré principal, jusqu'à 21 ans"
+    gratuite: "à partir du 3e enfant rattaché"
   unite: "euros par mois, assuré seul"
   tranches:
     moins_30_ans:   {essentiel: 32, confort: 48, premium: 72}
@@ -141,10 +152,15 @@ cotisations_mensuelles:
 delais_carence:
   soins_courants: "aucun"
   hospitalisation: "3 mois, sauf accident"
+  forfait_journalier: "aucun"
   optique: "6 mois"
+  dentaire_soins: "aucun"
   dentaire_protheses: "6 mois"
+  dentaire_implants: "6 mois"
+  orthodontie: "6 mois"
   maternite: "10 mois"
   medecines_douces: "3 mois"
+  reprise_anciennete: "dispense totale si adhésion dans les 3 mois suivant la résiliation du contrat précédent"
 
 delais_traitement:
   remboursement_teletransmission: "2 jours ouvrés"
