@@ -1,0 +1,36 @@
+{
+  "modele": "camembert-base",
+  "epochs": 4,
+  "batch": 16,
+  "lr": 2e-05,
+  "class_weights": true,
+  "duree_s": 141,
+  "meilleur_f1_val": 0.8087,
+  "meilleure_perte_val": 0.7267,
+  "historique": [
+    {
+      "epoch": 1,
+      "perte_train": 1.978,
+      "perte_val": 1.296,
+      "f1_val": 0.7681
+    },
+    {
+      "epoch": 2,
+      "perte_train": 0.6008,
+      "perte_val": 0.7637,
+      "f1_val": 0.8035
+    },
+    {
+      "epoch": 3,
+      "perte_train": 0.1989,
+      "perte_val": 0.7267,
+      "f1_val": 0.8087
+    },
+    {
+      "epoch": 4,
+      "perte_train": 0.1218,
+      "perte_val": 0.7371,
+      "f1_val": 0.8082
+    }
+  ]
+}

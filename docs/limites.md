@@ -1,1 +1,3 @@
 Le jeu de test est généré, pas annoté. Les étiquettes sont exactes par construction. La relecture manuelle a servi à détecter des artefacts de génération (élisions, accords, doublons, fuites train/test), corrigés dans le générateur plutôt que ligne par ligne. Sur un vrai corpus annoté, les scores seraient plus bas et l'accord inter-annotateurs deviendrait une métrique à part entière.
+
+La validation partageait initialement ses gabarits avec l'entraînement. Son F1 saturait à 1,0 dès la première epoch et la sélection du meilleur modèle conservait un modèle sous-entraîné. Les gabarits sont désormais répartis en trois pools strictement disjoints, et la perte de validation est suivie en plus du F1.
