@@ -1,0 +1,383 @@
+# Flux métier guidés de l'assistant Mutuelle Solstice.
+#
+# Ce fichier porte les TEXTES et la STRUCTURE des dialogues. Le moteur
+# (service/router.py) ne contient aucune procédure métier : ajouter un
+# flux ou reformuler une réponse ne demande pas de toucher au code.
+#
+# Deux règles de rédaction :
+#
+# 1. AUCUN MONTANT DE GARANTIE ici. Taux, forfaits et plafonds dépendent
+#    de la formule souscrite, ils vivent dans le corpus et ne sortent que
+#    par le RAG, avec leur citation. Un flux qui aurait besoin d'un
+#    montant renvoie vers la question correspondante.
+#
+# 2. Tout délai ou préavis présent dans data/reference/offre.yaml est
+#    écrit sous forme d'emplacement {offre:chemin.vers.cle}, résolu au
+#    démarrage. Le service refuse de démarrer si une clé est absente.
+#    Aucun chiffre recopié à la main. Un emplacement ne convient qu'à un
+#    fragment qui s'insère tel quel : une locution devant s'accorder est
+#    écrite en clair.
+#
+# Limite assumée, documentée dans docs/limites.md : la partie
+# PROCÉDURALE du corpus est volontairement dupliquée ici (pièces à
+# fournir, marche à suivre). Un flux qui ne dirait pas quoi faire ne
+# servirait à rien. La règle stricte ne porte que sur les montants.
+#
+# Types de champ : oui_non, choix, texte, date.
+
+resilier:
+  ouverture: >
+    Je peux vous guider dans la résiliation de votre contrat.
+  champs:
+    - nom: confirmation
+      type: oui_non
+      question: >
+        Confirmez-vous vouloir résilier votre contrat Mutuelle Solstice ?
+      relance: "Répondez simplement par oui ou par non."
+      si_non: >
+        Très bien, aucune démarche n'est engagée et votre contrat reste
+        en cours. Je reste à votre disposition pour toute autre question.
+    - nom: situation
+      type: choix
+      question: "Dans quelle situation vous trouvez-vous ?"
+      relance: "Indiquez le numéro de la situation qui vous correspond."
+      valeurs:
+        - cle: plus_un_an
+          libelle: "mon contrat a plus d'un an"
+          mots: [plus, ancien, longtemps, annees, ans]
+        - cle: contrat_employeur
+          libelle: >
+            mon contrat a moins d'un an et mon employeur me rattache à une
+            mutuelle obligatoire
+          mots: [employeur, travail, entreprise, obligatoire, collectif]
+        - cle: changement_situation
+          libelle: >
+            mon contrat a moins d'un an et ma situation a changé
+            (déménagement, emploi, mariage, divorce, retraite)
+          mots: [demenagement, demenage, mariage, divorce, retraite, emploi]
+        - cle: autre
+          libelle: "mon contrat a moins d'un an, pour une autre raison"
+          mots: [autre, aucune, rien]
+  reponse_par: situation
+  reponses:
+    plus_un_an: >
+      Votre contrat ayant plus d'un an, vous pouvez le résilier
+      {offre:resiliation.apres_un_an}. La demande se fait depuis votre
+      espace assuré ou par courrier simple, la lettre recommandée n'est
+      pas obligatoire. Nous accusons réception sous 5 jours ouvrés et
+      vous confirmons la date exacte de fin de vos garanties. Si vous
+      adhérez ailleurs, votre nouvel organisme peut aussi effectuer la
+      démarche à votre place.
+    contrat_employeur: >
+      L'adhésion obligatoire à un contrat collectif souscrit par votre
+      employeur permet de résilier sans attendre l'échéance annuelle. La
+      demande doit être formulée dans les 3 mois suivant l'évènement et
+      accompagnée d'une attestation de votre employeur. La résiliation
+      prend effet un mois après réception de la demande complète, depuis
+      votre espace assuré ou par courrier simple.
+    changement_situation: >
+      Un déménagement, un changement de situation professionnelle, un
+      mariage, un divorce ou un départ à la retraite permet de résilier
+      sans attendre l'échéance annuelle. La demande doit être formulée
+      dans les 3 mois suivant l'évènement, accompagnée du justificatif
+      correspondant, depuis votre espace assuré ou par courrier simple.
+      La résiliation prend effet un mois après réception de la demande
+      complète.
+    autre: >
+      Pendant la première année, hors motif particulier, la résiliation
+      n'est possible qu'{offre:resiliation.premiere_annee}. Une demande
+      hors de ce délai reporte la résiliation à l'échéance suivante. Vous
+      pouvez déposer votre demande depuis votre espace assuré, nous vous
+      confirmerons la date de fin de vos garanties sous 5 jours ouvrés.
+  cloture: >
+    Dans tous les cas, votre certificat de radiation vous sera délivré
+    sous 30 jours après la fin du contrat : conservez-le, il ouvre droit
+    à la {offre:delais_carence.reprise_anciennete}.
+
+souscrire:
+  ouverture: "Je peux vous accompagner dans cette démarche."
+  champs:
+    - nom: demarche
+      type: choix
+      question: "Que souhaitez-vous faire ?"
+      relance: "Indiquez le numéro de la démarche souhaitée."
+      valeurs:
+        - cle: nouvelle_adhesion
+          libelle: "adhérer à Mutuelle Solstice"
+          mots: [adherer, adhesion, souscrire, inscrire, nouveau, rejoindre]
+        - cle: ajout_beneficiaire
+          libelle: "ajouter un proche à mon contrat"
+          mots: [ajouter, conjoint, femme, mari, enfant, fils, fille, rattacher]
+        - cle: changement_formule
+          libelle: "changer de formule"
+          mots: [changer, formule, superieure, passer, modifier]
+  reponse_par: demarche
+  reponses:
+    nouvelle_adhesion: >
+      L'adhésion se fait en ligne et n'est soumise à aucun questionnaire
+      de santé. Quatre pièces sont nécessaires : une copie de votre pièce
+      d'identité, une attestation de droits à l'assurance maladie de
+      moins de 3 mois, un relevé d'identité bancaire à votre nom et un
+      mandat de prélèvement signé électroniquement. Votre contrat prendra
+      effet le premier jour du mois suivant la validation de votre
+      dossier, et vous disposerez d'un délai de renonciation de 14 jours
+      après signature.
+    ajout_beneficiaire: >
+      Vous pouvez ajouter votre conjoint, votre partenaire de PACS, votre
+      concubin ou vos enfants à charge à tout moment depuis votre espace
+      assuré. Les enfants sont rattachables jusqu'à leur 21e anniversaire,
+      ou leur 26e anniversaire s'ils poursuivent des études, sur
+      présentation d'un certificat de scolarité renouvelé chaque année.
+      Le rattachement prend effet le premier jour du mois suivant votre
+      demande, sauf naissance ou adoption, auquel cas l'enfant est couvert
+      rétroactivement si la demande est faite dans les 3 mois.
+    changement_formule: >
+      Le changement de formule est possible à chaque échéance annuelle,
+      avec un préavis d'un mois, et en cours d'année en cas de naissance,
+      de mariage, de divorce ou de changement de situation
+      professionnelle. La demande se fait depuis votre espace assuré.
+      Attention : le passage à une formule supérieure fait courir les
+      délais de carence sur les postes nouvellement couverts.
+  cloture: >
+    Si vous hésitez entre nos formules ou souhaitez connaître le montant
+    de la cotisation, posez-moi directement la question.
+
+demande_prise_en_charge:
+  ouverture: >
+    Je peux préparer votre demande de prise en charge hospitalière.
+  champs:
+    - nom: type_sejour
+      type: choix
+      question: "De quelle situation s'agit-il ?"
+      relance: "Indiquez 1 pour une hospitalisation prévue, 2 pour une urgence."
+      valeurs:
+        - cle: programmee
+          libelle: "une hospitalisation prévue à l'avance"
+          mots: [prevue, programmee, prochaine, operation, intervention, planifiee]
+        - cle: urgence
+          libelle: "une hospitalisation en urgence, déjà survenue"
+          mots: [urgence, urgent, hier, deja, arrive, entre]
+    - nom: etablissement
+      type: texte
+      si: {champ: type_sejour, vaut: programmee}
+      question: "Quel est le nom de l'établissement qui vous accueille ?"
+      relance: "Indiquez le nom de l'hôpital ou de la clinique."
+    - nom: date_admission
+      type: date
+      si: {champ: type_sejour, vaut: programmee}
+      question: "Quelle est la date d'entrée prévue, au format jj/mm/aaaa ?"
+      relance: "Indiquez la date au format jj/mm/aaaa, par exemple 12/09/2026."
+    - nom: duree_estimee
+      type: texte
+      si: {champ: type_sejour, vaut: programmee}
+      question: "Quelle est la durée estimée du séjour, en jours ?"
+      relance: "Indiquez une durée approximative, par exemple 3 jours."
+    - nom: chambre_particuliere
+      type: oui_non
+      si: {champ: type_sejour, vaut: programmee}
+      question: "Souhaitez-vous une chambre particulière ?"
+      relance: "Répondez par oui ou par non."
+  reponse_par: type_sejour
+  reponses:
+    programmee: >
+      J'ai noté votre séjour à {etablissement}, à partir du
+      {date_admission}, pour une durée estimée de {duree_estimee}.
+      Votre demande de prise en charge doit être déposée depuis votre
+      espace assuré au plus tard
+      {offre:delais_traitement.prise_en_charge_hospitaliere}. Nous
+      transmettons ensuite directement l'accord au service des admissions
+      de l'établissement et vous en déposons une copie dans votre espace
+      personnel, ce qui vous évite d'avancer les frais de séjour.
+    urgence: >
+      Aucune démarche préalable n'est exigée en cas d'urgence. Informez
+      Mutuelle Solstice dès que possible depuis votre espace assuré, et
+      au plus tard dans les 48 heures suivant l'admission : la prise en
+      charge sera régularisée rétroactivement, sans perte de droits. Une
+      hospitalisation consécutive à un accident n'est soumise à aucun
+      délai de carence.
+  cloture: >
+    Si vous avez reçu un devis d'honoraires de votre chirurgien,
+    transmettez-le depuis votre espace assuré : nous vous communiquons
+    une estimation de votre reste à charge sous 5 jours ouvrés.
+
+suivre_remboursement:
+  ouverture: "Je vais vous aider à situer votre remboursement."
+  champs:
+    - nom: canal
+      type: choix
+      question: "De quel type de soin s'agit-il ?"
+      relance: "Indiquez le numéro correspondant, ou 3 si vous ne savez pas."
+      valeurs:
+        - cle: teletransmis
+          libelle: >
+            un soin habituel, remboursé d'abord par la Sécurité sociale
+            (consultation, pharmacie, analyses)
+          mots: [medecin, consultation, pharmacie, analyses, generaliste, specialiste]
+        - cle: justificatif
+          libelle: >
+            un soin pour lequel j'ai envoyé moi-même une facture
+            (médecines douces, lentilles, implants)
+          mots: [facture, envoye, osteo, lentilles, implant, acupuncture, justificatif]
+        - cle: inconnu
+          libelle: "je ne sais pas"
+          mots: [sais, aucune, idee, sur]
+  reponse_par: canal
+  reponses:
+    teletransmis: >
+      Pour un soin transmis automatiquement par la Sécurité sociale, le
+      virement est effectué sous
+      {offre:delais_traitement.remboursement_teletransmission} à compter
+      de la réception de l'information, auxquels s'ajoutent 1 à 2 jours
+      ouvrés d'acheminement bancaire. Le détail poste par poste figure
+      dans votre espace assuré. Si vous avez adhéré récemment, sachez que
+      la télétransmission n'est effective que sous 15 jours.
+    justificatif: >
+      Pour un acte que vous réglez vous-même, le remboursement intervient
+      sous {offre:delais_traitement.remboursement_feuille_papier} à
+      compter de la réception d'un justificatif complet, auxquels
+      s'ajoutent 1 à 2 jours ouvrés d'acheminement bancaire. Vérifiez
+      dans votre espace assuré que la facture déposée est bien acquittée
+      et mentionne votre identité, la date, la nature de l'acte, le
+      montant réglé et les coordonnées du praticien : une note
+      d'honoraires non acquittée ne déclenche pas le remboursement.
+    inconnu: >
+      Le détail de vos remboursements est consultable dans votre espace
+      assuré, poste par poste, avec la part de la Sécurité sociale, la
+      nôtre et votre éventuel reste à charge. Les soins transmis par la
+      Sécurité sociale sont réglés sous
+      {offre:delais_traitement.remboursement_teletransmission}, ceux pour
+      lesquels vous envoyez une facture sous
+      {offre:delais_traitement.remboursement_feuille_papier}, plus 1 à 2
+      jours ouvrés d'acheminement bancaire.
+  cloture: >
+    Si le virement n'apparaît toujours pas au delà de ces délais, un
+    conseiller peut consulter votre dossier depuis la messagerie
+    sécurisée de votre espace assuré.
+
+demander_attestation:
+  champs:
+    - nom: document
+      type: choix
+      question: "Quel document vous faut-il ?"
+      relance: "Indiquez le numéro du document souhaité."
+      valeurs:
+        - cle: attestation_droits
+          libelle: "une attestation de droits ou de couverture"
+          mots: [droits, couverture, affiliation, preuve, adhesion, employeur]
+        - cle: carte_tiers_payant
+          libelle: "ma carte de tiers payant"
+          mots: [carte, tiers, payant, mutuelle, perdue]
+        - cle: certificat_radiation
+          libelle: "un certificat de radiation"
+          mots: [radiation, certificat, resilie, ancien, parti]
+  reponse_par: document
+  reponses:
+    attestation_droits: >
+      Votre attestation de droits est disponible immédiatement dans votre
+      espace assuré, à tout moment et sans démarche préalable. Vous la
+      téléchargez au format PDF depuis le site ou l'application mobile.
+    carte_tiers_payant: >
+      Votre carte de tiers payant est disponible immédiatement dans votre
+      espace assuré et peut être présentée sous forme numérique depuis
+      l'application mobile. Elle est acceptée en pharmacie, en
+      laboratoire, en radiologie, chez les opticiens et audioprothésistes
+      partenaires et dans les établissements hospitaliers. En cas de
+      perte, il suffit de la télécharger de nouveau.
+    certificat_radiation: >
+      Le certificat de radiation est délivré dans les 30 jours suivant la
+      fin effective du contrat. Il atteste vos dates de début et de fin
+      de couverture et vous ouvre droit à la
+      {offre:delais_carence.reprise_anciennete}. Il est déposé dans votre
+      espace assuré.
+
+modifier_coordonnees:
+  ouverture: "Cette modification se fait depuis votre espace assuré."
+  champs:
+    - nom: donnee
+      type: choix
+      question: "Quelle information souhaitez-vous mettre à jour ?"
+      relance: "Indiquez le numéro de l'information concernée."
+      valeurs:
+        - cle: bancaire
+          libelle: "mes coordonnées bancaires (RIB, IBAN)"
+          mots: [rib, iban, banque, bancaire, compte, virement]
+        - cle: postale
+          libelle: "mon adresse postale"
+          mots: [adresse, demenage, demenagement, postale, domicile]
+        - cle: contact
+          libelle: "mon téléphone ou mon adresse mail"
+          mots: [telephone, portable, mail, mel, courriel, numero]
+        - cle: etat_civil
+          libelle: "mon nom ou ma situation familiale"
+          mots: [nom, marie, mariee, famille, civil, divorce]
+  reponse_par: donnee
+  reponses:
+    bancaire: >
+      Vos coordonnées bancaires se modifient dans la rubrique dédiée de
+      votre espace assuré. Pensez à le faire sans attendre : nos
+      virements sont effectués sur le compte enregistré, et un
+      remboursement en cours partirait sur l'ancien.
+    postale: >
+      Votre adresse postale se met à jour directement dans votre espace
+      assuré, rubrique informations personnelles. Si ce déménagement
+      s'accompagne d'un changement de votre situation, sachez qu'il peut
+      aussi ouvrir un droit à résiliation : dites-le moi si vous
+      souhaitez que je vous explique la démarche.
+    contact: >
+      Votre numéro de téléphone et votre adresse mail se modifient dans
+      votre espace assuré, rubrique informations personnelles. La
+      modification est immédiate.
+    etat_civil: >
+      Un changement de nom ou de situation familiale se signale depuis
+      votre espace assuré, rubrique informations personnelles, avec le
+      justificatif correspondant. Ce type de changement peut également
+      ouvrir droit à une modification de formule en cours d'année :
+      dites-le moi si vous souhaitez en savoir plus.
+
+contacter_conseiller:
+  champs: []
+  reponse: >
+    Nos conseillers vous répondent par téléphone du lundi au vendredi, de
+    9 heures à 18 heures. Vous pouvez également leur écrire par
+    messagerie sécurisée depuis votre espace assuré : les demandes
+    reçoivent une réponse sous 2 jours ouvrés. Le numéro à composer et le
+    lien vers la messagerie figurent sur la page d'accueil de votre
+    espace assuré.
+
+# ---------------------------------------------------------------------------
+# Messages hors flux. Clé réservée : ce n'est pas une intention.
+# Le chargeur la retire avant de vérifier que les clés restantes sont
+# exactement les sept intentions transactionnelles de la taxonomie.
+# ---------------------------------------------------------------------------
+
+messages:
+  # Sert à la fois de demande de reformulation et de réponse d'accueil.
+  # "bonjour" sort à 0,448 de confiance, donc sous le seuil : plutôt
+  # qu'une règle en dur pour détecter les salutations, un seul texte
+  # couvre les deux cas.
+  reformulation: >
+    Bonjour, je suis l'assistant de Mutuelle Solstice. Je peux vous
+    renseigner sur vos garanties, vos remboursements, nos formules et nos
+    délais, et vous guider pour résilier, adhérer, obtenir une attestation
+    ou préparer une hospitalisation. Pouvez-vous préciser votre demande ?
+
+  recadrage: >
+    Mutuelle Solstice ne propose qu'une complémentaire santé individuelle :
+    ni assurance automobile, ni habitation, ni emprunteur, ni prévoyance.
+    Je ne peux donc pas vous aider sur ce point. Puis-je vous renseigner
+    sur vos frais de santé ?
+
+  abandon: >
+    Très bien, j'abandonne cette démarche, aucune information n'a été
+    enregistrée. Que puis-je faire pour vous ?
+
+  echec_champ: >
+    Je n'ai pas réussi à comprendre votre réponse. Plutôt que de vous
+    faire perdre du temps, je vous invite à contacter un conseiller depuis
+    la messagerie sécurisée de votre espace assuré, du lundi au vendredi
+    de 9 heures à 18 heures par téléphone.
+
+  erreur_generation: >
+    Je ne parviens pas à consulter la documentation pour le moment.
+    Réessayez dans quelques instants, ou posez votre question à un
+    conseiller depuis votre espace assuré.
