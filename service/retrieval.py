@@ -35,7 +35,7 @@ def lire_env() -> dict[str, str]:
     valeurs: dict[str, str] = {}
     fichier = RACINE / ".env"
     if fichier.exists():
-        for ligne in fichier.read_text(encoding="utf-8").splitlines():
+        for ligne in fichier.read_text(encoding="utf-8-sig").splitlines():
             ligne = ligne.strip()
             if ligne and not ligne.startswith("#") and "=" in ligne:
                 cle, _, valeur = ligne.partition("=")
