@@ -1,0 +1,151 @@
+{
+  "n": 536,
+  "ordre": [
+    "contacter_conseiller",
+    "demande_prise_en_charge",
+    "demander_attestation",
+    "modifier_coordonnees",
+    "resilier",
+    "souscrire",
+    "suivre_remboursement",
+    "comparer_formules",
+    "question_delai",
+    "question_garantie",
+    "question_tarif",
+    "hors_perimetre"
+  ],
+  "types": {
+    "suivre_remboursement": "transactionnelle",
+    "question_garantie": "informationnelle",
+    "question_tarif": "informationnelle",
+    "question_delai": "informationnelle",
+    "resilier": "transactionnelle",
+    "souscrire": "transactionnelle",
+    "comparer_formules": "informationnelle",
+    "demande_prise_en_charge": "transactionnelle",
+    "modifier_coordonnees": "transactionnelle",
+    "contacter_conseiller": "transactionnelle",
+    "hors_perimetre": "rejet",
+    "demander_attestation": "transactionnelle"
+  },
+  "modeles": {
+    "baseline": {
+      "routage": {
+        "erreurs": 114,
+        "inter_type": 89,
+        "intra_type": 25,
+        "part_inter_type": 0.7807,
+        "part_du_jeu": 0.166
+      },
+      "paires_frequentes": [
+        {
+          "reel": "souscrire",
+          "predit": "question_delai",
+          "n": 15,
+          "inter_type": true
+        },
+        {
+          "reel": "question_tarif",
+          "predit": "contacter_conseiller",
+          "n": 14,
+          "inter_type": true
+        },
+        {
+          "reel": "question_garantie",
+          "predit": "suivre_remboursement",
+          "n": 14,
+          "inter_type": true
+        },
+        {
+          "reel": "question_delai",
+          "predit": "demande_prise_en_charge",
+          "n": 11,
+          "inter_type": true
+        },
+        {
+          "reel": "resilier",
+          "predit": "comparer_formules",
+          "n": 8,
+          "inter_type": true
+        },
+        {
+          "reel": "resilier",
+          "predit": "souscrire",
+          "n": 6,
+          "inter_type": false
+        },
+        {
+          "reel": "question_garantie",
+          "predit": "question_tarif",
+          "n": 5,
+          "inter_type": false
+        },
+        {
+          "reel": "demande_prise_en_charge",
+          "predit": "comparer_formules",
+          "n": 5,
+          "inter_type": true
+        }
+      ]
+    },
+    "camembert": {
+      "routage": {
+        "erreurs": 65,
+        "inter_type": 26,
+        "intra_type": 39,
+        "part_inter_type": 0.4,
+        "part_du_jeu": 0.0485
+      },
+      "paires_frequentes": [
+        {
+          "reel": "souscrire",
+          "predit": "demander_attestation",
+          "n": 16,
+          "inter_type": false
+        },
+        {
+          "reel": "question_garantie",
+          "predit": "question_tarif",
+          "n": 9,
+          "inter_type": false
+        },
+        {
+          "reel": "resilier",
+          "predit": "question_delai",
+          "n": 7,
+          "inter_type": true
+        },
+        {
+          "reel": "demande_prise_en_charge",
+          "predit": "comparer_formules",
+          "n": 5,
+          "inter_type": true
+        },
+        {
+          "reel": "question_garantie",
+          "predit": "question_delai",
+          "n": 4,
+          "inter_type": false
+        },
+        {
+          "reel": "modifier_coordonnees",
+          "predit": "resilier",
+          "n": 3,
+          "inter_type": false
+        },
+        {
+          "reel": "comparer_formules",
+          "predit": "question_garantie",
+          "n": 3,
+          "inter_type": false
+        },
+        {
+          "reel": "hors_perimetre",
+          "predit": "contacter_conseiller",
+          "n": 3,
+          "inter_type": true
+        }
+      ]
+    }
+  }
+}

@@ -296,8 +296,9 @@ def main() -> None:
     np.savez_compressed(
         chemin_preds,
         probas=probas,
-        etiquettes=np.array(etiquettes),
-        reels=np.array(reels),
+        etiquettes=np.asarray(etiquettes, dtype=str),
+        reels=np.asarray(reels, dtype=str),
+        textes=np.asarray(test[col_texte], dtype=str),
     )
     print(f"[ok] probabilités enregistrées dans {args.predictions} (pour l'étape 5c)")
 
