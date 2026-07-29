@@ -1,0 +1,388 @@
+# Jeu d'évaluation du RAG : 50 questions écrites à la main.
+# Un tiers facile (17), un tiers nuance (17), un tiers sans réponse (16).
+# Le chunk attendu est référencé par (doc_id, section), jamais par id
+# numérique : les id de la table sont renumérotés à chaque réindexation.
+# Les questions sans réponse ont chunk_attendu: null et reponse_attendue
+# vide : le bon comportement est le refus.
+
+# ---------------------------------------------------------------- faciles
+
+- id: q01
+  question: "quel est le montant du forfait journalier en psychiatrie"
+  reponse_attendue: "15 euros par jour en service de psychiatrie"
+  chunk_attendu:
+    doc_id: hospitalisation
+    section: "Le forfait journalier hospitalier"
+  difficulte: facile
+
+- id: q02
+  question: "combien est remboursée la monture en formule essentiel"
+  reponse_attendue: "50 euros tous les deux ans"
+  chunk_attendu:
+    doc_id: garanties-essentiel
+    section: "Optique, formule Essentiel"
+  difficulte: facile
+
+- id: q03
+  question: "il y a un delai d'attente pour les lunettes ?"
+  reponse_attendue: "oui, un délai de carence de 6 mois sur le poste optique"
+  chunk_attendu:
+    doc_id: delais-carence
+    section: "Optique"
+  difficulte: facile
+
+- id: q04
+  question: "je paye combien par mois en confort si j'ai 35 ans"
+  reponse_attendue: "67 euros par mois pour un assuré de 30 à 49 ans"
+  chunk_attendu:
+    doc_id: cotisations
+    section: "Cotisations des assurés de 30 à 49 ans"
+  difficulte: facile
+
+- id: q05
+  question: "sous combien de temps je suis remboursé quand c'est télétransmis"
+  reponse_attendue: "virement sous 2 jours ouvrés après réception de l'information"
+  chunk_attendu:
+    doc_id: remboursements
+    section: "Délai de remboursement"
+  difficulte: facile
+
+- id: q06
+  question: "la chambre particulière en premium c'est combien"
+  reponse_attendue: "90 euros par jour, dans la limite de 60 jours par année d'adhésion"
+  chunk_attendu:
+    doc_id: garanties-premium
+    section: "Hospitalisation, formule Premium"
+  difficulte: facile
+
+- id: q07
+  question: "vous remboursez l'ostéopathe en formule confort ?"
+  reponse_attendue: "25 euros par séance, limité à quatre séances par année d'adhésion"
+  chunk_attendu:
+    doc_id: garanties-confort
+    section: "Médecines douces, formule Confort"
+  difficulte: facile
+
+- id: q08
+  question: "j'ai signé la semaine dernière, je peux encore me rétracter ?"
+  reponse_attendue: "oui, délai de renonciation de 14 jours calendaires après la signature"
+  chunk_attendu:
+    doc_id: souscription
+    section: "Délai de renonciation"
+  difficulte: facile
+
+- id: q09
+  question: "j'aurai mon certificat de radiation quand après la fin du contrat"
+  reponse_attendue: "dans les 30 jours suivant la fin effective du contrat"
+  chunk_attendu:
+    doc_id: resiliation
+    section: "Le certificat de radiation"
+  difficulte: facile
+
+- id: q10
+  question: "vos conseillers sont joignables quand"
+  reponse_attendue: "par téléphone du lundi au vendredi de 9 h à 18 h, et par messagerie sécurisée"
+  chunk_attendu:
+    doc_id: presentation
+    section: "Nous contacter"
+  difficulte: facile
+
+- id: q11
+  question: "faut il remplir un questionnaire de santé pour adhérer"
+  reponse_attendue: "non, aucun questionnaire de santé ni sélection médicale"
+  chunk_attendu:
+    doc_id: souscription
+    section: "Qui peut adhérer"
+  difficulte: facile
+
+- id: q12
+  question: "le forfait naissance en premium il est de combien"
+  reponse_attendue: "400 euros par enfant, sur présentation de l'acte de naissance"
+  chunk_attendu:
+    doc_id: garanties-premium
+    section: "Maternité, formule Premium"
+  difficulte: facile
+
+- id: q13
+  question: "le prélèvement de la cotisation tombe quel jour"
+  reponse_attendue: "le 5 de chaque mois, ou le premier jour ouvré suivant"
+  chunk_attendu:
+    doc_id: cotisations
+    section: "Modalités de paiement"
+  difficulte: facile
+
+- id: q14
+  question: "combien pour un implant dentaire en confort"
+  reponse_attendue: "forfait de 300 euros par implant, deux implants maximum par année d'adhésion"
+  chunk_attendu:
+    doc_id: garanties-confort
+    section: "Dentaire, formule Confort"
+  difficulte: facile
+
+- id: q15
+  question: "j'ai des factures de soins de l'année dernière, c'est trop tard ?"
+  reponse_attendue: "non, la demande peut être faite jusqu'à 2 ans après la date des soins"
+  chunk_attendu:
+    doc_id: remboursements
+    section: "Délai pour demander un remboursement"
+  difficulte: facile
+
+- id: q16
+  question: "hospitalisé en urgence cette nuit, je dois vous prévenir sous quel délai"
+  reponse_attendue: "dès que possible et au plus tard dans les 48 heures suivant l'admission"
+  chunk_attendu:
+    doc_id: hospitalisation
+    section: "Hospitalisation en urgence"
+  difficulte: facile
+
+- id: q17
+  question: "quel forfait pour les appareils auditifs en premium"
+  reponse_attendue: "100% de la base de remboursement plus un forfait de 250 euros par oreille appareillée"
+  chunk_attendu:
+    doc_id: garanties-premium
+    section: "Audiologie, formule Premium"
+  difficulte: facile
+
+# ---------------------------------------------------------------- nuance
+# Appuyées sur les difficultés semées : documents jumeaux, montant du
+# forfait journalier hors des garanties, carence naissance dans un autre
+# document, tarif famille à croiser, reprise d'ancienneté, changement de
+# formule, conditions cachées derrière un mot.
+
+- id: q18
+  question: "les verres progressifs sont pris en charge à combien en confort"
+  reponse_attendue: "jusqu'à 220 euros par verre complexe ou progressif"
+  chunk_attendu:
+    doc_id: garanties-confort
+    section: "Optique, formule Confort"
+  difficulte: nuance
+
+- id: q19
+  question: "je peux avoir des lentilles avec la formule essentiel ?"
+  reponse_attendue: "non, les lentilles ne sont pas couvertes en formule Essentiel, remboursées ou non"
+  chunk_attendu:
+    doc_id: garanties-essentiel
+    section: "Optique, formule Essentiel"
+  difficulte: nuance
+
+- id: q20
+  question: "on attend un bébé, il y a un délai avant de toucher le forfait naissance ?"
+  reponse_attendue: "oui, délai de carence de 10 mois sur toute la maternité, forfait naissance compris"
+  chunk_attendu:
+    doc_id: delais-carence
+    section: "Maternité"
+  difficulte: nuance
+
+- id: q21
+  question: "dans les garanties c'est écrit forfait journalier intégral, ça représente combien en euros"
+  reponse_attendue: "20 euros par jour en établissement de santé, 15 euros en psychiatrie"
+  chunk_attendu:
+    doc_id: hospitalisation
+    section: "Le forfait journalier hospitalier"
+  difficulte: nuance
+
+- id: q22
+  question: "je viens de résilier mon ancienne mutuelle, je vais devoir attendre 6 mois pour mes lunettes ?"
+  reponse_attendue: "non si l'adhésion intervient dans les 3 mois avec le certificat de radiation : dispense de tous les délais de carence"
+  chunk_attendu:
+    doc_id: delais-carence
+    section: "Reprise d'ancienneté"
+  difficulte: nuance
+
+- id: q23
+  question: "on a 35 ans tous les deux avec un enfant, la formule confort nous coûterait combien au total"
+  reponse_attendue: "147,40 euros par mois : 67 pour l'assuré principal, 53,60 pour le conjoint (80%), 26,80 pour l'enfant (40%)"
+  chunk_attendu:
+    doc_id: cotisations
+    section: "Cotisations des ayants droit"
+  difficulte: nuance
+
+- id: q24
+  question: "on a 4 enfants, on paie une cotisation pour chacun ?"
+  reponse_attendue: "non, à partir du troisième enfant rattaché aucune cotisation supplémentaire n'est due"
+  chunk_attendu:
+    doc_id: cotisations
+    section: "Cotisations des ayants droit"
+  difficulte: nuance
+
+- id: q25
+  question: "je passe d'essentiel à confort, je peux aller chez l'ostéo tout de suite ?"
+  reponse_attendue: "non, les postes nouvellement couverts subissent leur délai de carence (3 mois pour les médecines douces) à compter du changement de formule"
+  chunk_attendu:
+    doc_id: delais-carence
+    section: "Changement de formule en cours de contrat"
+  difficulte: nuance
+
+- id: q26
+  question: "je me suis cassé la jambe 1 mois après mon adhésion, l'opération est couverte malgré le délai de carence ?"
+  reponse_attendue: "oui, le délai de carence hospitalisation est levé quand l'hospitalisation suit un accident"
+  chunk_attendu:
+    doc_id: delais-carence
+    section: "Hospitalisation"
+  difficulte: nuance
+
+- id: q27
+  question: "en premium je dois attendre 2 ans pour changer de monture comme partout ?"
+  reponse_attendue: "non, en Premium la monture est prise en charge à 100 euros par année d'adhésion, sans renouvellement biennal"
+  chunk_attendu:
+    doc_id: garanties-premium
+    section: "Optique, formule Premium"
+  difficulte: nuance
+
+- id: q28
+  question: "la chirurgie esthétique est remboursée chez vous ?"
+  reponse_attendue: "non si elle n'est pas prise en charge par la Sécurité sociale ; la chirurgie réparatrice remboursée par la Sécurité sociale est couverte"
+  chunk_attendu:
+    doc_id: exclusions
+    section: "Chirurgie esthétique"
+  difficulte: nuance
+
+- id: q29
+  question: "si je tombe malade pendant mes vacances au Portugal je suis couvert ?"
+  reponse_attendue: "seuls les soins urgents et imprévus lors d'un séjour temporaire sont couverts, dans la limite des tarifs français et après prise en charge de la Sécurité sociale"
+  chunk_attendu:
+    doc_id: exclusions
+    section: "Soins reçus à l'étranger"
+  difficulte: nuance
+
+- id: q30
+  question: "j'ai ma carte de tiers payant, je peux l'utiliser chez l'opticien dès le premier mois ?"
+  reponse_attendue: "non, le tiers payant ne dispense pas des délais de carence, et l'optique a une carence de 6 mois"
+  chunk_attendu:
+    doc_id: remboursements
+    section: "Le tiers payant"
+  difficulte: nuance
+
+- id: q31
+  question: "j'ai adhéré il y a 4 mois et je veux partir, c'est possible ?"
+  reponse_attendue: "pas librement : la première année, résiliation seulement à l'échéance annuelle avec 2 mois de préavis, sauf motif comme déménagement ou changement de situation"
+  chunk_attendu:
+    doc_id: resiliation
+    section: "Résiliation pendant la première année de contrat"
+  difficulte: nuance
+
+- id: q32
+  question: "ma fille a 24 ans et est encore étudiante, elle peut rester sur mon contrat ?"
+  reponse_attendue: "oui, jusqu'à 26 ans pour les étudiants, sur présentation d'un certificat de scolarité chaque année"
+  chunk_attendu:
+    doc_id: souscription
+    section: "Rattachement du conjoint et des enfants"
+  difficulte: nuance
+
+- id: q33
+  question: "l'orthodontie est remboursée en premium ? c'est pour moi, j'ai 34 ans"
+  reponse_attendue: "non pour un adulte : seule l'orthodontie acceptée par la Sécurité sociale pour les moins de 16 ans est prise en charge (à 300% en Premium)"
+  chunk_attendu:
+    doc_id: garanties-premium
+    section: "Dentaire, formule Premium"
+  difficulte: nuance
+
+- id: q34
+  question: "je peux prendre premium pour moi et laisser ma femme en essentiel sur le même contrat ?"
+  reponse_attendue: "non, tous les bénéficiaires d'un même contrat relèvent obligatoirement de la même formule"
+  chunk_attendu:
+    doc_id: souscription
+    section: "Rattachement du conjoint et des enfants"
+  difficulte: nuance
+
+# ---------------------------------------------------------- sans réponse
+# Trois registres : hors périmètre franc, plausible mais absent du
+# corpus, voisin trompeur d'un sujet couvert. Le bon comportement est de
+# dire que l'information n'est pas disponible et de proposer un
+# conseiller, sans inventer.
+
+- id: q35
+  question: "mon chat doit se faire opérer, vous remboursez une partie ?"
+  reponse_attendue: ""
+  chunk_attendu: null
+  difficulte: sans_reponse
+
+- id: q36
+  question: "vous avez une agence à Lyon ou je peux passer ?"
+  reponse_attendue: ""
+  chunk_attendu: null
+  difficulte: sans_reponse
+
+- id: q37
+  question: "c'est quoi votre numéro de téléphone"
+  reponse_attendue: ""
+  chunk_attendu: null
+  difficulte: sans_reponse
+
+- id: q38
+  question: "vous avez un forfait pour les semelles orthopédiques ?"
+  reponse_attendue: ""
+  chunk_attendu: null
+  difficulte: sans_reponse
+
+- id: q39
+  question: "il y a un délai de carence pour les appareils auditifs ?"
+  reponse_attendue: ""
+  chunk_attendu: null
+  difficulte: sans_reponse
+
+- id: q40
+  question: "combien coûterait la formule confort pour mon fils de 10 ans tout seul, sans moi"
+  reponse_attendue: ""
+  chunk_attendu: null
+  difficulte: sans_reponse
+
+- id: q41
+  question: "le forfait monture c'est par personne ou pour toute la famille ?"
+  reponse_attendue: ""
+  chunk_attendu: null
+  difficulte: sans_reponse
+
+- id: q42
+  question: "la téléconsultation est prise en charge ?"
+  reponse_attendue: ""
+  chunk_attendu: null
+  difficulte: sans_reponse
+
+- id: q43
+  question: "vous participez à l'achat d'un fauteuil roulant ?"
+  reponse_attendue: ""
+  chunk_attendu: null
+  difficulte: sans_reponse
+
+- id: q44
+  question: "il y a un plafond annuel global de remboursement sur le contrat ?"
+  reponse_attendue: ""
+  chunk_attendu: null
+  difficulte: sans_reponse
+
+- id: q45
+  question: "les séances chez le psychologue sont remboursées ?"
+  reponse_attendue: ""
+  chunk_attendu: null
+  difficulte: sans_reponse
+
+- id: q46
+  question: "je reçois ma carte de mutuelle par courrier sous combien de temps ?"
+  reponse_attendue: ""
+  chunk_attendu: null
+  difficulte: sans_reponse
+
+- id: q47
+  question: "à quelle adresse postale j'envoie ma lettre de résiliation"
+  reponse_attendue: ""
+  chunk_attendu: null
+  difficulte: sans_reponse
+
+- id: q48
+  question: "je peux payer ma cotisation par chèque ?"
+  reponse_attendue: ""
+  chunk_attendu: null
+  difficulte: sans_reponse
+
+- id: q49
+  question: "combien de temps vous conservez mes données personnelles ?"
+  reponse_attendue: ""
+  chunk_attendu: null
+  difficulte: sans_reponse
+
+- id: q50
+  question: "les vaccins sont remboursés à quel taux ?"
+  reponse_attendue: ""
+  chunk_attendu: null
+  difficulte: sans_reponse
