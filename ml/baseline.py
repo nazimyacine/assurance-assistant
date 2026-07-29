@@ -17,6 +17,7 @@ import argparse
 import json
 from pathlib import Path
 
+import numpy as np
 import pandas as pd
 from sklearn.feature_extraction.text import TfidfVectorizer
 from sklearn.linear_model import LogisticRegression
@@ -27,6 +28,7 @@ RACINE = Path(__file__).resolve().parents[1]
 TRAIN = RACINE / "data" / "raw" / "intents_train.csv"
 TEST = RACINE / "data" / "eval" / "intents_test.csv"
 SORTIE = RACINE / "docs" / "baseline.json"
+PREDICTIONS = RACINE / "ml" / "artifacts" / "predictions_baseline_test.npz"
 
 
 def construire_modele(equilibrer: bool) -> Pipeline:
@@ -104,6 +106,17 @@ def main() -> int:
                 print(f"  {niveau:8} {masque.sum():4} phrases   "
                       f"exactitude {exact:.3f}")
                 resultats[nom][f"exactitude_{niveau}"] = round(exact, 4)
+
+            PREDICTIONS.parent.mkdir(parents=True, exist_ok=True)
+            np.savez_compressed(
+                PREDICTIONS,
+                predits=np.asarray(pred, dtype=str),
+                reels=np.asarray(test["intention"], dtype=str),
+                textes=np.asarray(test["texte"], dtype=str),
+                variante=np.asarray("ponderee"),
+            )
+            print(f"\nPrédictions enregistrées dans "
+                  f"{PREDICTIONS.relative_to(RACINE)}")
 
     print("\nRésumé")
     for nom, scores in resultats.items():
