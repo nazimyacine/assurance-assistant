@@ -1,7 +1,7 @@
 # Métriques de la classification d'intentions
 
 Document généré par `ml/build_metrics.py`, ne pas éditer à la main.
-Sources : `docs/baseline.json`, `docs/training.json`, `docs/eval_intent.json`, `docs/confusion.json`, `docs/seuil_rejet.json`.
+Sources : `docs/baseline.json`, `docs/training.json`, `docs/eval_intent.json`, `docs/confusion.json`, `docs/seuil_rejet.json`, `docs/eval_rag.json`.
 
 ## Entraînement
 
@@ -135,3 +135,21 @@ Les phrases d'un même gabarit ne sont pas indépendantes : une erreur porte le 
 | 1 | je ne veux plus de votre mutuelle | resilier | souscrire | 0,59 | La négation inverse le sens : "veux" plus "mutuelle" sont lus comme une adhésion. Le contresens classique des modèles de classification. |
 
 Les cas d'origine ambiguë sont arbitrés dans `data/eval/cas_ambigus.md`.
+
+## Évaluation du RAG : cinq configurations sur 50 questions
+
+50 questions écrites à la main : 34 à réponse, 16 sans réponse, soit 50 unités indépendantes. La recherche est mesurée par recall@5 et MRR@10 ; les réponses sont générées puis jugées par LLM (correct, incorrect ou refus), limites du juge dans `docs/limites.md`.
+
+| Configuration | recall@5 | MRR@10 | réponses correctes | refus corrects | faux refus |
+|---|---|---|---|---|---|
+| naif, vectoriel | 32/34 | 0,706 | 27/34 | 14/16 | 5 |
+| titres, vectoriel | 31/34 | 0,855 | 30/34 | 15/16 | 0 |
+| **titres + fil, vectoriel** | 32/34 | 0,844 | 30/34 | 16/16 | 3 |
+| titres, hybride | 30/34 | 0,773 | 29/34 | 16/16 | 0 |
+| titres + fil, hybride | 30/34 | 0,767 | 28/34 | 16/16 | 3 |
+
+Configuration retenue pour le service : **titres + fil, vectoriel**. À réponses correctes égales (30/34), elle refuse les 16 questions sans réponse sans exception ; ses 3 faux refus sont le prix accepté de cette prudence, inventer une réponse étant une faute là où refuser à tort n'est qu'une friction.
+
+Le recall@5 avantage structurellement le découpage naïf (top 5 sur un index de 22 chunks contre 94) ; la colonne des réponses correctes le démasque.
+
+Aucun seuil de pertinence exploitable sur le cosinus de tête : minimum des questions faciles 0,814, maximum des sans réponse 0,872. Le refus des questions hors documentation repose sur les consignes de génération.

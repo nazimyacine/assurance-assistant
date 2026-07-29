@@ -29,6 +29,7 @@ SOURCES_JSON = {
     "eval_intent": DOCS / "eval_intent.json",
     "confusion": DOCS / "confusion.json",
     "seuil_rejet": DOCS / "seuil_rejet.json",
+    "eval_rag": DOCS / "eval_rag.json",
 }
 NPZ_CAMEMBERT = ARTIFACTS / "predictions_test.npz"
 NPZ_BASELINE = ARTIFACTS / "predictions_baseline_test.npz"
@@ -291,6 +292,56 @@ def section_appariee(src: dict) -> list[str]:
     ]
     return lignes
 
+def section_rag(src: dict) -> list[str]:
+    """Le tableau des configurations RAG, depuis docs/eval_rag.json."""
+    r = src["eval_rag"]
+    retenue = "titres + fil, vectoriel"
+    lignes = [
+        "## Évaluation du RAG : cinq configurations sur 50 questions",
+        "",
+        "50 questions écrites à la main : 34 à réponse, 16 sans réponse, "
+        "soit 50 unités indépendantes. La recherche est mesurée par "
+        "recall@5 et MRR@10 ; les réponses sont générées puis jugées par "
+        "LLM (correct, incorrect ou refus), limites du juge dans "
+        "`docs/limites.md`.",
+        "",
+        "| Configuration | recall@5 | MRR@10 | réponses correctes "
+        "| refus corrects | faux refus |",
+        "|---|---|---|---|---|---|",
+    ]
+    for nom, c in r["configs"].items():
+        g = r["generation"][nom]
+        gras = "**" if nom == retenue else ""
+        lignes.append(
+            f"| {gras}{nom}{gras} | {c['recall_a_5']}/{c['sur']} "
+            f"| {nombre(c['mrr_a_10'], 3)} "
+            f"| {g['reponses_correctes']}/{g['sur']} "
+            f"| {g['refus_corrects']}/{g['sur_sans']} "
+            f"| {g['faux_refus']} |")
+    g = r["generation"][retenue]
+    s = r["seuil_pertinence"]
+    lignes += [
+        "",
+        f"Configuration retenue pour le service : **{retenue}**. À "
+        f"réponses correctes égales ({g['reponses_correctes']}/{g['sur']}), "
+        f"elle refuse les {g['sur_sans']} questions sans réponse sans "
+        f"exception ; ses {g['faux_refus']} faux refus sont le prix "
+        "accepté de cette prudence, inventer une réponse étant une faute "
+        "là où refuser à tort n'est qu'une friction.",
+        "",
+        "Le recall@5 avantage structurellement le découpage naïf (top 5 "
+        "sur un index de 22 chunks contre 94) ; la colonne des réponses "
+        "correctes le démasque.",
+        "",
+        "Aucun seuil de pertinence exploitable sur le cosinus de tête : "
+        f"minimum des questions faciles {nombre(s['facile']['min'], 3)}, "
+        f"maximum des sans réponse {nombre(s['sans_reponse']['max'], 3)}. "
+        "Le refus des questions hors documentation repose sur les "
+        "consignes de génération.",
+        "",
+    ]
+    return lignes
+
 
 def generer_markdown(src: dict, annotations: dict[str, str]) -> tuple[str, list[str]]:
     e = src["eval_intent"]
@@ -305,7 +356,8 @@ def generer_markdown(src: dict, annotations: dict[str, str]) -> tuple[str, list[
         "",
         "Document généré par `ml/build_metrics.py`, ne pas éditer à la main.",
         "Sources : `docs/baseline.json`, `docs/training.json`, "
-        "`docs/eval_intent.json`, `docs/confusion.json`, `docs/seuil_rejet.json`.",
+        "`docs/eval_intent.json`, `docs/confusion.json`, "
+        "`docs/seuil_rejet.json`, `docs/eval_rag.json`.",
         "",
         "## Entraînement",
         "",
@@ -435,6 +487,7 @@ def generer_markdown(src: dict, annotations: dict[str, str]) -> tuple[str, list[
         "`data/eval/cas_ambigus.md`.",
         "",
     ]
+    lignes += section_rag(src)
     return "\n".join(lignes), manquantes
 
 

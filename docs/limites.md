@@ -30,3 +30,23 @@ La validation partageait initialement ses gabarits avec l'entraînement. Son F1 
   le maximum des questions sans réponse (0,872). Le refus des questions
   hors corpus repose principalement sur les consignes de génération ;
   le SEUIL_PERTINENCE du routeur n'est qu'un filet pour les extrêmes.
+
+  - les réponses du RAG sont jugées par le même modèle que celui qui les
+  génère (mistral-small, température 0). Un juge indépendant (autre
+  modèle, ou relecture humaine des 250 verdicts) serait plus solide ;
+  les verdicts de la configuration retenue ont été relus à la main,
+  pas ceux des quatre autres.
+- les 3 faux refus de la configuration retenue sont le prix accepté du
+  refus parfait sur les questions sans réponse : pour un assistant
+  d'assurance, inventer une réponse est une faute, refuser à tort une
+  friction. Même arbitrage que le seuil de rejet de la classification.
+
+  - deux des trois faux refus de la configuration retenue surviennent
+  alors que le bon extrait est dans le prompt et cité dans le refus
+  même (q15, q29) : l'excès de prudence du générateur est le revers
+  des consignes strictes qui donnent le refus parfait. Le troisième
+  (q25) suit un raté de recherche ; refuser était la bonne dégradation.
+- l'unique réponse incorrecte (q23, tarif famille) vient d'un contexte
+  partiel : un seul des deux extraits nécessaires remonté, et le modèle
+  a improvisé un calcul au lieu de refuser. Le contexte partiel est
+  plus dangereux que l'absence de contexte.
