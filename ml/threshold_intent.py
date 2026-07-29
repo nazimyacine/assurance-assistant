@@ -155,23 +155,40 @@ def balayer(donnees: dict, types: dict[str, str]) -> list[dict]:
     return lignes
 
 
-def recommander(lignes: list[dict], couverture_min: float = 0.90) -> dict:
+def recommander(lignes: list[dict], couverture_min: float = 0.90,
+                rendement_marginal_min: float = 0.2) -> dict:
     """
     Règle de sélection, énoncée pour pouvoir être contestée.
 
     Parmi les seuils qui laissent passer au moins `couverture_min` des
-    messages, retenir celui qui déclenche le moins de flux métier à tort.
-    À égalité, le plus bas, parce qu'un seuil élevé se paie en frictions
+    messages, partir du plus bas et ne durcir le seuil que si le cran
+    considéré déclenche moins de flux métier à tort ET si ce gain a un
+    rendement marginal suffisant : au moins `rendement_marginal_min`
+    erreur évitée par message légitime perdu en plus (0,2 = une erreur
+    pour cinq légitimes au maximum). Sans ce critère d'arrêt, la règle
+    acceptait n'importe quel marché, y compris 11 légitimes perdues
+    pour une seule erreur en moins. Un seuil élevé se paie en frictions
     que ce jeu de test ne mesure pas : chaque rejet est un aller-retour
     supplémentaire imposé à l'assuré.
     """
-    eligibles = [l for l in lignes if l["couverture"] >= couverture_min]
+    eligibles = sorted((l for l in lignes if l["couverture"] >= couverture_min),
+                       key=lambda l: l["seuil"])
     if not eligibles:
         return {}
-    meilleur = min(eligibles, key=lambda l: (l["flux_a_tort"], l["seuil"]))
-    return {"regle": f"couverture >= {couverture_min:.0%}, "
-                     "puis minimum de flux metier declenches a tort",
-            "seuil": meilleur["seuil"], "detail": meilleur}
+    retenu = eligibles[0]
+    for candidat in eligibles[1:]:
+        if candidat["flux_a_tort"] >= retenu["flux_a_tort"]:
+            continue
+        perdues_en_plus = candidat["legitimes_perdues"] - retenu["legitimes_perdues"]
+        evitees_en_plus = candidat["erreurs_evitees"] - retenu["erreurs_evitees"]
+        if perdues_en_plus <= 0 or \
+                evitees_en_plus / perdues_en_plus >= rendement_marginal_min:
+            retenu = candidat
+    return {"regle": f"couverture >= {couverture_min:.0%}, puis durcissement "
+                     "du seuil tant qu'il reduit les flux metier declenches "
+                     "a tort avec un rendement marginal d'au moins "
+                     f"{rendement_marginal_min} erreur evitee par legitime perdue",
+            "seuil": retenu["seuil"], "detail": retenu}
 
 
 # --------------------------------------------------------------------------

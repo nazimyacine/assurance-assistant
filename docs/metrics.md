@@ -56,14 +56,14 @@ Matrices ordonnées par type de routage, générées par `ml/plot_confusion.py`.
 
 Calibration : ECE 0,1058, confiance moyenne 0,8537 pour une exactitude de 0,8787.
 
-Règle de sélection : couverture >= 80%, puis minimum de flux metier declenches a tort.
+Règle de sélection : couverture >= 80%, puis durcissement du seuil tant qu'il reduit les flux metier declenches a tort avec un rendement marginal d'au moins 0.2 erreur evitee par legitime perdue.
 
-| | sans seuil | seuil 0,825 |
+| | sans seuil | seuil 0,800 |
 |---|---|---|
-| couverture (lignes) | 100,0% | 80,4% |
-| couverture (gabarits) | 100,0% | 71,5% |
-| exactitude sur acceptés | 87,9% | 97,7% |
-| flux métier déclenchés à tort | 31 | 3 |
+| couverture (lignes) | 100,0% | 82,7% |
+| couverture (gabarits) | 100,0% | 74,1% |
+| exactitude sur acceptés | 87,9% | 97,5% |
+| flux métier déclenchés à tort | 31 | 4 |
 
 ## Analyse des erreurs, groupée par gabarit
 

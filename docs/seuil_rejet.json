@@ -81,19 +81,19 @@
     "exactitude": 0.8787
   },
   "recommandation": {
-    "regle": "couverture >= 80%, puis minimum de flux metier declenches a tort",
-    "seuil": 0.825,
+    "regle": "couverture >= 80%, puis durcissement du seuil tant qu'il reduit les flux metier declenches a tort avec un rendement marginal d'au moins 0.2 erreur evitee par legitime perdue",
+    "seuil": 0.8,
     "detail": {
-      "seuil": 0.825,
-      "couverture": 0.8041,
-      "couverture_gabarit": 0.7148,
-      "exactitude_acceptes": 0.9768,
-      "exactitude_acceptes_gabarit": 0.88,
-      "erreurs_evitees": 55,
-      "legitimes_perdues": 50,
-      "rendement": 1.1,
-      "erreurs_restantes": 10,
-      "flux_a_tort": 3,
+      "seuil": 0.8,
+      "couverture": 0.8265,
+      "couverture_gabarit": 0.7407,
+      "exactitude_acceptes": 0.9752,
+      "exactitude_acceptes_gabarit": 0.8824,
+      "erreurs_evitees": 54,
+      "legitimes_perdues": 39,
+      "rendement": 1.38,
+      "erreurs_restantes": 11,
+      "flux_a_tort": 4,
       "change_de_chemin": 2
     }
   },
