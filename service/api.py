@@ -3,8 +3,8 @@
 Deux routes, POST /chat et GET /health.
 
 Le routeur, donc CamemBERT, le modèle e5 et l'index BM25, est construit
-UNE FOIS au démarrage, environ 8 secondes, et vit pour toute la durée du
-processus. Un message coûte ensuite 25 ms de classification et 75 ms de
+UNE FOIS au démarrage, environ 4 secondes, et vit pour toute la durée du
+processus. Un message coûte ensuite 25 ms de classification et 100 ms de
 recherche, contre plusieurs secondes s'il fallait recharger à chaque
 appel.
 
@@ -13,9 +13,13 @@ la requête et ressort dans la réponse. Deux instances derrière un
 répartiteur se comportent identiquement, et un redémarrage ne perd aucune
 conversation en cours.
 
+Étape 11 : la requête accepte une formule optionnelle, le contexte client
+injecté par la passerelle Spring. Elle restreint la recherche documentaire
+aux garanties de cette formule et aux documents de procédure.
+
 Lancement :
     $env:HF_HUB_OFFLINE = "1"
-    uvicorn service.api:app --port 8000
+    python -m uvicorn service.api:app --port 8000
 
 Documentation interactive et contrat de sortie : http://localhost:8000/docs
 """
@@ -61,9 +65,10 @@ SERVICE: dict = {"routeur": None}
 async def cycle_de_vie(app: FastAPI):
     journal.info("chargement du routeur")
     SERVICE["routeur"] = Routeur()
-    journal.info("routeur prêt : %d flux, %d intentions",
+    journal.info("routeur prêt : %d flux, %d intentions, formules %s",
                  len(SERVICE["routeur"].flux),
-                 len(SERVICE["routeur"].taxonomie))
+                 len(SERVICE["routeur"].taxonomie),
+                 SERVICE["routeur"].recherche.formules)
     yield
     SERVICE["routeur"] = None
 
@@ -71,8 +76,8 @@ async def cycle_de_vie(app: FastAPI):
 app = FastAPI(
     title="Assistant Mutuelle Solstice",
     description="Classification d'intentions CamemBERT, flux métier guidés "
-                "et recherche documentaire RAG.",
-    version="0.10.0",
+                "et recherche documentaire RAG avec contexte client.",
+    version="0.11.0",
     lifespan=cycle_de_vie,
 )
 app.add_middleware(CORSMiddleware, allow_origins=ORIGINES,
@@ -117,6 +122,9 @@ class Requete(BaseModel):
     # requête démesuré parte vers le modèle de langage.
     message: str = Field(min_length=1, max_length=1000)
     etat: Etat | None = None
+    # Contexte client injecté par la passerelle Spring. Absent en appel
+    # direct, la recherche porte alors sur tout le corpus.
+    formule: str | None = None
 
 
 class Reponse(BaseModel):
@@ -124,6 +132,7 @@ class Reponse(BaseModel):
     intention: str | None = None
     confiance: float | None = None
     chemin: str
+    formule: str | None = None
     sources: list[Source] = []
     etat: Etat | None = None
     latence_ms: Latences
@@ -138,15 +147,19 @@ def chat(requete: Requete) -> dict:
         raise HTTPException(status_code=503, detail="service en cours de démarrage")
 
     etat = requete.etat.model_dump() if requete.etat else None
-    with VERROU:
-        sortie = routeur.repondre(requete.message, etat)
+    try:
+        with VERROU:
+            sortie = routeur.repondre(requete.message, etat, requete.formule)
+    except ValueError as erreur:
+        # Formule inconnue : faute du client, pas du service.
+        raise HTTPException(status_code=400, detail=str(erreur)) from erreur
 
     # Journalisation d'observation seulement. La journalisation
     # persistante, avec identifiant de session, appartient à la
     # passerelle Spring (étape 11).
-    journal.info("chemin=%s intention=%s confiance=%s latences=%s",
-                 sortie["chemin"], sortie["intention"],
-                 sortie["confiance"], sortie["latence_ms"])
+    journal.info("chemin=%s intention=%s confiance=%s formule=%s latences=%s",
+                 sortie["chemin"], sortie["intention"], sortie["confiance"],
+                 sortie["formule"], sortie["latence_ms"])
     return sortie
 
 
@@ -188,5 +201,6 @@ def health(reponse: Response) -> dict:
             "seuil_confiance": SEUIL_CONFIANCE,
             "cosinus_plancher": COSINUS_PLANCHER,
             "chunks_servis": CHUNKS_SERVIS,
+            "formules": routeur.recherche.formules,
         },
     }
