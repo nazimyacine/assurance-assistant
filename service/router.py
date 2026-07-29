@@ -32,6 +32,7 @@ import json
 import re
 import time
 import unicodedata
+import logging
 from datetime import date, datetime
 from pathlib import Path
 
@@ -94,6 +95,8 @@ COURTOISIE = frozenset({"merci", "merci beaucoup", "c bon merci", "cest bon merc
                         "ok merci", "d accord merci", "parfait merci", "super merci",
                         "au revoir", "bonne journee", "a bientot", "c est bon merci",
                         "bonjour", "bonsoir", "salut", "coucou", "hello"})
+
+journal = logging.getLogger("assistant")
 
 
 # ---------------------------------------------------------------------------
@@ -286,7 +289,23 @@ class Routeur:
 
     # -- point d'entrée ----------------------------------------------------
 
-    def repondre(self, message: str, etat: dict | None = None) -> dict:
+    def repondre(self, message: str, etat: dict | None = None,
+                 formule: str | None = None) -> dict:
+        """Point d'entrée. `formule` est le contexte client, injecté par
+        la passerelle Spring à l'étape 11 : il restreint la recherche
+        documentaire aux garanties de cette formule et aux documents de
+        procédure. Absent, le comportement est celui des étapes 9 et 10.
+
+        Validation en un seul endroit, à l'entrée : une formule inconnue
+        lève ValueError ici, que l'API traduira en 400.
+        """
+        formule = self.recherche.valider_formule(formule)
+        sortie = self._router(message, etat, formule)
+        sortie["formule"] = formule
+        return sortie
+
+    def _router(self, message: str, etat: dict | None,
+                formule: str | None) -> dict:
         """Chemins possibles : flux_metier, rag, reformulation, recadrage."""
         if normaliser(message).strip(" .!?,;") in COURTOISIE:
             return self._sortie(self.messages["reformulation"], "reformulation")
@@ -311,14 +330,15 @@ class Routeur:
                                 latences=latences)
         if type_routage == "transactionnelle":
             return self._ouvrir(intention, confiance, latences)
-        return self._rag(message, intention, confiance, latences)
+        return self._rag(message, intention, confiance, latences, formule)
 
     # -- chemin documentaire ----------------------------------------------
 
     def _rag(self, message: str, intention: str, confiance: float,
-             latences: dict) -> dict:
+             latences: dict, formule: str | None = None) -> dict:
         debut = time.perf_counter()
-        chunks = self.recherche.vectoriel_chunks(message, k=CHUNKS_SERVIS)
+        chunks = self.recherche.vectoriel_chunks(message, k=CHUNKS_SERVIS,
+                                                 formule=formule)
         latences["recherche"] = round((time.perf_counter() - debut) * 1000)
 
         sources = [{"document": c["doc_id"],
@@ -335,10 +355,13 @@ class Routeur:
 
         try:
             resultat = generer(message, chunks)
-        except Exception:
+        except Exception as erreur:
             # Dégradation propre : la passerelle Spring traduira en 503
-            # (étape 11). Les sources sont tout de même remontées, le
-            # panneau d'inspection reste utile.
+            # (étape 11). L'erreur est journalisée, jamais avalée : un 429
+            # du palier gratuit et une clé absente ne se soignent pas
+            # pareil. Les sources sont tout de même remontées, le panneau
+            # d'inspection reste utile.
+            journal.warning("generation en echec : %s", erreur)
             return self._sortie(self.messages["erreur_generation"], "rag",
                                 intention=intention, confiance=confiance,
                                 sources=sources, latences=latences)
@@ -474,8 +497,11 @@ def afficher(message: str, sortie: dict) -> None:
 
 
 def main() -> None:
+    logging.basicConfig(level=logging.INFO, format="%(levelname)s %(message)s")
     parseur = argparse.ArgumentParser(description=__doc__)
     parseur.add_argument("--message")
+    parseur.add_argument("--formule", default=None,
+                         help="contexte client, filtre la recherche RAG")
     parseur.add_argument("--scenario", action="store_true")
     parseur.add_argument("--interactif", action="store_true")
     parseur.add_argument("--json", action="store_true",
@@ -485,7 +511,8 @@ def main() -> None:
     debut = time.perf_counter()
     routeur = Routeur()
     print(f"[ok] routeur prêt en {round(time.perf_counter() - debut, 1)} s, "
-          f"{len(routeur.flux)} flux, {len(routeur.taxonomie)} intentions")
+          f"{len(routeur.flux)} flux, {len(routeur.taxonomie)} intentions, "
+          f"formules {routeur.recherche.formules}")
 
     if args.scenario:
         etat = None
@@ -504,14 +531,14 @@ def main() -> None:
                 break
             if not message:
                 break
-            sortie = routeur.repondre(message, etat)
+            sortie = routeur.repondre(message, etat, args.formule)
             afficher(message, sortie)
             etat = sortie["etat"]
         return
 
     if not args.message:
         raise SystemExit("Indiquer --message, --scenario ou --interactif")
-    sortie = routeur.repondre(args.message)
+    sortie = routeur.repondre(args.message, None, args.formule)
     if args.json:
         print(json.dumps(sortie, ensure_ascii=False, indent=2))
     else:
