@@ -121,6 +121,17 @@ class Recherche:
         ordre = [i for i in np.argsort(scores)[::-1] if scores[i] > 0][:k]
         return [(self.chunks[i]["id"], float(scores[i])) for i in ordre]
 
+    def vectoriel_chunks(self, question: str, k: int = 5) -> list[dict]:
+        """Les k meilleurs chunks en vectoriel pur, dictionnaires complets.
+
+        C'est la configuration de service retenue à l'étape 8 : titres +
+        fil, vectoriel seul, l'hybride ayant mesuré en dessous sur ce
+        corpus. Même forme de sortie que hybride(), moins les champs de
+        fusion, pour que le routeur n'ait pas à recomposer avec par_id.
+        """
+        return [{**self.par_id[id_], "score_cosinus": score}
+                for id_, score in self.vectoriel(question, k=k)]
+
     def hybride(self, question: str, k: int = 5) -> list[dict]:
         """Fusion RRF des deux listes. Retourne les k meilleurs chunks,
         chacun avec son score RRF, son score cosinus (si présent dans la

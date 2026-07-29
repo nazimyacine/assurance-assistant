@@ -50,3 +50,5 @@ La validation partageait initialement ses gabarits avec l'entraînement. Son F1 
   partiel : un seul des deux extraits nécessaires remonté, et le modèle
   a improvisé un calcul au lieu de refuser. Le contexte partiel est
   plus dangereux que l'absence de contexte.
+
+  La taxonomie ne comporte aucune intention de politesse ou de clôture. Un message purement civil est donc hors des douze classes par construction, et le classifieur le range dans la classe la plus proche avec une confiance élevée, au-dessus du seuil de rejet : "c bon merci" sort à 0,876 sur suivre_remboursement. Un pré-filtre lexical déterministe intercepte une liste fermée de formules courantes avant la classification. Il ne corrige pas le fond du problème et ne modifie aucune métrique, le jeu de test ne contenant aucune formule de politesse. La solution correcte serait une treizième intention, au prix d'un réentraînement et de la régénération de tous les chiffres publiés.
