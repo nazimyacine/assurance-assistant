@@ -28,6 +28,25 @@ MAX_MOTS = 500
 FENETRE_NAIF = 400
 CHEVAUCHEMENT = 50
 
+def lire_env() -> dict[str, str]:
+    """Lit le .env à la racine du dépôt (format CLE=valeur)."""
+    valeurs: dict[str, str] = {}
+    fichier = RACINE / ".env"
+    if fichier.exists():
+        for ligne in fichier.read_text(encoding="utf-8").splitlines():
+            ligne = ligne.strip()
+            if ligne and not ligne.startswith("#") and "=" in ligne:
+                cle, _, valeur = ligne.partition("=")
+                valeurs[cle.strip()] = valeur.strip()
+    return valeurs
+
+
+ENV = lire_env()
+DSN = (f"postgresql://{ENV.get('POSTGRES_USER', 'assurance')}"
+       f":{ENV.get('POSTGRES_PASSWORD', 'assurance')}"
+       f"@localhost:{ENV.get('POSTGRES_PORT', '5433')}"
+       f"/{ENV.get('POSTGRES_DB', 'assurance')}")
+
 
 @dataclass
 class Chunk:
@@ -110,11 +129,82 @@ def statistiques(chunks: list[Chunk]) -> None:
         raise SystemExit(f"ERREUR : {len(trop_longs)} chunk(s) au dessus de {MAX_MOTS} mots")
     print("Plafond de mots : OK")
 
+def indexer(chunks: list[Chunk]) -> None:
+    import psycopg
+    from pgvector.psycopg import register_vector
+    from sentence_transformers import SentenceTransformer
+
+    modele = SentenceTransformer("intfloat/multilingual-e5-base")
+    # e5 exige le préfixe "passage: " à l'encodage ; le texte stocké
+    # en base reste sans préfixe.
+    embeddings = modele.encode([f"passage: {c.texte}" for c in chunks],
+                               batch_size=64, normalize_embeddings=True,
+                               show_progress_bar=True)
+
+    with psycopg.connect(DSN, autocommit=True) as conn:
+        register_vector(conn)
+        conn.execute("DROP TABLE IF EXISTS chunks")
+        conn.execute("""
+            CREATE TABLE chunks (
+                id        serial PRIMARY KEY,
+                doc_id    text    NOT NULL,
+                type      text    NOT NULL,
+                formule   text    NOT NULL,
+                section   text    NOT NULL,
+                decoupage text    NOT NULL,
+                avec_fil  boolean NOT NULL,
+                n_mots    int     NOT NULL,
+                texte     text    NOT NULL,
+                embedding vector(768) NOT NULL
+            )""")
+        with conn.cursor() as cur:
+            cur.executemany(
+                """INSERT INTO chunks (doc_id, type, formule, section,
+                       decoupage, avec_fil, n_mots, texte, embedding)
+                   VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s)""",
+                [(c.doc_id, c.type, c.formule, c.section, c.decoupage,
+                  c.avec_fil, c.n_mots, c.texte, e)
+                 for c, e in zip(chunks, embeddings)])
+        conn.execute("CREATE INDEX ON chunks "
+                     "USING hnsw (embedding vector_cosine_ops)")
+        n = conn.execute("SELECT count(*) FROM chunks").fetchone()[0]
+        print(f"{n} chunks indexés dans Postgres")
+
+
+def chercher(requete: str, k: int = 5) -> None:
+    """Contrôle de l'étape : les k chunks les plus proches, variante
+    titres + fil, celle de la configuration cible."""
+    import psycopg
+    from pgvector.psycopg import register_vector
+    from sentence_transformers import SentenceTransformer
+
+    modele = SentenceTransformer("intfloat/multilingual-e5-base")
+    vecteur = modele.encode(f"query: {requete}", normalize_embeddings=True)
+    with psycopg.connect(DSN) as conn:
+        register_vector(conn)
+        resultats = conn.execute(
+            """SELECT doc_id, section, 1 - (embedding <=> %s) AS score,
+                      left(texte, 90)
+               FROM chunks
+               WHERE decoupage = 'titres' AND avec_fil
+               ORDER BY embedding <=> %s
+               LIMIT %s""", (vecteur, vecteur, k)).fetchall()
+    print(f"\nrequête : {requete}")
+    for doc_id, section, score, extrait in resultats:
+        print(f"  {score:.3f}  {doc_id:24s} {section:32s} {extrait}...")
+
 
 def main() -> None:
     parseur = argparse.ArgumentParser(description=__doc__)
-    parseur.add_argument("--dry-run", action="store_true")
+    parseur.add_argument("--dry-run", action="store_true",
+                         help="découpe et affiche les statistiques, n'écrit rien")
+    parseur.add_argument("--requete",
+                         help="cherche cette question dans l'index au lieu d'indexer")
     args = parseur.parse_args()
+
+    if args.requete:
+        chercher(args.requete)
+        return
 
     documents = sorted(CORPUS.glob("*.md"))
     if len(documents) != 11:
@@ -127,7 +217,7 @@ def main() -> None:
     statistiques(chunks)
     if args.dry_run:
         return
-    raise SystemExit("Partie embeddings et Postgres : commit suivant.")
+    indexer(chunks)
 
 
 if __name__ == "__main__":
