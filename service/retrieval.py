@@ -29,6 +29,21 @@ RACINE = Path(__file__).resolve().parents[1]
 RRF_K = 60          # constante de la fusion, 1 / (60 + rang), non réglée
 CANDIDATS = 20      # profondeur des listes avant fusion
 
+# Mots vides du français, formes après minuscules et retrait des accents.
+# Sans eux, BM25 score "je", "la", "encore" sur tous les chunks et le
+# classement lexical d'une question sans vocabulaire commun avec le
+# corpus est du bruit confiant (constaté sur le jeu d'évaluation RAG).
+MOTS_VIDES = frozenset("""
+le la les l un une des de du d au aux et ou mais donc or ni car
+que qu qui quoi dont ce cet cette ces c se s ne n pas plus moins
+je j tu il elle on nous vous ils elles me m te t
+mon ma mes ton ta tes son sa ses notre nos votre vos leur leurs
+y en a ai as avons avez ont est es suis sommes etes sont etre avoir
+pour par avec sans dans sur sous chez vers apres avant pendant
+si comme quand tres tout toute tous toutes meme aussi bien encore deja
+peux peut pouvez faut fait faire
+""".split())
+
 
 def lire_env() -> dict[str, str]:
     """Lit le .env à la racine du dépôt (format CLE=valeur)."""
@@ -51,11 +66,14 @@ DSN = (f"postgresql://{ENV.get('POSTGRES_USER', 'assurance')}"
 
 
 def tokeniser(texte: str) -> list[str]:
-    """Minuscules, accents retirés, mots et nombres. Le retrait des
-    accents aligne les questions en style SMS sur le corpus accentué."""
+    """Minuscules, accents retirés, mots et nombres, sans mots vides.
+    Le retrait des accents aligne les questions en style SMS sur le
+    corpus accentué ; le retrait des mots vides évite que BM25 classe
+    les 94 chunks sur "je" et "la"."""
     texte = unicodedata.normalize("NFKD", texte.lower())
     texte = "".join(c for c in texte if not unicodedata.combining(c))
-    return re.findall(r"[a-z0-9]+", texte)
+    return [m for m in re.findall(r"[a-z0-9]+", texte)
+            if m not in MOTS_VIDES]
 
 
 class Recherche:
@@ -96,9 +114,11 @@ class Recherche:
         return [(id_, float(score)) for id_, score in lignes]
 
     def lexical(self, question: str, k: int = CANDIDATS) -> list[tuple[int, float]]:
-        """Liste (id, score BM25) triée, calculée en mémoire."""
+        """Liste (id, score BM25) triée, calculée en mémoire. Les chunks
+        à score nul sont exclus : sans recouvrement lexical, un rang
+        BM25 n'a pas de sens et polluerait la fusion RRF."""
         scores = self.bm25.get_scores(tokeniser(question))
-        ordre = np.argsort(scores)[::-1][:k]
+        ordre = [i for i in np.argsort(scores)[::-1] if scores[i] > 0][:k]
         return [(self.chunks[i]["id"], float(scores[i])) for i in ordre]
 
     def hybride(self, question: str, k: int = 5) -> list[dict]:

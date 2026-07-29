@@ -39,6 +39,7 @@ PAS = FENETRE_NAIF - CHEVAUCHEMENT
 CONFIGS = [
     ("naif, vectoriel", "naif", False, "vectoriel"),
     ("titres, vectoriel", "titres", False, "vectoriel"),
+    ("titres + fil, vectoriel", "titres", True, "vectoriel"),
     ("titres, hybride", "titres", False, "hybride"),
     ("titres + fil, hybride", "titres", True, "hybride"),
 ]
