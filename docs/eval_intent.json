@@ -1,0 +1,130 @@
+{
+  "modele": "ml/artifacts/intent-model",
+  "jeu_test": {
+    "chemin": "data/eval/intents_test.csv",
+    "n": 536
+  },
+  "global": {
+    "f1_macro": 0.8425,
+    "exactitude": 0.8787,
+    "precision_macro": 0.8521,
+    "rappel_macro": 0.8724
+  },
+  "par_classe": {
+    "comparer_formules": {
+      "precision": 0.8333,
+      "rappel": 0.9091,
+      "f1": 0.8696,
+      "support": 33
+    },
+    "contacter_conseiller": {
+      "precision": 0.88,
+      "rappel": 1.0,
+      "f1": 0.9362,
+      "support": 22
+    },
+    "demande_prise_en_charge": {
+      "precision": 1.0,
+      "rappel": 0.8,
+      "f1": 0.8889,
+      "support": 25
+    },
+    "demander_attestation": {
+      "precision": 0.3704,
+      "rappel": 1.0,
+      "f1": 0.5405,
+      "support": 10
+    },
+    "hors_perimetre": {
+      "precision": 0.8571,
+      "rappel": 0.8182,
+      "f1": 0.8372,
+      "support": 22
+    },
+    "modifier_coordonnees": {
+      "precision": 0.8696,
+      "rappel": 0.8696,
+      "f1": 0.8696,
+      "support": 23
+    },
+    "question_delai": {
+      "precision": 0.8136,
+      "rappel": 0.96,
+      "f1": 0.8807,
+      "support": 50
+    },
+    "question_garantie": {
+      "precision": 0.9432,
+      "rappel": 0.83,
+      "f1": 0.883,
+      "support": 100
+    },
+    "question_tarif": {
+      "precision": 0.85,
+      "rappel": 1.0,
+      "f1": 0.9189,
+      "support": 51
+    },
+    "resilier": {
+      "precision": 0.9167,
+      "rappel": 0.7674,
+      "f1": 0.8354,
+      "support": 43
+    },
+    "souscrire": {
+      "precision": 0.9167,
+      "rappel": 0.5238,
+      "f1": 0.6667,
+      "support": 42
+    },
+    "suivre_remboursement": {
+      "precision": 0.9744,
+      "rappel": 0.9913,
+      "f1": 0.9828,
+      "support": 115
+    }
+  },
+  "par_difficulte": {
+    "ambigu": {
+      "exactitude": 0.4167,
+      "f1_macro": 0.3886,
+      "n": 36,
+      "classes_presentes": 10
+    },
+    "bruite": {
+      "exactitude": 0.9118,
+      "f1_macro": 0.8817,
+      "n": 363,
+      "classes_presentes": 12
+    },
+    "facile": {
+      "exactitude": 0.9124,
+      "f1_macro": 0.8336,
+      "n": 137,
+      "classes_presentes": 12
+    }
+  },
+  "baseline": {
+    "variantes": {
+      "brute": {
+        "f1_macro": 0.7463,
+        "exactitude": 0.778
+      },
+      "ponderee": {
+        "f1_macro": 0.7503,
+        "exactitude": 0.7873,
+        "exactitude_facile": 0.8029,
+        "exactitude_bruite": 0.8072,
+        "exactitude_ambigu": 0.5278
+      }
+    },
+    "retenue": "ponderee",
+    "f1_macro": 0.7503,
+    "exactitude": 0.7873,
+    "par_difficulte": {
+      "facile": 0.8029,
+      "bruite": 0.8072,
+      "ambigu": 0.5278
+    }
+  }
+}
