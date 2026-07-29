@@ -2,6 +2,7 @@ package com.solstice.gateway;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.boot.context.properties.ConfigurationPropertiesScan;
 
 /**
  * Passerelle de l'assistant Mutuelle Solstice (étape 11).
@@ -17,6 +18,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
  * passerelle reconstitue le reste.</p>
  */
 @SpringBootApplication
+@ConfigurationPropertiesScan
 public class GatewayApplication {
 
     public static void main(String[] args) {
