@@ -65,6 +65,48 @@ Règle de sélection : couverture >= 80%, puis durcissement du seuil tant qu'il 
 | exactitude sur acceptés | 87,9% | 97,5% |
 | flux métier déclenchés à tort | 31 | 4 |
 
+## Comparaison appariée baseline contre CamemBERT
+
+Les deux modèles sont évalués sur les mêmes phrases, dans le même ordre (vérifié par le script). Comparaison des désaccords :
+
+| | n |
+|---|---|
+| les deux corrects | 407 |
+| les deux faux | 50 |
+| baseline seule correcte | 15 |
+| CamemBERT seul correct | 64 |
+
+Test de McNemar (binomial exact) au niveau ligne : p < 0,0001. Les lignes d'un même gabarit n'étant pas indépendantes, ce chiffre surestime la certitude ; au niveau des unités indépendantes, CamemBERT fait mieux sur 16 unités, moins bien sur 8, égalité sur 40 (test des signes : p 0,1516). À ce niveau, l'écart n'atteint pas le seuil conventionnel de signification : 64 unités ne suffisent pas à trancher, voir `docs/limites.md`.
+
+### Les cas ambigus que la baseline réussit et que CamemBERT rate
+
+| Phrase | Réel | CamemBERT prédit |
+|---|---|---|
+| je viens d'adhérer et j'ai besoin de lunettes cordialement | question_delai | hors_perimetre |
+| bonjour j'ai changé de banque | modifier_coordonnees | resilier |
+| salut quelle formule pour être bien remboursé | comparer_formules | question_garantie |
+| quelle formule pour être bien remboursé | comparer_formules | question_garantie |
+| je vous explique ma situation, mon fils a 22 as, il est encore couvert | question_garantie | suivre_remboursement |
+| bonsoir, quelle formule pour être bien remboursé | comparer_formules | question_garantie |
+| mon fils a 22 ans, il est encore couvert | question_garantie | suivre_remboursement |
+| je viens d'adhérer et j'ai besoin de lunettes | question_delai | hors_perimetre |
+| je ne comprends pas mon relevé | suivre_remboursement | modifier_coordonnees |
+| désolé de vous déranger mais mon fils a 22 ans, il est encore couvert | question_garantie | suivre_remboursement |
+
+Sur les cas ambigus, la baseline est seule correcte 10 fois, CamemBERT seul correct 6 fois.
+
+### Prédictions contre support : les classes sur-prédites
+
+Classes prédites au moins 25% au delà de leur support par au moins un des deux modèles :
+
+| Classe | Support | Prédictions baseline | Prédictions CamemBERT |
+|---|---|---|---|
+| demander_attestation | 10 | 15 | 27 |
+| contacter_conseiller | 22 | 33 | 25 |
+| comparer_formules | 33 | 50 | 36 |
+
+Deux mécanismes distincts : la baseline pondérée sur-prédit les classes rares par construction (`class_weight="balanced"`), avec un rappel parfait payé en précision, ce qui explique une partie de son avantage sur les phrases à étiquette arbitrée. La sur-prédiction de `demander_attestation` par CamemBERT est un phénomène différent : l'effet de gabarit analysé ci-dessous.
+
 ## Analyse des erreurs, groupée par gabarit
 
 Les phrases d'un même gabarit ne sont pas indépendantes : une erreur porte le plus souvent sur un gabarit entier. Les 65 erreurs de CamemBERT se réduisent à quelques groupes (gabarit, intention prédite).

@@ -14,6 +14,7 @@ import json
 import sys
 import yaml
 from pathlib import Path
+from scipy.stats import binomtest
 
 import numpy as np
 import pandas as pd
@@ -192,6 +193,104 @@ def groupes_erreurs(src: dict) -> pd.DataFrame:
                .sort_values(["n", "gabarit"], ascending=[False, True]))
     return groupes
 
+def section_appariee(src: dict) -> list[str]:
+    """Comparaison appariée baseline contre CamemBERT sur les mêmes phrases."""
+    test = src["test"]
+    reels = src["reels"]
+    cam_ok = src["camembert_predit"] == reels
+    base_ok = src["baseline_predit"] == reels
+
+    seuls_base = base_ok & ~cam_ok
+    seuls_cam = cam_ok & ~base_ok
+    b, c = int(seuls_base.sum()), int(seuls_cam.sum())
+    p_ligne = binomtest(min(b, c), b + c).pvalue
+
+    # Même comparaison au niveau des unités indépendantes : pour chaque
+    # gabarit, taux de réussite des deux modèles, puis test des signes.
+    par_unite = (test.assign(cam=cam_ok, base=base_ok)
+                 .groupby("gabarit")[["cam", "base"]].mean())
+    gagne = int((par_unite["cam"] > par_unite["base"]).sum())
+    perd = int((par_unite["cam"] < par_unite["base"]).sum())
+    egal = len(par_unite) - gagne - perd
+    p_unite = binomtest(min(gagne, perd), gagne + perd).pvalue
+
+    def fmt_p(p: float) -> str:
+        return "< 0,0001" if p < 1e-4 else nombre(p, 4)
+
+    lignes = [
+        "## Comparaison appariée baseline contre CamemBERT",
+        "",
+        "Les deux modèles sont évalués sur les mêmes phrases, dans le même "
+        "ordre (vérifié par le script). Comparaison des désaccords :",
+        "",
+        "| | n |",
+        "|---|---|",
+        f"| les deux corrects | {int((base_ok & cam_ok).sum())} |",
+        f"| les deux faux | {int((~base_ok & ~cam_ok).sum())} |",
+        f"| baseline seule correcte | {b} |",
+        f"| CamemBERT seul correct | {c} |",
+        "",
+        f"Test de McNemar (binomial exact) au niveau ligne : p {fmt_p(p_ligne)}. "
+        "Les lignes d'un même gabarit n'étant pas indépendantes, ce chiffre "
+        "surestime la certitude ; au niveau des unités indépendantes, "
+        f"CamemBERT fait mieux sur {gagne} unités, moins bien sur {perd}, "
+        f"égalité sur {egal} (test des signes : p {fmt_p(p_unite)})."
+        + (" À ce niveau, l'écart n'atteint pas le seuil conventionnel de "
+           "signification : 64 unités ne suffisent pas à trancher, "
+           "voir `docs/limites.md`."
+           if p_unite >= 0.05 else ""),
+        "",
+        "### Les cas ambigus que la baseline réussit et que CamemBERT rate",
+        "",
+    ]
+
+    masque = seuls_base & (test["difficulte"] == "ambigu").to_numpy()
+    gagnes_base = (test.loc[masque]
+                   .assign(predit=src["camembert_predit"][masque]))
+    n_amb_base = int(masque.sum())
+    n_amb_cam = int((seuls_cam & (test["difficulte"] == "ambigu").to_numpy()).sum())
+    if len(gagnes_base):
+        lignes += ["| Phrase | Réel | CamemBERT prédit |", "|---|---|---|"]
+        for _, r in gagnes_base.iterrows():
+            texte = str(r["texte"]).replace("|", "\\|")
+            lignes.append(f"| {texte} | {r['intention']} | {r['predit']} |")
+    lignes += [
+        "",
+        f"Sur les cas ambigus, la baseline est seule correcte {n_amb_base} "
+        f"fois, CamemBERT seul correct {n_amb_cam} fois.",
+        "",
+        "### Prédictions contre support : les classes sur-prédites",
+        "",
+        "Classes prédites au moins 25% au delà de leur support par au "
+        "moins un des deux modèles :",
+        "",
+        "| Classe | Support | Prédictions baseline | Prédictions CamemBERT |",
+        "|---|---|---|---|",
+    ]
+    supports = pd.Series(reels).value_counts()
+    pred_base = pd.Series(src["baseline_predit"]).value_counts()
+    pred_cam = pd.Series(src["camembert_predit"]).value_counts()
+    sur_predites = sorted(
+        (cl for cl in supports.index
+         if max(pred_base.get(cl, 0), pred_cam.get(cl, 0))
+         >= 1.25 * supports[cl]),
+        key=lambda cl: supports[cl])
+    for classe in sur_predites:
+        lignes.append(f"| {classe} | {supports[classe]} "
+                      f"| {pred_base.get(classe, 0)} "
+                      f"| {pred_cam.get(classe, 0)} |")
+    lignes += [
+        "",
+        "Deux mécanismes distincts : la baseline pondérée sur-prédit les "
+        "classes rares par construction (`class_weight=\"balanced\"`), "
+        "avec un rappel parfait payé en précision, ce qui explique une "
+        "partie de son avantage sur les phrases à étiquette arbitrée. "
+        "La sur-prédiction de `demander_attestation` par CamemBERT est "
+        "un phénomène différent : l'effet de gabarit analysé ci-dessous.",
+        "",
+    ]
+    return lignes
+
 
 def generer_markdown(src: dict, annotations: dict[str, str]) -> tuple[str, list[str]]:
     e = src["eval_intent"]
@@ -306,6 +405,9 @@ def generer_markdown(src: dict, annotations: dict[str, str]) -> tuple[str, list[
         f"| flux métier déclenchés à tort | {sans_seuil['flux_a_tort']} "
         f"| {retenu['flux_a_tort']} |",
         "",
+    ]
+    lignes += section_appariee(src)
+    lignes += [
         "## Analyse des erreurs, groupée par gabarit",
         "",
         "Les phrases d'un même gabarit ne sont pas indépendantes : une "
