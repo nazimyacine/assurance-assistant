@@ -57,6 +57,10 @@ public class Echange {
         this.recuLe = Instant.now();
     }
 
+    public String getSessionId() {
+        return sessionId;
+    }
+
     public void renseigner(String chemin, String intention, Double confiance,
                            String formule, Integer classificationMs,
                            Integer rechercheMs, Integer generationMs,

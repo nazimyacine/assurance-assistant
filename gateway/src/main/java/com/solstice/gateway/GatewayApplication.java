@@ -3,6 +3,7 @@ package com.solstice.gateway;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.context.properties.ConfigurationPropertiesScan;
+import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 
 /**
  * Passerelle de l'assistant Mutuelle Solstice (étape 11).
@@ -19,6 +20,10 @@ import org.springframework.boot.context.properties.ConfigurationPropertiesScan;
  */
 @SpringBootApplication
 @ConfigurationPropertiesScan
+// Les dépôts sont des interfaces imbriquées dans Depots, un simple espace
+// de noms. L'analyse de Spring Data les ignore par défaut ; sans cette
+// option, il trouve 0 dépôt et le contrôleur ne peut pas être construit.
+@EnableJpaRepositories(considerNestedRepositories = true)
 public class GatewayApplication {
 
     public static void main(String[] args) {
