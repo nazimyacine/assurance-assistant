@@ -22,3 +22,4 @@ frontend/node_modules/
 frontend/dist/
 frontend/.angular/
 data/eval/intents_test_a_relire.csv
+gateway/target/

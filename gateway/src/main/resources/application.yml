@@ -1,0 +1,54 @@
+# Configuration de la passerelle. Tout ce qui est propre au poste
+# (ports, URL du service IA, délais) vit ici, rien dans le code.
+
+server:
+  port: 8080
+
+spring:
+  application:
+    name: solstice-gateway
+
+  # H2 en mémoire : sessions et clients fictifs sont des données de
+  # démonstration, jetables par principe. Redémarrer la passerelle
+  # remet la démonstration à zéro, et c'est voulu.
+  datasource:
+    url: jdbc:h2:mem:gateway;DB_CLOSE_DELAY=-1
+    driver-class-name: org.h2.Driver
+    username: sa
+    password: ""
+
+  jpa:
+    hibernate:
+      # Le schéma vient de schema.sql, pas des entités : le SQL versionné
+      # fait foi, Hibernate se contente de valider que les entités lui
+      # correspondent. Une divergence casse au démarrage, pas en pleine
+      # démonstration.
+      ddl-auto: validate
+    open-in-view: false
+
+  sql:
+    init:
+      # Exécuter schema.sql et data.sql même si la source n'est pas
+      # une base embarquée reconnue comme telle.
+      mode: always
+
+  # Console H2 sur /h2-console, pour inspecter sessions et journal en
+  # cours de démonstration. Sans mot de passe : acceptable uniquement
+  # parce que la base est en mémoire et ne contient que du décor.
+  h2:
+    console:
+      enabled: true
+
+# Paramètres du service IA. Le préfixe "ia" est lu par une classe
+# @ConfigurationProperties, à venir avec le client HTTP.
+ia:
+  base-url: http://localhost:8000
+  # Délais d'attente explicites, exigence du cadrage. La génération LLM
+  # mesurée prend 800 à 1600 ms ; 15 s couvrent les réessais du palier
+  # gratuit Mistral sans laisser le front pendre indéfiniment.
+  connect-timeout-ms: 2000
+  read-timeout-ms: 15000
+
+logging:
+  level:
+    com.solstice.gateway: INFO
