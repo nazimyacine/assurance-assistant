@@ -224,6 +224,7 @@ def generer(pool: dict, total: int, rng: random.Random,
                 "intention": nom,
                 "difficulte": niveau,
                 "origine": "gabarit",
+                "gabarit": gabarit,
             })
             obtenus += 1
 
@@ -257,7 +258,8 @@ def ecrire(chemin: Path, lignes: list[dict]) -> None:
     chemin.parent.mkdir(parents=True, exist_ok=True)
     with chemin.open("w", encoding="utf-8", newline="") as f:
         writer = csv.DictWriter(
-            f, fieldnames=["texte", "intention", "difficulte", "origine"]
+            f, fieldnames=["texte", "intention", "difficulte", "origine",
+                           "gabarit"]
         )
         writer.writeheader()
         writer.writerows(lignes)
@@ -287,6 +289,7 @@ def main() -> int:
                 "intention": intention,
                 "difficulte": "ambigu",
                 "origine": "cas_ambigu",
+                "gabarit": phrase,
             })
     test = dedupliquer(test)
     rng.shuffle(test)
