@@ -12,6 +12,7 @@ from __future__ import annotations
 import argparse
 import json
 import sys
+import yaml
 from pathlib import Path
 
 import numpy as np
@@ -33,6 +34,8 @@ NPZ_BASELINE = ARTIFACTS / "predictions_baseline_test.npz"
 CSV_TEST = RACINE / "data" / "eval" / "intents_test.csv"
 LABELS = ARTIFACTS / "intent-model" / "labels.json"
 CAS_AMBIGUS = RACINE / "data" / "eval" / "cas_ambigus.md"
+ANNOTATIONS = DOCS / "annotations_erreurs.yaml"
+SORTIE = DOCS / "metrics.md"
 
 
 def echec(message: str) -> None:
@@ -158,6 +161,180 @@ def etat_des_lieux(src: dict) -> None:
     print("\naperçu des 5 premiers groupes :")
     print(groupes.head(5).to_string())
 
+def pct(x: float, dec: int = 1) -> str:
+    return f"{100 * x:.{dec}f}%".replace(".", ",")
+
+
+def nombre(x: float, dec: int = 4) -> str:
+    return f"{x:.{dec}f}".replace(".", ",")
+
+
+def charger_annotations() -> dict[str, str]:
+    if not ANNOTATIONS.exists():
+        return {}
+    contenu = yaml.safe_load(ANNOTATIONS.read_text(encoding="utf-8"))
+    return {str(k): str(v).strip() for k, v in (contenu or {}).items()}
+
+
+def groupes_erreurs(src: dict) -> pd.DataFrame:
+    """Les erreurs CamemBERT groupées par gabarit, triées par effectif."""
+    test = src["test"]
+    erreurs = src["camembert_predit"] != src["reels"]
+    df = (test.loc[erreurs]
+          .assign(predit=src["camembert_predit"][erreurs],
+                  confiance=src["probas"].max(axis=1)[erreurs]))
+    groupes = (df.groupby(["gabarit", "intention", "predit"], sort=False)
+               .agg(n=("texte", "size"),
+                    exemple=("texte", "first"),
+                    origine=("origine", "first"),
+                    confiance_moyenne=("confiance", "mean"))
+               .reset_index()
+               .sort_values(["n", "gabarit"], ascending=[False, True]))
+    return groupes
+
+
+def generer_markdown(src: dict, annotations: dict[str, str]) -> tuple[str, list[str]]:
+    e = src["eval_intent"]
+    t = src["training"]
+    c = src["confusion"]
+    s = src["seuil_rejet"]
+    lignes: list[str] = []
+    manquantes: list[str] = []
+
+    lignes += [
+        "# Métriques de la classification d'intentions",
+        "",
+        "Document généré par `ml/build_metrics.py`, ne pas éditer à la main.",
+        "Sources : `docs/baseline.json`, `docs/training.json`, "
+        "`docs/eval_intent.json`, `docs/confusion.json`, `docs/seuil_rejet.json`.",
+        "",
+        "## Entraînement",
+        "",
+        f"Modèle `{t['modele']}`, {t['epochs']} epochs, batch {t['batch']}, "
+        f"lr {t['lr']}, pondération des classes : {'oui' if t['class_weights'] else 'non'}, "
+        f"durée {t['duree_s']} s.",
+        "",
+        "| Epoch | Perte train | Perte val | F1 macro val |",
+        "|---|---|---|---|",
+    ]
+    for h in t["historique"]:
+        gras = "**" if h["f1_val"] == t["meilleur_f1_val"] else ""
+        lignes.append(f"| {h['epoch']} | {nombre(h['perte_train'])} "
+                      f"| {nombre(h['perte_val'])} "
+                      f"| {gras}{nombre(h['f1_val'])}{gras} |")
+    lignes += [
+        "",
+        "Modèle conservé : epoch au meilleur F1 de validation. La perte de "
+        "validation remonte ensuite alors que la perte d'entraînement "
+        "descend : surapprentissage.",
+        "",
+        "## Baseline contre CamemBERT",
+        "",
+        f"Variante de baseline retenue : {e['baseline']['retenue']} "
+        "(la meilleure des deux, sélection automatique).",
+        "",
+        "| Modèle | F1 macro | Exactitude |",
+        "|---|---|---|",
+        f"| Baseline TF-IDF + régression logistique | {nombre(e['baseline']['f1_macro'])} "
+        f"| {nombre(e['baseline']['exactitude'])} |",
+        f"| **CamemBERT fine-tuné** | **{nombre(e['global']['f1_macro'])}** "
+        f"| **{nombre(e['global']['exactitude'])}** |",
+        "",
+        f"Écart de F1 macro : +{nombre(e['global']['f1_macro'] - e['baseline']['f1_macro'])}.",
+        "",
+        "### Exactitude par difficulté (même métrique des deux côtés)",
+        "",
+        "| Difficulté | n | Baseline | CamemBERT |",
+        "|---|---|---|---|",
+    ]
+    for diff in ["facile", "bruite", "ambigu"]:
+        cam = e["par_difficulte"][diff]
+        lignes.append(f"| {diff} | {cam['n']} "
+                      f"| {nombre(e['baseline']['par_difficulte'][diff])} "
+                      f"| {nombre(cam['exactitude'])} |")
+    n_ambigu = e["par_difficulte"]["ambigu"]["n"]
+    lignes += [
+        "",
+        f"L'écart sur les cas ambigus porte sur {n_ambigu} lignes et vaut "
+        "quelques phrases : il ne permet pas de conclure, voir "
+        "`docs/limites.md`.",
+        "",
+        "## Routage",
+        "",
+        "Une erreur qui reste dans le même type (transactionnelle, "
+        "informationnelle, rejet) laisse le routeur sur le bon chemin ; "
+        "une erreur inter-type l'envoie ailleurs.",
+        "",
+        "| | Baseline | CamemBERT |",
+        "|---|---|---|",
+    ]
+    rb = c["modeles"]["baseline"]["routage"]
+    rc = c["modeles"]["camembert"]["routage"]
+    lignes += [
+        f"| Erreurs | {rb['erreurs']} | {rc['erreurs']} |",
+        f"| dont changement de chemin | {rb['inter_type']} | {rc['inter_type']} |",
+        f"| **Messages mal routés** | **{pct(rb['part_du_jeu'])}** "
+        f"| **{pct(rc['part_du_jeu'])}** |",
+        f"| Erreurs restant sur le bon chemin | {pct(1 - rb['part_inter_type'])} "
+        f"| {pct(1 - rc['part_inter_type'])} |",
+        "",
+        "![Matrices de confusion](matrice_confusion.png)",
+        "",
+        "Matrices ordonnées par type de routage, générées par "
+        "`ml/plot_confusion.py`.",
+        "",
+        "## Seuil de rejet",
+        "",
+        f"Calibration : ECE {nombre(s['calibration']['ece'])}, confiance "
+        f"moyenne {nombre(s['calibration']['confiance_moyenne'])} pour une "
+        f"exactitude de {nombre(s['calibration']['exactitude'])}.",
+        "",
+        f"Règle de sélection : {s['recommandation']['regle']}.",
+        "",
+    ]
+    sans_seuil = s["balayage"][0]
+    retenu = s["recommandation"]["detail"]
+    lignes += [
+        f"| | sans seuil | seuil {nombre(retenu['seuil'], 3)} |",
+        "|---|---|---|",
+        f"| couverture (lignes) | {pct(sans_seuil['couverture'])} "
+        f"| {pct(retenu['couverture'])} |",
+        f"| couverture (gabarits) | {pct(sans_seuil['couverture_gabarit'])} "
+        f"| {pct(retenu['couverture_gabarit'])} |",
+        f"| exactitude sur acceptés | {pct(sans_seuil['exactitude_acceptes'])} "
+        f"| {pct(retenu['exactitude_acceptes'])} |",
+        f"| flux métier déclenchés à tort | {sans_seuil['flux_a_tort']} "
+        f"| {retenu['flux_a_tort']} |",
+        "",
+        "## Analyse des erreurs, groupée par gabarit",
+        "",
+        "Les phrases d'un même gabarit ne sont pas indépendantes : une "
+        "erreur porte le plus souvent sur un gabarit entier. Les "
+        f"{rc['erreurs']} erreurs de CamemBERT se réduisent à "
+        "quelques groupes (gabarit, intention prédite).",
+        "",
+        "| n | Gabarit | Réel | Prédit | Confiance moy. | Explication |",
+        "|---|---|---|---|---|---|",
+    ]
+    groupes = groupes_erreurs(src).head(20)
+    for _, g in groupes.iterrows():
+        cle = f"{g['gabarit']} || {g['predit']}"
+        explication = annotations.get(cle)
+        if explication is None:
+            explication = "à annoter"
+            manquantes.append(cle)
+        gabarit = str(g["gabarit"]).replace("|", "\\|")
+        lignes.append(f"| {g['n']} | {gabarit} | {g['intention']} "
+                      f"| {g['predit']} | {nombre(g['confiance_moyenne'], 2)} "
+                      f"| {explication} |")
+    lignes += [
+        "",
+        "Les cas d'origine ambiguë sont arbitrés dans "
+        "`data/eval/cas_ambigus.md`.",
+        "",
+    ]
+    return "\n".join(lignes), manquantes
+
 
 def main() -> None:
     parseur = argparse.ArgumentParser(description=__doc__)
@@ -171,6 +348,18 @@ def main() -> None:
     if args.check:
         print()
         etat_des_lieux(src)
+        return
+
+    annotations = charger_annotations()
+    markdown, manquantes = generer_markdown(src, annotations)
+    SORTIE.write_text(markdown, encoding="utf-8")
+    print(f"Écrit : {SORTIE.relative_to(RACINE)}")
+    if manquantes:
+        print(f"\n{len(manquantes)} groupe(s) sans explication dans "
+              f"{ANNOTATIONS.name} :")
+        for cle in manquantes:
+            print(f'  "{cle}": >-')
+            print("    ")
 
 
 if __name__ == "__main__":

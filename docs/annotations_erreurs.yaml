@@ -1,0 +1,63 @@
+# Explications des groupes d'erreurs, une phrase par groupe.
+# Clé : "gabarit || intention prédite". Fusionné dans docs/metrics.md
+# par build_metrics.py. Une clé absente apparaît comme "à annoter".
+
+"quels documents pour adhérer || demander_attestation": >-
+  Le gabarit parle de pièces à fournir, vocabulaire entier de
+  demander_attestation ; le modèle attrape le mot saillant.
+"il y a un questionnaire de santé pour adhérer || demander_attestation": >-
+  Même mécanique : un document nommé dans la phrase l'emporte sur
+  l'intention d'adhésion.
+"quelle est la procédure pour partir || question_delai": >-
+  Aucun mot de résiliation dans la phrase ; "procédure pour partir"
+  ressemble aux questions de démarches et de délais.
+"je suis convoqué pour une intervention, quelle démarche || comparer_formules": >-
+  Vocabulaire médical peu vu à l'entraînement pour cette intention ;
+  confiance 0,43, le seuil rejette ces lignes.
+"combien je suis remboursé pour {acte} || question_tarif": >-
+  "combien" tire vers le tarif ; la frontière garantie/tarif tient à
+  l'opposition remboursé/payé, ténue dans une phrase courte.
+"combien je paye pour les lunettes || question_tarif": >-
+  Cas ambigu arbitré en garantie (reste à charge contre cotisation) ;
+  le modèle choisit l'autre lecture, défendable, avec confiance 0,91.
+"j'ai changé de banque || resilier": >-
+  Constat sans demande ; le changement de banque est associé au départ
+  plutôt qu'à la mise à jour du RIB.
+"je cherche un médecin près de chez moi || contacter_conseiller": >-
+  Demande de service formulée poliment : le modèle propose un humain
+  au lieu de reconnaître le hors périmètre.
+"mon fils a 22 ans, il est encore couvert || suivre_remboursement": >-
+  Cas ambigu (conditions de rattachement) ; "encore couvert" est lu
+  comme le suivi d'un dossier existant.
+"quelle formule pour être bien remboursé || question_garantie": >-
+  Cas ambigu arbitré en comparer_formules ; "bien remboursé" tire vers
+  les garanties, c'est l'autre branche de l'arbitrage.
+"est ce que j'ai droit à {acte} || question_delai": >-
+  "avoir droit" évoque les conditions et délais de carence ;
+  confiance 0,46, rejetée par le seuil.
+"est ce que je peux changer de formule maintenant || modifier_coordonnees": >-
+  Cas ambigu arbitré en souscrire ; le modèle attrape "changer" comme
+  une modification, encore un mot saillant.
+"il y a un questionnaire de santé pour adhérer || question_garantie": >-
+  Dispersion résiduelle du même gabarit documents : "santé" part cette
+  fois vers les garanties.
+"je viens d'adhérer et j'ai besoin de lunettes || hors_perimetre": >-
+  Cas ambigu, le délai de carence est sous-entendu sans être nommé ;
+  sans mot interrogatif, le modèle ne rattache la phrase à rien.
+"l'implant c'est pris en charge et sous combien de temps || question_delai": >-
+  Deux intentions dans une phrase, arbitrée en garantie ; le modèle
+  répond à l'autre moitié avec confiance 0,91. Inévitable par construction.
+"les lunettes c'est combien || question_tarif": >-
+  Même ambiguïté que "combien je paye pour les lunettes", même bascule.
+"comment je fais pour résilier || hors_perimetre": >-
+  Le mot résilier est pourtant explicite ; formulation isolée à
+  confiance 0,44, rejetée par le seuil.
+"est ce que j'ai droit à {acte} || demander_attestation": >-
+  Confiance 0,32, le minimum du modèle sur tout le jeu : dispersion
+  résiduelle, sans signal exploitable.
+"je ne comprends pas mon relevé || modifier_coordonnees": >-
+  Cas ambigu entre suivi et conseiller ; le modèle part sur une
+  troisième lecture, à faible confiance.
+"je ne veux plus de votre mutuelle || souscrire": >-
+  La négation inverse le sens : "veux" plus "mutuelle" sont lus comme
+  une adhésion. Le contresens classique des modèles de classification.
