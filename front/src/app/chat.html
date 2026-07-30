@@ -35,7 +35,8 @@
             </div>
 
             <div class="contenu">
-              <p class="texte" [class.texte-vous]="tour.auteur === 'vous'">{{ tour.texte }}</p>
+              <p class="texte" [class.texte-vous]="tour.auteur === 'vous'"
+                 [innerHTML]="tour.texte | gras"></p>
 
               @if (dernier && tour.reponse && tour.reponse.options.length > 0) {
                 @if (numerote(tour.reponse.options)) {

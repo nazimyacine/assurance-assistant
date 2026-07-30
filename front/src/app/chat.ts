@@ -2,6 +2,7 @@ import { Component, ElementRef, effect, inject, signal, viewChild } from '@angul
 
 import { Chemin, Option } from './contrat';
 import { Conversation } from './conversation';
+import { Gras } from './gras';
 
 /** Annotation de marge : ce que le routeur a décidé, en un mot.
  *  Terse par choix, c'est de la marginalia ; le libellé complet est en
@@ -37,6 +38,7 @@ const EXEMPLES = [
 
 @Component({
   selector: 'app-chat',
+  imports: [Gras],
   templateUrl: './chat.html',
   styleUrl: './chat.css',
 })
