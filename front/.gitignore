@@ -43,9 +43,14 @@ __screenshots__/
 .DS_Store
 Thumbs.db
 
-# Copie de travail de docs/metrics.md, déposée ici par le script
-# copier:metriques au démarrage et à la compilation. Le fichier de
-# référence est docs/metrics.md, lui-même généré par ml/build_metrics.py :
-# versionner cette copie créerait un troisième exemplaire des mêmes
-# chiffres, avec la certitude qu'il finirait par diverger des deux autres.
+# Copies de travail déposées ici par le script copier:metriques au
+# démarrage et à la compilation : le document de métriques et les figures
+# de docs/. Les originaux sont dans docs/, eux-mêmes générés par
+# ml/build_metrics.py et ml/plot_confusion.py. Versionner ces copies
+# créerait un troisième exemplaire des mêmes chiffres, avec la certitude
+# qu'il finirait par diverger des deux autres.
+# La règle porte sur *.png et non sur les deux noms actuels : une figure
+# ajoutée côté Python arriverait ici sans que personne y pense, et se
+# retrouverait versionnée par accident.
 /public/metrics.md
+/public/*.png
