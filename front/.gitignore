@@ -42,3 +42,10 @@ __screenshots__/
 # System files
 .DS_Store
 Thumbs.db
+
+# Copie de travail de docs/metrics.md, déposée ici par le script
+# copier:metriques au démarrage et à la compilation. Le fichier de
+# référence est docs/metrics.md, lui-même généré par ml/build_metrics.py :
+# versionner cette copie créerait un troisième exemplaire des mêmes
+# chiffres, avec la certitude qu'il finirait par diverger des deux autres.
+/public/metrics.md

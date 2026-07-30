@@ -3,6 +3,9 @@
   "version": "0.0.0",
   "scripts": {
     "ng": "ng",
+    "copier:metriques": "node -e \"const f=require('fs');const s='../docs/metrics.md';const d='public/metrics.md';if(f.existsSync(s)){f.copyFileSync(s,d);console.log('[metriques] '+s+' copie vers '+d);}else{console.warn('[metriques] ATTENTION: '+s+' absent, la page metriques le dira. Lancer python ml/build_metrics.py');}\"",
+    "prestart": "npm run copier:metriques",
+    "prebuild": "npm run copier:metriques",
     "start": "ng serve",
     "build": "ng build",
     "watch": "ng build --watch --configuration development",
