@@ -14,6 +14,37 @@
   </div>
 
   <div class="actions">
+    <!-- Le contexte client n'est pas un décor : il filtre la recherche
+         par formule. C'est la démonstration de l'apport de la passerelle,
+         d'où sa place dans l'en-tête et non dans un menu. -->
+    <label class="identite">
+      <span class="etiquette">Vous êtes</span>
+      <select
+        #identite
+        [value]="passerelle.clientId() ?? ''"
+        [disabled]="conversation.enCours()"
+        (change)="changerIdentite(identite.value)">
+        <option value="">Visiteur</option>
+        @for (client of clients(); track client.id) {
+          <option [value]="client.id">
+            {{ client.nom }} · {{ client.formule | titlecase }}
+          </option>
+        }
+      </select>
+    </label>
+
+    <button
+      type="button"
+      class="pastille"
+      [class.ok]="sante() === 'ok'"
+      [class.degrade]="sante() === 'degrade'"
+      [class.injoignable]="sante() === 'injoignable'"
+      [title]="detailSante()"
+      (click)="interrogerSante()">
+      <span class="point" aria-hidden="true"></span>
+      <span class="libelle">{{ libelleSante() }}</span>
+    </button>
+
     @if (conversation.tours().length > 0) {
       <button type="button" class="recommencer" (click)="conversation.recommencer()">
         Nouvelle conversation

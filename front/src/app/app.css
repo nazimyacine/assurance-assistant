@@ -58,7 +58,99 @@
 .actions {
   display: flex;
   align-items: center;
+  justify-content: flex-end;
+  flex-wrap: wrap;
   gap: var(--e-3);
+}
+
+/* -- sélecteur d'identité ------------------------------------------ */
+
+.identite {
+  display: flex;
+  align-items: center;
+  gap: var(--e-2);
+}
+
+/* Même traitement que .role : une étiquette de formulaire, pas un titre. */
+.identite .etiquette {
+  font-family: var(--chiffres);
+  font-size: var(--t-xs);
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--encre-tres-douce);
+}
+
+.identite select {
+  padding: var(--e-2) var(--e-3);
+  border: 1px solid var(--trait);
+  border-radius: var(--rayon-s);
+  background: var(--carte);
+  font-size: var(--t-s);
+  cursor: pointer;
+  transition: border-color 120ms ease;
+}
+
+.identite select:hover:enabled {
+  border-color: var(--solstice);
+}
+
+/* Pendant un appel, changer d'identité couperait la conversation en
+   cours de route : le sélecteur se verrouille le temps de la réponse. */
+.identite select:disabled {
+  color: var(--encre-tres-douce);
+  cursor: default;
+}
+
+/* -- pastille de santé --------------------------------------------- */
+
+/* Discrète tant que tout va bien : seul le point se colore. Un bandeau
+   vert permanent n'apprend rien et occupe la place de ce qui compte. */
+.pastille {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--e-2);
+  padding: var(--e-1) var(--e-3);
+  border: 1px solid var(--trait);
+  border-radius: 999px;
+  background: transparent;
+  font-family: var(--chiffres);
+  font-size: var(--t-xs);
+  letter-spacing: 0.02em;
+  color: var(--encre-douce);
+  cursor: pointer;
+}
+
+.pastille .point {
+  width: 7px;
+  height: 7px;
+  flex: none;
+  border-radius: 50%;
+  background: var(--encre-tres-douce);
+}
+
+.pastille.ok .point {
+  background: var(--solstice);
+}
+
+/* L'ambre reste réservé aux réserves : un service dégradé en est une. */
+.pastille.degrade {
+  border-color: var(--ambre);
+  background: var(--ambre-fond);
+  color: var(--ambre);
+}
+
+.pastille.degrade .point {
+  background: var(--ambre);
+}
+
+.pastille.injoignable {
+  border-color: var(--alerte);
+  background: var(--alerte-fond);
+  color: var(--alerte);
+}
+
+.pastille.injoignable .point {
+  background: var(--alerte);
 }
 
 .recommencer {
@@ -75,6 +167,20 @@
 .recommencer:hover {
   border-color: var(--solstice);
   color: var(--solstice);
+}
+
+/* Sous 820 px, l'en-tête ne tient plus sur une ligne : l'étiquette du
+   sélecteur et le libellé de la pastille s'effacent, la valeur choisie
+   et le point de couleur suffisent à lire l'état. */
+@media (max-width: 820px) {
+  .entete {
+    padding: var(--e-3) var(--e-4);
+  }
+
+  .identite .etiquette,
+  .pastille .libelle {
+    display: none;
+  }
 }
 
 /* -- plateau ------------------------------------------------------- */
