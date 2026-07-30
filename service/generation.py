@@ -24,6 +24,21 @@ BASE_URL = ENV.get("LLM_BASE_URL", "https://api.mistral.ai/v1")
 MODELE = ENV.get("LLM_MODELE", "mistral-small-latest")
 CLE = ENV.get("MISTRAL_API_KEY", "")
 
+# Délais d'attente en secondes, (connexion, lecture).
+#
+# RÈGLE : les délais doivent CROÎTRE du plus interne vers le plus
+# externe. Ici 5 et 10 secondes, sous les 15 secondes de lecture de la
+# passerelle Spring, elles-mêmes sous les 20 secondes du front. Un délai
+# interne plus long que celui qui l'englobe est pire qu'inutile : la
+# couche supérieure abandonne d'abord et rend une erreur brute, tandis
+# que la dégradation soignée de ce module s'exécute pour personne.
+#
+# Découvert à l'usage : avec 60 secondes de connexion et une panne DNS,
+# la passerelle rendait un 503 nu là où le routeur aurait affiché un
+# message lisible. 10 secondes de lecture couvrent largement la
+# génération mesurée à l'étape 8, entre 838 et 1600 ms.
+DELAIS = (5, 10)
+
 CONSIGNES = """Tu es l'assistant de Mutuelle Solstice, une complémentaire santé.
 Tu réponds à la question d'un assuré en t'appuyant UNIQUEMENT sur les
 extraits fournis. Règles impératives :
@@ -48,9 +63,15 @@ def construire_prompt(question: str, chunks: list[dict]) -> list[dict]:
 
 
 def generer(question: str, chunks: list[dict]) -> dict:
-    """Appelle le LLM et retourne {"reponse": str, "latence_ms": int}."""
+    """Appelle le LLM et retourne {"reponse": str, "latence_ms": int}.
+
+    Toute panne remonte en Exception ordinaire : le routeur l'attrape,
+    la journalise et dégrade. SystemExit serait ici un piège, la classe
+    héritant de BaseException et traversant donc le `except Exception`
+    du routeur au lieu d'y être traitée.
+    """
     if not CLE and "mistral" in BASE_URL:
-        raise SystemExit("ERREUR : MISTRAL_API_KEY absente du .env")
+        raise RuntimeError("MISTRAL_API_KEY absente du .env")
     debut = time.perf_counter()
     http = requests.post(
         f"{BASE_URL}/chat/completions",
@@ -59,7 +80,7 @@ def generer(question: str, chunks: list[dict]) -> dict:
               "messages": construire_prompt(question, chunks),
               "temperature": 0.2,
               "max_tokens": 400},
-        timeout=60)
+        timeout=DELAIS)
     http.raise_for_status()
     texte = http.json()["choices"][0]["message"]["content"]
     return {"reponse": texte,
@@ -71,8 +92,11 @@ def main() -> None:
     parseur.add_argument("--question", required=True)
     args = parseur.parse_args()
 
-    recherche = Recherche()
-    chunks = recherche.hybride(args.question)
+    # Configuration de service, identique à celle du routeur : le
+    # contrôle de ce module doit exercer ce que le service exécute, pas
+    # une autre configuration. L'hybride a été mesuré perdant à l'étape 8.
+    recherche = Recherche(decoupage="titres", avec_fil=True)
+    chunks = recherche.vectoriel_chunks(args.question, k=5)
     print(f"\nquestion : {args.question}")
     print("\nchunks retenus :")
     for c in chunks:
