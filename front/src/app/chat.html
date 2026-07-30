@@ -1,0 +1,93 @@
+<section class="chat">
+  <div class="fil" #fil>
+    @if (conversation.tours().length === 0) {
+      <div class="accueil">
+        <p class="accueil-titre">Assistant Mutuelle Solstice</p>
+        <p class="accueil-texte">
+          Posez une question sur vos garanties, vos remboursements ou nos
+          délais, ou lancez une démarche. Chaque réponse indique le chemin
+          qu'elle a emprunté et les passages sur lesquels elle s'appuie.
+        </p>
+        <p class="accueil-relance">Pour commencer</p>
+        <ul class="exemples">
+          @for (exemple of exemples; track exemple) {
+            <li>
+              <button type="button" class="exemple" (click)="repondre(exemple)">
+                {{ exemple }}
+              </button>
+            </li>
+          }
+        </ul>
+      </div>
+    } @else {
+      <div class="tours">
+        @for (tour of conversation.tours(); track tour.id; let dernier = $last) {
+          <article class="tour">
+            <div class="marge">
+              @if (tour.auteur === 'vous') {
+                <span class="code code-vous">vous</span>
+              } @else {
+                <span class="code" [title]="titre(tour.reponse!.chemin)">
+                  {{ code(tour.reponse!.chemin) }}
+                </span>
+                <span class="duree">{{ tour.reponse!.latence_totale_ms }} ms</span>
+              }
+            </div>
+
+            <div class="contenu">
+              <p class="texte" [class.texte-vous]="tour.auteur === 'vous'">{{ tour.texte }}</p>
+
+              @if (dernier && tour.reponse && tour.reponse.options.length > 0) {
+                @if (numerote(tour.reponse.options)) {
+                  <p class="aide">Cliquez un numéro, ou tapez-le.</p>
+                  <div class="touches">
+                    @for (option of tour.reponse.options; track option.cle) {
+                      <button type="button" class="touche" [title]="option.libelle"
+                              (click)="repondre(option.valeur)">
+                        {{ option.rang }}
+                      </button>
+                    }
+                  </div>
+                } @else {
+                  <div class="options">
+                    @for (option of tour.reponse.options; track option.cle) {
+                      <button type="button" class="option"
+                              (click)="repondre(option.valeur)">
+                        {{ option.libelle }}
+                      </button>
+                    }
+                  </div>
+                }
+              }
+            </div>
+          </article>
+        }
+
+        @if (conversation.enCours()) {
+          <article class="tour">
+            <div class="marge"><span class="code code-attente">···</span></div>
+            <div class="contenu"><p class="attente">Réponse en cours</p></div>
+          </article>
+        }
+      </div>
+    }
+  </div>
+
+  @if (conversation.erreur(); as erreur) {
+    <p class="erreur" role="alert">{{ erreur }}</p>
+  }
+
+  <form class="composeur" (submit)="$event.preventDefault(); envoyer()">
+    <div class="composeur-corps">
+      <input class="saisie" type="text" autocomplete="off"
+             placeholder="Écrivez votre message"
+             [value]="saisie()"
+             (input)="saisie.set($any($event.target).value)"
+             [disabled]="conversation.enCours()" />
+      <button type="submit" class="envoi"
+              [disabled]="conversation.enCours() || saisie().trim().length === 0">
+        Envoyer
+      </button>
+    </div>
+  </form>
+</section>

@@ -1,0 +1,95 @@
+:host {
+  display: flex;
+  flex-direction: column;
+  /* dvh plutôt que vh : sur mobile, la barre d'adresse qui se replie ne
+     doit pas laisser la zone de saisie hors de l'écran. */
+  height: 100dvh;
+}
+
+/* -- en-tête ------------------------------------------------------- */
+
+.entete {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--e-4);
+  padding: var(--e-3) var(--e-5);
+  border-bottom: 1px solid var(--trait);
+  background: var(--carte);
+}
+
+.marque {
+  display: flex;
+  align-items: center;
+  gap: var(--e-3);
+}
+
+.sceau {
+  width: 26px;
+  height: 26px;
+  flex: none;
+  fill: none;
+  stroke: var(--solstice);
+  stroke-width: 1.4;
+  stroke-linecap: round;
+}
+
+.titres {
+  display: flex;
+  align-items: baseline;
+  gap: var(--e-2);
+}
+
+.nom {
+  font-size: var(--t-l);
+  font-weight: 600;
+  letter-spacing: -0.01em;
+}
+
+/* Le rôle se lit comme une mention de service, pas comme un slogan. */
+.role {
+  font-family: var(--chiffres);
+  font-size: var(--t-xs);
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--encre-tres-douce);
+}
+
+.actions {
+  display: flex;
+  align-items: center;
+  gap: var(--e-3);
+}
+
+.recommencer {
+  padding: var(--e-2) var(--e-3);
+  border: 1px solid var(--trait);
+  border-radius: var(--rayon-s);
+  background: transparent;
+  font-size: var(--t-s);
+  color: var(--encre-douce);
+  cursor: pointer;
+  transition: border-color 120ms ease, color 120ms ease;
+}
+
+.recommencer:hover {
+  border-color: var(--solstice);
+  color: var(--solstice);
+}
+
+/* -- plateau ------------------------------------------------------- */
+
+/* Une colonne aujourd'hui, deux au commit 3 quand le panneau
+   d'inspection s'installera à droite. */
+.plateau {
+  flex: 1;
+  min-height: 0;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+}
+
+.colonne {
+  min-width: 0;
+  min-height: 0;
+  background: var(--carte);
+}

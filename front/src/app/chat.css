@@ -1,0 +1,303 @@
+:host {
+  display: block;
+  height: 100%;
+  min-height: 0;
+
+  /* Une seule source pour l'alignement vertical de toute la colonne.
+     La gouttière de marge et sa gouttière définissent le décalage du
+     texte ; tout le reste s'y raccroche par calcul. */
+  --marge-largeur: 64px;
+  --gouttiere: var(--e-5);
+  --decalage: calc(var(--marge-largeur) + var(--gouttiere));
+  --colonne: 780px;
+}
+
+.chat {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  min-height: 0;
+}
+
+/* -- le fil ------------------------------------------------------- */
+
+.fil {
+  flex: 1;
+  min-height: 0;
+  overflow-y: auto;
+  padding: var(--e-6) var(--e-5);
+}
+
+.tours {
+  position: relative;
+  max-width: var(--colonne);
+}
+
+.tours::before {
+  content: '';
+  position: absolute;
+  top: 4px;
+  bottom: 4px;
+  left: calc(var(--marge-largeur) + var(--gouttiere) / 2);
+  width: 1px;
+  background: var(--trait);
+}
+
+.tour {
+  display: grid;
+  grid-template-columns: var(--marge-largeur) 1fr;
+  column-gap: var(--gouttiere);
+  padding-block: var(--e-4);
+}
+
+/* -- la marge ----------------------------------------------------- */
+
+.marge {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 2px;
+  padding-top: 2px;
+}
+
+.code {
+  font-family: var(--chiffres);
+  font-size: var(--t-xs);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--encre-tres-douce);
+  cursor: default;
+}
+
+.code-vous {
+  color: var(--solstice);
+  text-transform: none;
+  letter-spacing: 0.04em;
+}
+
+.code-attente { letter-spacing: 0.1em; }
+
+.duree {
+  font-family: var(--chiffres);
+  font-size: var(--t-xs);
+  font-variant-numeric: tabular-nums;
+  color: var(--encre-tres-douce);
+}
+
+/* -- le contenu --------------------------------------------------- */
+
+.texte {
+  margin: 0;
+  /* Les sauts de ligne du routeur portent du sens : ils séparent les
+     options numérotées. Le navigateur doit les respecter. */
+  white-space: pre-line;
+  color: var(--encre);
+}
+
+.texte-vous { font-weight: 500; }
+
+.attente {
+  margin: 0;
+  color: var(--encre-tres-douce);
+  font-style: italic;
+}
+
+/* -- réponses proposées ------------------------------------------- */
+
+.aide {
+  margin: var(--e-3) 0 var(--e-2);
+  font-size: var(--t-xs);
+  color: var(--encre-douce);
+}
+
+.touches {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--e-2);
+}
+
+.touche {
+  width: 40px;
+  height: 40px;
+  border: 1px solid var(--trait);
+  border-radius: var(--rayon-s);
+  background: var(--carte);
+  font-family: var(--chiffres);
+  font-size: var(--t-m);
+  color: var(--encre);
+  cursor: pointer;
+  transition: border-color 120ms ease, background-color 120ms ease,
+              transform 120ms ease;
+}
+
+.touche:hover {
+  border-color: var(--solstice);
+  background: var(--solstice-fond);
+  transform: translateY(-1px);
+}
+
+.options {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--e-2);
+  margin-top: var(--e-3);
+}
+
+.option {
+  padding: var(--e-2) var(--e-4);
+  border: 1px solid var(--trait);
+  border-radius: var(--rayon-s);
+  background: var(--carte);
+  color: var(--encre);
+  cursor: pointer;
+  transition: border-color 120ms ease, background-color 120ms ease;
+}
+
+.option:hover {
+  border-color: var(--solstice);
+  background: var(--solstice-fond);
+}
+
+/* -- écran d'accueil ---------------------------------------------- */
+
+/* Aligné sur la colonne de texte de la conversation : passer de
+   l'accueil au premier message ne doit rien déplacer horizontalement. */
+.accueil {
+  margin-left: var(--decalage);
+  max-width: calc(var(--colonne) - var(--decalage));
+  padding-top: var(--e-6);
+}
+
+.accueil-titre {
+  margin: 0 0 var(--e-3);
+  font-size: var(--t-xl);
+  font-weight: 600;
+  letter-spacing: -0.01em;
+}
+
+.accueil-texte {
+  margin: 0 0 var(--e-6);
+  color: var(--encre-douce);
+  max-width: 46ch;
+}
+
+.accueil-relance {
+  margin: 0 0 var(--e-3);
+  font-family: var(--chiffres);
+  font-size: var(--t-xs);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--encre-tres-douce);
+}
+
+.exemples {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: var(--e-2);
+  max-width: 480px;
+}
+
+/* Largeur commune : le bord droit des trois exemples fait une ligne,
+   pas un escalier. */
+.exemple {
+  display: block;
+  width: 100%;
+  padding: var(--e-3) var(--e-4);
+  border: 1px solid var(--trait);
+  border-left: 2px solid var(--solstice);
+  border-radius: 0 var(--rayon-s) var(--rayon-s) 0;
+  background: var(--carte);
+  text-align: left;
+  color: var(--encre);
+  cursor: pointer;
+  transition: background-color 120ms ease, border-color 120ms ease;
+}
+
+.exemple:hover {
+  background: var(--solstice-fond);
+  border-color: var(--solstice);
+  border-left-color: var(--solstice);
+}
+
+/* -- erreur et composeur ------------------------------------------ */
+
+.erreur {
+  margin: 0;
+  padding: var(--e-3) var(--e-5) var(--e-3)
+           calc(var(--e-5) + var(--decalage));
+  background: var(--alerte-fond);
+  color: var(--alerte);
+  font-size: var(--t-s);
+  border-top: 1px solid var(--trait);
+}
+
+/* Le formulaire tient toute la largeur pour que son filet supérieur
+   traverse la colonne ; c'est son contenu qui est cadré. */
+.composeur {
+  padding: var(--e-4) var(--e-5);
+  border-top: 1px solid var(--trait);
+  background: var(--carte);
+}
+
+.composeur-corps {
+  display: flex;
+  gap: var(--e-2);
+  margin-left: var(--decalage);
+  max-width: calc(var(--colonne) - var(--decalage));
+}
+
+.saisie {
+  flex: 1;
+  min-width: 0;
+  padding: var(--e-3) var(--e-4);
+  border: 1px solid var(--trait);
+  border-radius: var(--rayon-s);
+  background: var(--papier);
+  color: var(--encre);
+}
+
+.saisie::placeholder { color: var(--encre-tres-douce); }
+
+.saisie:disabled { opacity: 0.6; }
+
+.envoi {
+  padding: var(--e-3) var(--e-5);
+  border: 1px solid var(--solstice);
+  border-radius: var(--rayon-s);
+  background: var(--solstice);
+  color: #ffffff;
+  font-weight: 500;
+  cursor: pointer;
+  transition: opacity 120ms ease;
+}
+
+.envoi:disabled {
+  opacity: 0.4;
+  cursor: default;
+}
+
+/* -- petits écrans ------------------------------------------------- */
+
+@media (max-width: 640px) {
+  :host { --decalage: 0px; }
+
+  .fil { padding: var(--e-5) var(--e-4); }
+  .tours::before { display: none; }
+
+  .tour {
+    grid-template-columns: 1fr;
+    row-gap: var(--e-1);
+  }
+
+  .marge {
+    flex-direction: row;
+    align-items: baseline;
+    gap: var(--e-2);
+  }
+
+  .accueil, .composeur-corps { max-width: none; }
+  .erreur { padding-inline: var(--e-4); }
+}
