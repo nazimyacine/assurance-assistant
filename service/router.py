@@ -19,6 +19,12 @@ DEUX PRINCIPES À NE PAS PERDRE.
    à faible confiance. La sortie de secours est donc lexicale et
    déterministe, pas probabiliste.
 
+Avenant de l'étape 12 : la sortie porte un champ `options` quand une
+question fermée est posée, pour que le front rende des boutons sans
+analyser le texte. Chaque option porte le texte qu'un utilisateur aurait
+tapé : la lecture des réponses reste celle de l'étape 9, aucune branche
+nouvelle n'entre dans le moteur de flux.
+
 Contrôle : python -m service.router --scenario
            python -m service.router --interactif
            python -m service.router --message "..."
@@ -74,6 +80,11 @@ MOTS_NON = frozenset({"non", "nan", "negatif", "jamais"})
 PHRASES_OUI = ("d accord", "tout a fait", "bien sur", "je confirme", "c est ca")
 PHRASES_NON = ("pas du tout", "non merci", "surtout pas")
 
+# Options rendues pour un champ oui_non. Les valeurs renvoyées sont des
+# mots de MOTS_OUI et MOTS_NON : le bouton produit exactement ce qu'un
+# utilisateur aurait tapé.
+OPTIONS_OUI_NON = (("oui", "Oui"), ("non", "Non"))
+
 MOIS = {"janvier": 1, "fevrier": 2, "mars": 3, "avril": 4, "mai": 5,
         "juin": 6, "juillet": 7, "aout": 8, "septembre": 9, "octobre": 10,
         "novembre": 11, "decembre": 12}
@@ -112,6 +123,12 @@ def normaliser(texte: str) -> str:
 
 def mots_de(texte: str) -> list[str]:
     return re.findall(r"[a-z0-9]+", normaliser(texte))
+
+
+def aplatir(texte: str) -> str:
+    """Replie un bloc YAML en une ligne. Les libellés d'options viennent
+    de blocs > et portent des retours à la ligne de mise en forme."""
+    return " ".join(str(texte).split())
 
 
 def charger_taxonomie() -> dict[str, str]:
@@ -273,17 +290,19 @@ class Routeur:
             if ligne or (propres and propres[-1]):
                 propres.append(ligne)
         return "\n".join(propres).strip()
-    
+
     @staticmethod
     def _sortie(reponse: str, chemin: str, intention: str | None = None,
                 confiance: float | None = None, sources: list | None = None,
-                etat: dict | None = None, latences: dict | None = None) -> dict:
+                options: list | None = None, etat: dict | None = None,
+                latences: dict | None = None) -> dict:
         base = {"classification": 0, "recherche": 0, "generation": 0}
         return {"reponse": Routeur._nettoyer(reponse),
                 "intention": intention,
                 "confiance": None if confiance is None else round(confiance, 4),
                 "chemin": chemin,
                 "sources": sources or [],
+                "options": options or [],
                 "etat": etat,
                 "latence_ms": base | (latences or {})}
 
@@ -387,13 +406,37 @@ class Routeur:
     @staticmethod
     def _question(champ: dict) -> str:
         """La question, suivie des options numérotées pour un champ de
-        type choix. Le front pourra les rendre en boutons (étape 12)."""
-        texte = " ".join(champ["question"].split())
+        type choix. Le texte reste autosuffisant : un client qui ignore
+        le champ `options` (curl, /docs, mode CLI) voit la même chose
+        qu'avant l'avenant de l'étape 12."""
+        texte = aplatir(champ["question"])
         if champ["type"] == "choix":
-            options = "\n".join(f"{rang}. {' '.join(v['libelle'].split())}"
+            options = "\n".join(f"{rang}. {aplatir(v['libelle'])}"
                                 for rang, v in enumerate(champ["valeurs"], 1))
             texte = f"{texte}\n{options}"
         return texte
+
+    @staticmethod
+    def _options(champ: dict) -> list[dict]:
+        """Version structurée des réponses attendues, pour que le front
+        rende des boutons sans analyser le texte (avenant étape 12).
+
+        `valeur` porte le texte exact qu'un utilisateur aurait tapé : le
+        bouton renvoie un message ordinaire, lu par lire_choix ou
+        lire_oui_non sans qu'aucune branche soit ajoutée au moteur. Les
+        champs libres (texte, date) n'ont pas d'options : liste vide,
+        le front affiche sa zone de saisie.
+        """
+        if champ["type"] == "oui_non":
+            return [{"rang": rang, "cle": cle, "libelle": libelle,
+                     "valeur": cle}
+                    for rang, (cle, libelle) in enumerate(OPTIONS_OUI_NON, 1)]
+        if champ["type"] == "choix":
+            return [{"rang": rang, "cle": valeur["cle"],
+                     "libelle": aplatir(valeur["libelle"]),
+                     "valeur": str(rang)}
+                    for rang, valeur in enumerate(champ["valeurs"], 1)]
+        return []
 
     def _ouvrir(self, intention: str, confiance: float, latences: dict) -> dict:
         flux = self.flux[intention]
@@ -404,10 +447,11 @@ class Routeur:
                                 latences=latences)
         etat = {"flux": intention, "attente": champ["nom"], "donnees": {},
                 "relances": 0, "confiance_ouverture": confiance}
-        entete = " ".join(flux.get("ouverture", "").split())
+        entete = aplatir(flux.get("ouverture", ""))
         return self._sortie(f"{entete}\n\n{self._question(champ)}",
                             "flux_metier", intention=intention,
-                            confiance=confiance, etat=etat, latences=latences)
+                            confiance=confiance, options=self._options(champ),
+                            etat=etat, latences=latences)
 
     def _poursuivre(self, message: str, etat: dict) -> dict:
         intention = etat["flux"]
@@ -433,7 +477,8 @@ class Routeur:
             suite = dict(etat, relances=relances)
             return self._sortie(f"{champ['relance']}\n\n{self._question(champ)}",
                                 "flux_metier", intention=intention,
-                                confiance=confiance, etat=suite)
+                                confiance=confiance,
+                                options=self._options(champ), etat=suite)
 
         if champ["type"] == "oui_non" and valeur == "non" and "si_non" in champ:
             return self._sortie(champ["si_non"], "flux_metier",
@@ -447,7 +492,7 @@ class Routeur:
                      "confiance_ouverture": confiance}
             return self._sortie(self._question(suivant), "flux_metier",
                                 intention=intention, confiance=confiance,
-                                etat=suite)
+                                options=self._options(suivant), etat=suite)
 
         return self._sortie(self._clore(flux, donnees), "flux_metier",
                             intention=intention, confiance=confiance)
@@ -491,6 +536,9 @@ def afficher(message: str, sortie: dict) -> None:
           f"{sortie['etat']['attente'] if sortie['etat'] else '-'}]")
     for ligne in sortie["reponse"].split("\n"):
         print(f"  {ligne}")
+    if sortie["options"]:
+        rendu = "  ".join(f"[{o['valeur']}] {o['cle']}" for o in sortie["options"])
+        print(f"    boutons {rendu}")
     for source in sortie["sources"]:
         print(f"    source {source['score']:.3f}  "
               f"{source['document']} > {source['section']}")

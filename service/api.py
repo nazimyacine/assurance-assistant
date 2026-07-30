@@ -17,6 +17,10 @@ conversation en cours.
 injecté par la passerelle Spring. Elle restreint la recherche documentaire
 aux garanties de cette formule et aux documents de procédure.
 
+Avenant de l'étape 12 : la réponse porte une liste `options` quand une
+question fermée est posée, pour que le front rende des boutons sans
+analyser le texte de la réponse.
+
 Lancement :
     $env:HF_HUB_OFFLINE = "1"
     python -m uvicorn service.api:app --port 8000
@@ -77,7 +81,7 @@ app = FastAPI(
     title="Assistant Mutuelle Solstice",
     description="Classification d'intentions CamemBERT, flux métier guidés "
                 "et recherche documentaire RAG avec contexte client.",
-    version="0.11.0",
+    version="0.12.0",
     lifespan=cycle_de_vie,
 )
 app.add_middleware(CORSMiddleware, allow_origins=ORIGINES,
@@ -111,6 +115,22 @@ class Source(BaseModel):
     extrait: str
 
 
+class Option(BaseModel):
+    """Une réponse attendue à une question fermée, rendue en bouton par
+    le front. `valeur` est le message à envoyer au tour suivant : le
+    bouton produit exactement ce qu'un utilisateur aurait tapé, aucune
+    route d'entrée particulière n'existe côté service.
+
+    Même vigilance que pour Etat : ce modèle est ce qui autorise le
+    champ à sortir. Sans lui, FastAPI le supprimerait en silence et le
+    front n'afficherait jamais un bouton.
+    """
+    rang: int
+    cle: str
+    libelle: str
+    valeur: str
+
+
 class Latences(BaseModel):
     classification: int = 0
     recherche: int = 0
@@ -134,6 +154,9 @@ class Reponse(BaseModel):
     chemin: str
     formule: str | None = None
     sources: list[Source] = []
+    # Liste vide et jamais null, comme sources : le front teste la
+    # longueur, il n'a pas à distinguer deux formes d'absence.
+    options: list[Option] = []
     etat: Etat | None = None
     latence_ms: Latences
 
