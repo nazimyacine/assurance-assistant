@@ -1,37 +1,54 @@
 <header class="entete">
-  <div class="marque">
-    <!-- Un solstice : le disque solaire au plus haut de sa course sur la
-         ligne d'horizon. La marque vient du nom, pas d'un catalogue. -->
-    <svg class="sceau" viewBox="0 0 24 24" aria-hidden="true">
-      <path d="M4 17 H20" />
-      <path d="M12 17 A6 6 0 0 1 12 5 A6 6 0 0 1 12 17" />
-      <path d="M12 2 V4  M20.5 8.5 L19 9.5  M3.5 8.5 L5 9.5" />
-    </svg>
-    <div class="titres">
-      <span class="nom">Mutuelle Solstice</span>
-      <span class="role">Assistant</span>
+  <div class="gauche">
+    <div class="marque">
+      <!-- Un solstice : le disque solaire au plus haut de sa course sur la
+           ligne d'horizon. La marque vient du nom, pas d'un catalogue. -->
+      <svg class="sceau" viewBox="0 0 24 24" aria-hidden="true">
+        <path d="M4 17 H20" />
+        <path d="M12 17 A6 6 0 0 1 12 5 A6 6 0 0 1 12 17" />
+        <path d="M12 2 V4  M20.5 8.5 L19 9.5  M3.5 8.5 L5 9.5" />
+      </svg>
+      <div class="titres">
+        <span class="nom">Mutuelle Solstice</span>
+        <span class="role">Assistant</span>
+      </div>
     </div>
+
+    <!-- Les métriques ne sont pas une annexe : ce sont elles qui
+         justifient chaque choix visible dans la conversation. D'où un
+         onglet de premier niveau, à côté de la marque. -->
+    <nav class="onglets">
+      <a routerLink="/"
+         routerLinkActive="actif"
+         [routerLinkActiveOptions]="exact"
+         ariaCurrentWhenActive="page">Conversation</a>
+      <a routerLink="/metriques"
+         routerLinkActive="actif"
+         ariaCurrentWhenActive="page">Métriques</a>
+    </nav>
   </div>
 
   <div class="actions">
-    <!-- Le contexte client n'est pas un décor : il filtre la recherche
-         par formule. C'est la démonstration de l'apport de la passerelle,
-         d'où sa place dans l'en-tête et non dans un menu. -->
-    <label class="identite">
-      <span class="etiquette">Vous êtes</span>
-      <select
-        #identite
-        [value]="passerelle.clientId() ?? ''"
-        [disabled]="conversation.enCours()"
-        (change)="changerIdentite(identite.value)">
-        <option value="">Visiteur</option>
-        @for (client of clients(); track client.id) {
-          <option [value]="client.id">
-            {{ client.nom }} · {{ client.formule | titlecase }}
-          </option>
-        }
-      </select>
-    </label>
+    <!-- Le contexte client et la reprise du fil n'ont de sens que sur la
+         conversation. La pastille, elle, reste : l'état des services vaut
+         partout. -->
+    @if (surChat()) {
+      <label class="identite">
+        <span class="etiquette">Vous êtes</span>
+        <select
+          #identite
+          [value]="passerelle.clientId() ?? ''"
+          [disabled]="conversation.enCours()"
+          (change)="changerIdentite(identite.value)">
+          <option value="">Visiteur</option>
+          @for (client of clients(); track client.id) {
+            <option [value]="client.id">
+              {{ client.nom }} · {{ client.formule | titlecase }}
+            </option>
+          }
+        </select>
+      </label>
+    }
 
     <button
       type="button"
@@ -45,7 +62,7 @@
       <span class="libelle">{{ libelleSante() }}</span>
     </button>
 
-    @if (conversation.tours().length > 0) {
+    @if (surChat() && conversation.tours().length > 0) {
       <button type="button" class="recommencer" (click)="conversation.recommencer()">
         Nouvelle conversation
       </button>
@@ -53,9 +70,11 @@
   </div>
 </header>
 
-<main class="plateau">
+<main class="plateau" [class.pleine-largeur]="!surChat()">
   <div class="colonne">
     <router-outlet />
   </div>
-  <app-inspection class="panneau-place" />
+  @if (surChat()) {
+    <app-inspection class="panneau-place" />
+  }
 </main>

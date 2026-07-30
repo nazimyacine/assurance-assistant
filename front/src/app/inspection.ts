@@ -1,6 +1,6 @@
-import { Component, computed, inject, signal } from '@angular/core';
+import { Component, computed, inject, linkedSignal } from '@angular/core';
 
-import { Chemin } from './contrat';
+import { Chemin, ReponseChat } from './contrat';
 import { Conversation } from './conversation';
 import { Passerelle } from './passerelle';
 
@@ -28,10 +28,12 @@ export class Inspection {
   private readonly passerelle = inject(Passerelle);
   protected readonly conversation = inject(Conversation);
 
-  /** Les passages dépliés, par index. Se vide à chaque nouvelle réponse
-   *  puisque le panneau est reconstruit. */
-  protected readonly deplies = signal<Set<number>>(new Set());
-
+  /** Lecture seule du signal partagé. Ce panneau NE DEMANDE PLUS la
+   *  santé : la coquille en est propriétaire, elle interroge à
+   *  l'ouverture et après chaque erreur. Le panneau étant détruit et
+   *  reconstruit à chaque passage par l'onglet des métriques, un appel
+   *  dans son constructeur produisait une requête réseau par aller-retour,
+   *  pour une donnée qui vit dans un service racine et lui survit. */
   protected readonly sante = this.passerelle.etat;
 
   /** Seuil réellement servi, lu depuis /api/health. Jamais codé en dur :
@@ -41,6 +43,22 @@ export class Inspection {
     () => this.sante()?.detail_service_ia?.configuration.seuil_confiance ?? null);
 
   protected readonly reponse = this.conversation.derniere;
+
+  /**
+   * Les passages dépliés, par index.
+   *
+   * `linkedSignal` et non `signal` : l'état se réinitialise quand sa
+   * source change, ici à chaque nouvelle réponse. Sans cela, un passage
+   * déplié le restait pour la réponse SUIVANTE, dont le passage de même
+   * rang n'a rien à voir. Le composant, lui, n'est pas reconstruit entre
+   * deux messages ; il ne l'est qu'au retour de l'onglet des métriques.
+   * Déclaré APRÈS `reponse`, dont il dépend : les champs s'initialisent
+   * dans l'ordre d'écriture.
+   */
+  protected readonly deplies = linkedSignal<ReponseChat | null, Set<number>>({
+    source: this.reponse,
+    computation: () => new Set<number>(),
+  });
 
   /** Latences en parts du total, pour la barre empilée. La génération
    *  pèse environ 88% du chemin documentaire : c'est le fait le plus
@@ -59,10 +77,6 @@ export class Inspection {
         part: (latences[etape.cle] / total) * 100,
       }));
   });
-
-  constructor() {
-    void this.passerelle.rafraichirSante();
-  }
 
   protected explication(chemin: Chemin): string {
     return CHEMINS[chemin];

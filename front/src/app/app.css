@@ -12,10 +12,17 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
+  flex-wrap: wrap;
   gap: var(--e-4);
   padding: var(--e-3) var(--e-5);
   border-bottom: 1px solid var(--trait);
   background: var(--carte);
+}
+
+.gauche {
+  display: flex;
+  align-items: center;
+  gap: var(--e-6);
 }
 
 .marque {
@@ -53,6 +60,33 @@
   letter-spacing: 0.1em;
   text-transform: uppercase;
   color: var(--encre-tres-douce);
+}
+
+/* -- onglets ------------------------------------------------------- */
+
+.onglets {
+  display: flex;
+  gap: var(--e-4);
+}
+
+/* Un trait sous l'onglet actif, pas un fond ni une pilule : la même
+   sobriété que la marge annotée du fil de conversation. */
+.onglets a {
+  padding: var(--e-1) 0;
+  border-bottom: 2px solid transparent;
+  font-size: var(--t-s);
+  color: var(--encre-douce);
+  text-decoration: none;
+  transition: color 120ms ease, border-color 120ms ease;
+}
+
+.onglets a:hover {
+  color: var(--encre);
+}
+
+.onglets a.actif {
+  border-bottom-color: var(--solstice);
+  color: var(--encre);
 }
 
 .actions {
@@ -177,6 +211,10 @@
     padding: var(--e-3) var(--e-4);
   }
 
+  .gauche {
+    gap: var(--e-4);
+  }
+
   .identite .etiquette,
   .pastille .libelle {
     display: none;
@@ -193,6 +231,13 @@
   min-height: 0;
   display: grid;
   grid-template-columns: minmax(0, 1fr) 360px;
+}
+
+/* Hors de la conversation, le panneau n'a rien à commenter : la page
+   prend toute la largeur plutôt que de laisser une colonne vide. */
+.plateau.pleine-largeur {
+  grid-template-columns: minmax(0, 1fr);
+  grid-template-rows: minmax(0, 1fr);
 }
 
 .colonne {

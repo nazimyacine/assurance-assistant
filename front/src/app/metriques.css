@@ -1,0 +1,145 @@
+/* Styles NON encapsulés : voir l'explication en tête de metriques.ts.
+ * Conséquence de lecture : chaque sélecteur de ce fichier commence par
+ * `app-metriques`, sans exception. La portée que le mécanisme d'Angular
+ * n'assure plus est rétablie par cette convention, et toute règle qui
+ * l'oublierait fuirait dans l'application entière. */
+
+app-metriques {
+  display: block;
+  height: 100%;
+  overflow-y: auto;
+  background: var(--carte);
+}
+
+/* Une largeur de lecture, pas la largeur de la fenêtre : ce document se
+   lit en continu. Seuls les tableaux en sortent, dans leur enveloppe. */
+app-metriques .page {
+  max-width: 80ch;
+  margin: 0 auto;
+  padding: var(--e-6) var(--e-5) var(--e-7);
+}
+
+/* -- structure du document ----------------------------------------- */
+
+app-metriques .rendu h1 {
+  margin: 0 0 var(--e-4);
+  font-size: var(--t-xl);
+  font-weight: 600;
+  letter-spacing: -0.01em;
+}
+
+/* Le filet au-dessus des sections remplace un interligne triple : il
+   découpe un document long sans ajouter de couleur. */
+app-metriques .rendu h2 {
+  margin: var(--e-7) 0 var(--e-4);
+  padding-top: var(--e-5);
+  border-top: 1px solid var(--trait);
+  font-size: var(--t-l);
+  font-weight: 600;
+}
+
+app-metriques .rendu h3 {
+  margin: var(--e-5) 0 var(--e-3);
+  font-size: var(--t-m);
+  font-weight: 600;
+  color: var(--encre-douce);
+}
+
+app-metriques .rendu p {
+  margin: 0 0 var(--e-4);
+}
+
+app-metriques .rendu strong {
+  font-weight: 600;
+}
+
+app-metriques .rendu em {
+  color: var(--encre-douce);
+}
+
+/* Les noms de fichiers et de scripts, nombreux dans ce document. */
+app-metriques .rendu code {
+  padding: 1px var(--e-1);
+  border-radius: var(--rayon-s);
+  background: var(--papier);
+  font-family: var(--chiffres);
+  font-size: 0.9em;
+}
+
+/* -- tableaux ------------------------------------------------------ */
+
+/* Le défilement se pose sur l'enveloppe, jamais sur le <table> : un
+   tableau en display:block fait calculer aux thead et tbody des largeurs
+   de colonnes séparées, et l'en-tête cesse d'être aligné sur le corps. */
+app-metriques .rendu .tableau {
+  overflow-x: auto;
+  margin: var(--e-4) 0 var(--e-5);
+}
+
+app-metriques .rendu table {
+  min-width: 100%;
+  border-collapse: collapse;
+  font-size: var(--t-s);
+  /* La règle maison veut la chasse fixe pour les chiffres, afin qu'ils
+     s'alignent. Impossible ici : ces tableaux mêlent des nombres et des
+     phrases entières dans la même rangée. tabular-nums donne l'alignement
+     des colonnes de chiffres sans imposer une police de code à du texte
+     courant. */
+  font-variant-numeric: tabular-nums;
+}
+
+app-metriques .rendu th,
+app-metriques .rendu td {
+  padding: var(--e-2) var(--e-3);
+  border-bottom: 1px solid var(--trait);
+  text-align: left;
+  vertical-align: top;
+}
+
+/* Les en-têtes ne se replient pas : ce sont eux qui fixent la largeur
+   minimale des colonnes, donc le seuil à partir duquel l'enveloppe se met
+   à défiler. Le corps, lui, se replie. */
+app-metriques .rendu thead th {
+  font-family: var(--chiffres);
+  font-size: var(--t-xs);
+  font-weight: 500;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--encre-tres-douce);
+  white-space: nowrap;
+}
+
+app-metriques .rendu tbody tr:last-child td {
+  border-bottom: none;
+}
+
+/* -- figures ------------------------------------------------------- */
+
+app-metriques .rendu figure {
+  margin: var(--e-5) 0;
+}
+
+app-metriques .rendu img {
+  display: block;
+  max-width: 100%;
+  border: 1px solid var(--trait);
+  border-radius: var(--rayon-s);
+}
+
+/* -- états --------------------------------------------------------- */
+
+app-metriques .attente {
+  color: var(--encre-tres-douce);
+  font-size: var(--t-s);
+}
+
+/* Ambre, comme partout ailleurs dans l'application : une réserve, pas
+   une panne. Le document manque, l'application va bien. */
+app-metriques .absent {
+  padding: var(--e-4);
+  border: 1px solid var(--ambre);
+  border-radius: var(--rayon-s);
+  background: var(--ambre-fond);
+  color: var(--ambre);
+  font-size: var(--t-s);
+}

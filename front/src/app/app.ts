@@ -1,6 +1,10 @@
 import { TitleCasePipe } from '@angular/common';
 import { Component, computed, effect, inject, signal } from '@angular/core';
-import { RouterOutlet } from '@angular/router';
+import { toSignal } from '@angular/core/rxjs-interop';
+import {
+  NavigationEnd, Router, RouterLink, RouterLinkActive, RouterOutlet,
+} from '@angular/router';
+import { filter, map } from 'rxjs';
 
 import { Client } from './contrat';
 import { Conversation } from './conversation';
@@ -19,13 +23,33 @@ const LIBELLES: Record<EtatSante, string> = {
 
 @Component({
   selector: 'app-root',
-  imports: [RouterOutlet, Inspection, TitleCasePipe],
+  imports: [
+    RouterOutlet, RouterLink, RouterLinkActive, Inspection, TitleCasePipe,
+  ],
   templateUrl: './app.html',
   styleUrl: './app.css',
 })
 export class App {
   protected readonly conversation = inject(Conversation);
   protected readonly passerelle = inject(Passerelle);
+  private readonly router = inject(Router);
+
+  /** Sans quoi l'onglet Conversation resterait actif sur toutes les
+   *  routes, `/` étant le préfixe de tout. Déclaré ici plutôt qu'en
+   *  littéral dans le gabarit, qui en reconstruirait un à chaque cycle. */
+  protected readonly exact = { exact: true } as const;
+
+  /** L'URL courante, en signal. Le panneau d'inspection est placé HORS du
+   *  router-outlet, parce qu'il commente la conversation et non la route :
+   *  il doit donc être masqué explicitement quand la route n'est plus
+   *  celle de la conversation. */
+  private readonly url = toSignal(
+    this.router.events.pipe(
+      filter(evenement => evenement instanceof NavigationEnd),
+      map(() => this.router.url)),
+    { initialValue: this.router.url });
+
+  protected readonly surChat = computed(() => !this.url().startsWith('/metriques'));
 
   /** Les clients fictifs semés par la passerelle. Liste vide si elle est
    *  injoignable : le sélecteur se réduit alors au mode visiteur, qui est

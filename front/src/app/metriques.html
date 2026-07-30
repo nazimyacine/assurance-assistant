@@ -1,0 +1,14 @@
+<article class="page">
+  @if (html()) {
+    <!-- innerHTML passe par le filtre de sécurité d'Angular, jamais
+         désarmé : la sortie du convertisseur est nettoyée une seconde
+         fois avant d'atteindre le document. Deux verrous plutôt qu'un,
+         pour une source qui n'a aucune raison d'être hostile mais que
+         personne ne relit ligne à ligne. -->
+    <div class="rendu" [innerHTML]="html()"></div>
+  } @else if (erreur()) {
+    <p class="absent">{{ erreur() }}</p>
+  } @else {
+    <p class="attente">Chargement du document...</p>
+  }
+</article>
