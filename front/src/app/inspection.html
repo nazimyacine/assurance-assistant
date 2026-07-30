@@ -1,0 +1,148 @@
+<aside class="panneau">
+  <header class="tete">
+    <span class="titre">Inspection</span>
+    <span class="sous-titre">dernière réponse</span>
+  </header>
+
+  @if (reponse(); as r) {
+    <!-- Classification -->
+    <section class="bloc">
+      <p class="etiquette">Intention</p>
+      @if (r.intention) {
+        <p class="valeur">{{ r.intention }}</p>
+
+        @if (r.confiance !== null) {
+          <div class="jauge" [class.jauge-basse]="retenue() === false">
+            <div class="jauge-remplie" [style.width.%]="r.confiance * 100"></div>
+            @if (seuil(); as s) {
+              <div class="jauge-seuil" [style.left.%]="s * 100"
+                   [title]="'Seuil de rejet servi : ' + pourcent(s)"></div>
+            }
+          </div>
+          <p class="jauge-legende">
+            <span class="chiffre">{{ pourcent(r.confiance) }}</span>
+            @if (seuil(); as s) {
+              <span class="note">
+                seuil {{ pourcent(s) }} ·
+                {{ retenue() ? 'retenue' : 'rejetée' }}
+              </span>
+            }
+          </p>
+        }
+      } @else {
+        <p class="vide">Aucune classification : message traité par le
+          pré-filtre de courtoisie, en amont du modèle.</p>
+      }
+    </section>
+
+    <!-- Chemin -->
+    <section class="bloc">
+      <p class="etiquette">Chemin</p>
+      <p class="valeur">{{ r.chemin }}</p>
+      <p class="note">{{ explication(r.chemin) }}</p>
+    </section>
+
+    <!-- Contexte client -->
+    <section class="bloc">
+      <p class="etiquette">Contexte</p>
+      @if (r.client) {
+        <p class="valeur">{{ r.client.nom }}</p>
+        <p class="note">
+          Formule {{ r.client.formule }} : la recherche est restreinte à
+          ses garanties et aux documents communs.
+        </p>
+      } @else {
+        <p class="valeur">visiteur</p>
+        <p class="note">Aucun contexte client, la recherche porte sur tout
+          le corpus.</p>
+      }
+    </section>
+
+    <!-- Passages -->
+    <section class="bloc">
+      <p class="etiquette">
+        Passages retenus
+        <span class="compte">{{ r.sources.length }}</span>
+      </p>
+      @if (r.sources.length === 0) {
+        <p class="vide">Aucune recherche documentaire sur ce chemin.</p>
+      } @else {
+        <ul class="passages">
+          @for (source of r.sources; track $index) {
+            <li class="passage">
+              <button type="button" class="passage-tete"
+                      [attr.aria-expanded]="deplies().has($index)"
+                      (click)="basculer($index)">
+                <span class="score chiffre">{{ source.score.toFixed(3) }}</span>
+                <span class="chemin-doc">
+                  {{ source.document }}<span class="sep"> › </span>{{ source.section }}
+                </span>
+              </button>
+              @if (deplies().has($index)) {
+                <p class="extrait">{{ source.extrait }}…</p>
+              }
+            </li>
+          }
+        </ul>
+      }
+    </section>
+
+    <!-- Latences -->
+    <section class="bloc">
+      <p class="etiquette">Latence</p>
+      @if (segments().length > 0) {
+        <div class="ruban">
+          @for (segment of segments(); track segment.cle) {
+            <div class="ruban-part" [class]="'part-' + segment.cle"
+                 [style.width.%]="segment.part"
+                 [title]="segment.libelle + ' : ' + segment.ms + ' ms'"></div>
+          }
+        </div>
+        <ul class="latences">
+          @for (segment of segments(); track segment.cle) {
+            <li>
+              <span class="puce" [class]="'part-' + segment.cle"></span>
+              <span class="latence-nom">{{ segment.libelle }}</span>
+              <span class="chiffre">{{ segment.ms }} ms</span>
+            </li>
+          }
+        </ul>
+      }
+      <p class="total">
+        <span class="latence-nom">Aller-retour complet</span>
+        <span class="chiffre">{{ r.latence_totale_ms }} ms</span>
+      </p>
+    </section>
+  } @else {
+    <!-- Avant le premier message : la configuration réellement servie. -->
+    <section class="bloc">
+      <p class="vide">
+        Chaque réponse sera décomposée ici : intention reconnue et
+        confiance, chemin emprunté, passages du corpus cités et temps
+        passé à chaque étape.
+      </p>
+    </section>
+
+    @if (sante()?.detail_service_ia; as detail) {
+      <section class="bloc">
+        <p class="etiquette">Configuration servie</p>
+        <dl class="config">
+          <dt>Découpage</dt>
+          <dd>{{ detail.configuration.decoupage }}{{ detail.configuration.avec_fil ? ' + fil' : '' }}</dd>
+          <dt>Passages indexés</dt>
+          <dd class="chiffre">{{ detail.chunks_en_memoire }}</dd>
+          <dt>Intentions</dt>
+          <dd class="chiffre">{{ detail.intentions }}</dd>
+          <dt>Seuil de rejet</dt>
+          <dd class="chiffre">{{ pourcent(detail.configuration.seuil_confiance) }}</dd>
+          <dt>Calcul</dt>
+          <dd>{{ detail.device }}</dd>
+        </dl>
+        <p class="note">
+          Ces valeurs viennent du service lui-même : la configuration qui
+          tourne est celle qui a été mesurée.
+        </p>
+      </section>
+    }
+  }
+</aside>

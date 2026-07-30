@@ -12,17 +12,12 @@ import { Client, ReponseChat, RequeteChat, Sante } from './contrat';
  * et journalise. Le préfixe /api est réécrit vers le port 8080 par le
  * proxy du serveur de développement, donc aucune URL absolue n'apparaît
  * ici et rien n'est à changer si la passerelle déménage.
- *
- * Le service porte deux signaux, la session courante et le client
- * choisi. C'est le strict minimum d'état partagé : les composants qui en
- * ont besoin les lisent, aucun n'a à se les transmettre.
  */
 
 /** Au-delà des 15 secondes d'attente de lecture de la passerelle, plus
- *  une marge pour ses réessais. Si ce délai se déclenche, c'est que la
- *  passerelle elle-même ne répond plus, pas le modèle de langage : sans
- *  lui, une requête perdue laisserait le front en attente indéfiniment,
- *  HttpClient n'ayant aucun délai par défaut. */
+ *  une marge pour ses réessais. Dernier maillon d'une chaîne de délais
+ *  croissants : 10 s pour l'appel au modèle, 15 s pour la passerelle,
+ *  20 s ici. */
 const DELAI_MS = 20_000;
 
 /** Erreur déjà traduite en message affichable. Le composant décide où
@@ -47,18 +42,16 @@ export class Passerelle {
    *  sur tout le corpus. */
   readonly clientId = signal<string | null>(null);
 
-  /**
-   * Changer d'identité repart d'une session vierge. La passerelle fixe
-   * le client d'une session à sa création et refuserait de le changer en
-   * cours de route ; on ne cherche pas à contourner cette règle, on la
-   * respecte côté front.
-   */
+  /** Dernière santé connue des deux services. Partagée plutôt que
+   *  redemandée par chaque vue : le panneau d'inspection y lit le seuil
+   *  de rejet servi, la pastille d'en-tête y lira l'état. */
+  readonly etat = signal<Sante | null>(null);
+
   choisirClient(id: string | null): void {
     this.clientId.set(id);
     this.sessionId.set(null);
   }
 
-  /** Repart d'une conversation vide sans changer d'identité. */
   reinitialiser(): void {
     this.sessionId.set(null);
   }
@@ -67,10 +60,6 @@ export class Passerelle {
     const corps: RequeteChat = { message };
     const session = this.sessionId();
     const client = this.clientId();
-    // Les champs sont omis plutôt que mis à null quand ils n'ont pas de
-    // valeur : c'est ce que la passerelle attend, et c'est aussi ce
-    // qu'elle fait dans l'autre sens en omettant `client` pour un
-    // visiteur.
     if (session) { corps.session_id = session; }
     if (client) { corps.client_id = client; }
 
@@ -85,23 +74,23 @@ export class Passerelle {
   }
 
   /**
-   * Ne lève JAMAIS. Un indicateur de santé qui échoue en cascade
-   * n'indique plus rien : quand le service IA est injoignable, la
-   * passerelle répond en 503 avec un corps parfaitement exploitable, et
-   * c'est précisément l'état que la pastille doit montrer.
+   * Ne lève JAMAIS et met à jour le signal partagé. Un indicateur de
+   * santé qui échoue en cascade n'indique plus rien : quand le service
+   * IA est injoignable, la passerelle répond en 503 avec un corps
+   * parfaitement exploitable, et c'est précisément l'état à montrer.
    */
-  async sante(): Promise<Sante> {
+  async rafraichirSante(): Promise<Sante> {
+    let sante: Sante;
     try {
-      return await firstValueFrom(
+      sante = await firstValueFrom(
         this.http.get<Sante>('/api/health').pipe(timeout(DELAI_MS)));
     } catch (erreur) {
-      // Le 503 de santé dégradée porte un corps exploitable : la
-      // passerelle répond, c'est le service IA qui manque.
-      if (erreur instanceof HttpErrorResponse && erreur.error?.passerelle) {
-        return erreur.error as Sante;
-      }
-      return { passerelle: 'injoignable', service_ia: 'inconnu' };
+      sante = erreur instanceof HttpErrorResponse && erreur.error?.passerelle
+        ? erreur.error as Sante
+        : { passerelle: 'injoignable', service_ia: 'inconnu' };
     }
+    this.etat.set(sante);
+    return sante;
   }
 
   private async appeler<T>(appel: Observable<T>): Promise<T> {
@@ -122,10 +111,6 @@ export class Passerelle {
       return new ErreurPasserelle(
         0, "Le service n'a pas répondu dans le temps imparti.");
     }
-    // Statut 0 : le navigateur n'a même pas obtenu de réponse, la
-    // passerelle est arrêtée ou le serveur de développement ne réécrit
-    // pas. Distinct d'un 503, où la passerelle répond pour dire qu'elle
-    // ne peut pas servir.
     if (erreur.status === 0) {
       return new ErreurPasserelle(
         0, 'La passerelle est injoignable. Est-elle démarrée sur le port 8080 ?');

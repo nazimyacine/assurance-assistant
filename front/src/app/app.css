@@ -79,17 +79,33 @@
 
 /* -- plateau ------------------------------------------------------- */
 
-/* Une colonne aujourd'hui, deux au commit 3 quand le panneau
-   d'inspection s'installera à droite. */
+/* La colonne de gauche est élastique, le panneau a une largeur fixe :
+   c'est le texte qui doit respirer quand la fenêtre s'élargit, pas
+   l'instrumentation, dont les lignes sont courtes et calibrées. */
 .plateau {
   flex: 1;
   min-height: 0;
   display: grid;
-  grid-template-columns: minmax(0, 1fr);
+  grid-template-columns: minmax(0, 1fr) 360px;
 }
 
 .colonne {
   min-width: 0;
   min-height: 0;
   background: var(--carte);
+}
+
+.panneau-place {
+  min-width: 0;
+  min-height: 0;
+}
+
+/* Sous 1100 px, deux colonnes deviendraient deux colonnes étroites.
+   Le panneau passe dessous, avec sa propre zone de défilement, plutôt
+   que de disparaître : c'est la pièce qui distingue ce projet. */
+@media (max-width: 1100px) {
+  .plateau {
+    grid-template-columns: minmax(0, 1fr);
+    grid-template-rows: minmax(0, 1fr) minmax(0, 40vh);
+  }
 }

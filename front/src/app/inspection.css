@@ -1,0 +1,255 @@
+:host {
+  display: block;
+  height: 100%;
+  min-height: 0;
+}
+
+.panneau {
+  height: 100%;
+  overflow-y: auto;
+  padding: var(--e-4) var(--e-5) var(--e-6);
+  background: var(--papier);
+  border-left: 1px solid var(--trait);
+}
+
+.tete {
+  display: flex;
+  align-items: baseline;
+  gap: var(--e-2);
+  padding-bottom: var(--e-3);
+  border-bottom: 1px solid var(--trait);
+}
+
+.titre {
+  font-family: var(--chiffres);
+  font-size: var(--t-xs);
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--encre);
+}
+
+.sous-titre {
+  font-size: var(--t-xs);
+  color: var(--encre-tres-douce);
+}
+
+.bloc {
+  padding: var(--e-4) 0;
+  border-bottom: 1px solid var(--trait);
+}
+
+.bloc:last-child { border-bottom: none; }
+
+.etiquette {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  margin: 0 0 var(--e-2);
+  font-family: var(--chiffres);
+  font-size: var(--t-xs);
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--encre-tres-douce);
+}
+
+.compte {
+  font-variant-numeric: tabular-nums;
+  letter-spacing: 0;
+}
+
+.valeur {
+  margin: 0;
+  font-size: var(--t-m);
+  font-weight: 500;
+  color: var(--encre);
+}
+
+.note {
+  margin: var(--e-2) 0 0;
+  font-size: var(--t-xs);
+  line-height: 1.5;
+  color: var(--encre-douce);
+}
+
+.vide {
+  margin: 0;
+  font-size: var(--t-xs);
+  line-height: 1.5;
+  color: var(--encre-tres-douce);
+}
+
+/* Tous les nombres du panneau passent par là : chasse fixe et chiffres
+   de même largeur, pour qu'ils s'empilent et se comparent. */
+.chiffre {
+  font-family: var(--chiffres);
+  font-variant-numeric: tabular-nums;
+}
+
+/* -- jauge de confiance -------------------------------------------- */
+
+.jauge {
+  position: relative;
+  height: 6px;
+  margin-top: var(--e-3);
+  border-radius: 3px;
+  background: #e4e8e6;
+  overflow: visible;
+}
+
+.jauge-remplie {
+  height: 100%;
+  border-radius: 3px;
+  background: var(--solstice);
+  transition: width 220ms ease;
+}
+
+.jauge-basse .jauge-remplie { background: var(--ambre); }
+
+/* Le repère du seuil mesuré, posé sur la barre. C'est lui qui rend la
+   décision lisible : au-dessus retenue, en dessous reformulation. */
+.jauge-seuil {
+  position: absolute;
+  top: -4px;
+  bottom: -4px;
+  width: 2px;
+  background: var(--encre);
+  opacity: 0.55;
+}
+
+.jauge-legende {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: var(--e-2);
+  margin: var(--e-2) 0 0;
+  font-size: var(--t-xs);
+  color: var(--encre-douce);
+}
+
+.jauge-legende .chiffre {
+  font-size: var(--t-s);
+  color: var(--encre);
+}
+
+/* -- passages ------------------------------------------------------ */
+
+.passages {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 1px;
+}
+
+.passage-tete {
+  display: flex;
+  align-items: baseline;
+  gap: var(--e-3);
+  width: 100%;
+  padding: var(--e-2) var(--e-2) var(--e-2) 0;
+  border: none;
+  background: none;
+  text-align: left;
+  cursor: pointer;
+  border-radius: var(--rayon-s);
+}
+
+.passage-tete:hover { background: var(--solstice-fond); }
+
+.score {
+  flex: none;
+  font-size: var(--t-s);
+  color: var(--solstice);
+}
+
+.chemin-doc {
+  font-size: var(--t-xs);
+  line-height: 1.4;
+  color: var(--encre);
+  word-break: break-word;
+}
+
+.sep { color: var(--encre-tres-douce); }
+
+.extrait {
+  margin: 0 0 var(--e-2) 52px;
+  padding-left: var(--e-3);
+  border-left: 2px solid var(--trait);
+  font-size: var(--t-xs);
+  line-height: 1.55;
+  color: var(--encre-douce);
+}
+
+/* -- latences ------------------------------------------------------ */
+
+.ruban {
+  display: flex;
+  height: 8px;
+  margin-bottom: var(--e-3);
+  border-radius: 4px;
+  overflow: hidden;
+  background: #e4e8e6;
+}
+
+.ruban-part { height: 100%; }
+
+.part-classification { background: var(--solstice); }
+.part-recherche { background: #6ba292; }
+.part-generation { background: #b9cec7; }
+
+.latences {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: var(--e-1);
+}
+
+.latences li,
+.total {
+  display: flex;
+  align-items: baseline;
+  gap: var(--e-2);
+  margin: 0;
+  font-size: var(--t-xs);
+  color: var(--encre-douce);
+}
+
+.latence-nom { flex: 1; }
+
+.latences .chiffre,
+.total .chiffre { color: var(--encre); }
+
+.puce {
+  width: 8px;
+  height: 8px;
+  flex: none;
+  border-radius: 2px;
+}
+
+.total {
+  margin-top: var(--e-3);
+  padding-top: var(--e-2);
+  border-top: 1px solid var(--trait);
+  font-weight: 500;
+}
+
+/* -- configuration servie ------------------------------------------ */
+
+.config {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: var(--e-1) var(--e-3);
+  margin: 0;
+  font-size: var(--t-xs);
+}
+
+.config dt { color: var(--encre-douce); }
+
+.config dd {
+  margin: 0;
+  color: var(--encre);
+  text-align: right;
+}
